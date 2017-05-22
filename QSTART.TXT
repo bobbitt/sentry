@@ -1,0 +1,42 @@
+        =======================
+        QUICKSTART INSTRUCTIONS
+        =======================
+
+        1. If you are upgrading, run your current copy of Sentry and
+        select "Export Initialization Settings" from the SuperUser menu.
+        Otherwise, skip to step 2.
+
+        2. Unzip SENTRYXX.ZIP into a temporary directory. Overwrite any
+        existing files.
+
+        3. Copy ALL original Sentry files onto a floppy disk, and tuck
+        it away. This is for emergency recovery if required.
+
+        4. Run the program called INSTALL.EXE. Enter the path you want
+        to install Sentry to. This will automatically create all the
+        proper initialization settings. If you have not previously
+        entered your registration information, of if you are installing
+        from scratch, you will have enter it now (registered versions
+        only). If you exported the settings in step 1, you will be asked
+        if you wish to use them. If you use the exported settings, you
+        can skip steps 6, 7 and 8 - your system will already be set up.
+
+        5. Run Sentry. If an error occurs, you should check the
+        Readme.txt file for further help.
+
+        6. Log in as "Sentry" with password "Sentry" (note the
+        capitalizations). You must log in as a SuperUser, and to do
+        this, hold down the CTRL key while pressing ENTER after typing
+        the login.
+
+        7. Create the users on your system. The first one you should
+        create is you. Give yourself SuperUser access, and delete the
+        old Sentry account (a real security violation if you leave it!)
+
+        8. Set up all accounts as you see fit: assign max logins, expiry
+        dates and password expiry dates to reflect your needs.
+
+        9. Read the Readme.txt file! This will give you a much more
+        in-depth discussion of what to do if problems arise, and how to
+        properly secure your system. I know it's long, but if you're
+        serious about security, it is time well spent.

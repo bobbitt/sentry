@@ -1,0 +1,16 @@
+[TopDir]
+file0=C:\secur\Sentry\CBREAK.SYS
+file1=C:\secur\Sentry\SENTRY.GRP
+file2=C:\secur\Sentry\SENTRY.W95
+file3=C:\secur\Sentry\SENTRY.311
+file4=C:\secur\sentry\SENTRY.PIF
+file5=C:\secur\sentry\SENTRY.URL
+file6=C:\secur\sentry\LICENSE.TXT
+file7=C:\secur\sentry\LICENSE.SHA
+file8=C:\SECUR\SENTRY\SENTRY.EXE
+file9=C:\SECUR\SENTRY\INSTALL.EXE
+
+[General]
+Type=FILELIST
+Version=1.00.000
+

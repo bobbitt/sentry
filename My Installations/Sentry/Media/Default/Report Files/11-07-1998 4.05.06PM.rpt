@@ -1,0 +1,109 @@
+////////////////////////////////////////////////////////////////////////////////
+///////////////////InstallShield Media Library Report Summary///////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+Media Name      : Default
+Report Filename : C:\secur\Sentry\My Installations\Sentry\Media\Default\Report Files\11-07-1998 4.05.06PM.rpt
+Date            : 11/07/1998
+Time            : 4:05PM
+
+Number of Components:                3 
+Number of File Groups:               3 
+Number of Files:                    22 
+Total Size of Files:           634,284 (bytes)
+
+==========
+COMPONENTS
+==========
+
+
+     Program Files
+     Help Files
+     Security Tools
+
+
+////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////Report Details/////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+================================================================================
+                           COMPONENT: "Program Files"
+================================================================================
+
+SUMMARY:
+    Total Files:                7 (files for this component only)
+    Source Bytes:         202,606 (files for this component only)
+
+
+                **** File Group: "Program Executable Files" ****
+
+
+<Directory>: C:\secur\Sentry
+
+    Filename                    Date        Time      Size         Version      
+    --------------------------  ----------  --------  -----------  -------------
+    SENTRY.URL                  09/13/1997  20:41:20           76               
+    SENTRY.GRP                  07/03/1996  07:47:00        1,329               
+    CBREAK.SYS                  03/05/1997  19:26:00          226               
+    LICENSE.TXT                 06/16/1998  19:31:04        3,364               
+    SENTRY.PIF                  07/03/1996  07:47:00          995               
+    SENTRY.EXE                  11/07/1998  16:03:24      127,310               
+    install.exe                 11/07/1998  16:00:04       69,306               
+    --------------------------  ----------  --------  -----------  -------------
+    Count=7                                               202,606               
+
+
+================================================================================
+                            COMPONENT: "Help Files"
+================================================================================
+
+SUMMARY:
+    Total Files:               14 (files for this component only)
+    Source Bytes:         616,376 (files for this component only)
+
+
+                       **** File Group: "Help Files" ****
+
+
+<Directory>: C:\secur\Sentry
+
+    Filename                    Date        Time      Size         Version      
+    --------------------------  ----------  --------  -----------  -------------
+    STRINGES                    05/02/1998  09:56:26       18,858               
+    HISTORY.TXT                 11/06/1998  08:23:44       28,008               
+    ORDER.FRM                   11/06/1998  08:24:14        2,706               
+    QSTART.TXT                  08/28/1996  14:38:30        2,055               
+    README.COM                  07/03/1996  07:47:00        4,217               
+    README.TXT                  11/06/1998  08:24:58      138,764               
+    READMEES.TXT                02/15/1998  10:13:04      125,723               
+    SENTRY.HLP                  03/04/1998  17:09:08       24,732               
+    SENTRY.INS                  07/23/1997  21:43:44       11,701               
+    SENTRYES.HLP                03/04/1998  17:09:30       26,883               
+    SENTRYES.INS                01/25/1998  09:57:52       13,929               
+    STRING                      06/14/1998  13:47:22       15,663               
+    FILE_ID.DIZ                 11/06/1998  08:24:14          416               
+    WHATSNEW.TXT                11/06/1998  08:24:00          115               
+    --------------------------  ----------  --------  -----------  -------------
+    Count=14                                              413,770               
+
+
+================================================================================
+                          COMPONENT: "Security Tools"
+================================================================================
+
+SUMMARY:
+    Total Files:                1 (files for this component only)
+    Source Bytes:         634,284 (files for this component only)
+
+
+                     **** File Group: "Security Tools" ****
+
+
+<Directory>: C:\secur\Sentry
+
+    Filename                    Date        Time      Size         Version      
+    --------------------------  ----------  --------  -----------  -------------
+    SDEL.EXE                    11/06/1998  22:20:42       17,908               
+    --------------------------  ----------  --------  -----------  -------------
+    Count=1                                                17,908               

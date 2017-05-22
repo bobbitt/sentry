@@ -1,0 +1,523 @@
+Pasaporte Anterior
+esta cambiando pasaportes
+Lista de Usuarios
+*NINGUNO*
+No. m ximo de usuarios excedido (MAXUSER=
+Usuarios Actuales (ESC para salir)
+Cuenta
+Pasaporte
+Inv
+Max
+Nombre
+Ultimo Acceso
+Expiraci¢n
+Acc
+Inv Acc
+Seleccionar usuario
+Crear usuario(s)
+NOTA: Oprimir CTRL-ENTER despu‚s del Login crea a ese usuario como un Super Usuario
+Login:
+Verificar pasaporte:
+Este usuario ha sido creado con privilegios de Super Usuario
+Desea que esta cuenta tenga fecha de expiraci¢n:
+Desea que el pasaporte tenga fecha de expiraci¢n?
+Quiere un par metro distinto al valor por omisi¢n en el m ximo numero de accesos (Login) inv lidos?
+Teclee "X" para asignar accesos inv lidos ilimitados.
+Teclee el numero de accesos inv lidos secuenciales antes de que la cuenta del usuario sea autom ticamente cancelada, hasta un total de 99. [Enter] selecciona el valor por omisi¢n.
+Los nombres de usuario (Logins) deben de ser de entre
+Los pasaportes deben de ser de entre
+Pasaporte no verificado!
+Ese usuario ya existe!
+creado
+Borrar
+Borrar usuario(s)
+Este es un Super Usuario!
+Usted no puede borrar este usuario. Es el ultimo Super   Usuario!
+Oprima cualquier tecla para regresar al men£ de Super Usuario...
+Esta seguro de querer borrar
+Borrado
+Alternar
+Alternar estado de Super Usuario
+NOTA: El usuario debe re teclear su pasaporte para obtener ¢ rescindir su acceso como Super Usuario
+Usted puede sobreponerse a esto ingresando cualquier otro pasaporte, el cual ser  el pasaporte del usuario a partir de este momento.
+Usted no puede quitar accesos de Super Usuario al ultimo Super Usuario!
+Esta seguro de querer
+ retirarle accesos de Super Usuario a
+ concederle accesos de Super Usuario a
+Pasaporte:
+Oprima cualquier tecla para continuar...
+Acceso de Super Usuario
+ Concedido a
+ Revocado a
+Usuario
+Cambiar expiraci¢n de la cuenta
+Establecer expiraci¢n de la cuenta
+Men£ de Super Usuarios
+La fecha de expiraci¢n es
+Esta cuenta ha expirado
+Esta cuenta no tiene fecha de expiraci¢n.
+Desea Usted cambiar
+La fecha de expiraci¢n de [NAME]
+Expiraci¢n de cuenta cambiada a
+Expiraci¢n de cuenta removida.
+Cambiar expiraci¢n de Pasaporte
+Establecer expiraci¢n de Pasaporte
+(Este pasaporte ha expirado)
+Este pasaporte no tiene fecha de vencimiento
+Import Initialization Settings *** TRANSLATE
+Cannot import Initialization Settings with a Protected File! *** TRANSLATE
+Initialization Settings Imported... *** TRANSLATE
+Fecha de expiraci¢n del pasaporte cambiada a 
+The next time Sentry is run, it will pick up and use these settings. *** TRANSLATE
+Fecha de expiraci¢n de pasaporte removida.
+M ximo de Accesos (Login) Inv lidos
+Asignar Numero M ximo de Accesos (Login) Inv lidos
+Esta cuenta esta programada para cancelarse despu‚s de
+accesos inv lidos
+Esta cuenta no tiene limite m ximo de accesos inv lidos
+There are no settings to import! *** TRANSLATE
+El par metro de accesos inv lidos de [NAME]
+El par metro de accesos inv lidos de [NAME] fue cambiado a
+El par metro de accesos inv lidos de [NAME] fue removido.
+1. Crear Usuario
+2. Borrar Usuario
+3. Ver todos los Usuarios
+4. Alternar estado de Super Usuario
+5. Cambiar fecha de vencimiento de cuenta
+6. Cambiar fecha de vencimiento de pasaporte
+7. Cambiar pasaporte de cuenta
+8. Asignar Numero M ximo de Accesos Inv lidos
+9. Regresar a Men£ de Super Usuario
+Men£ de Mantenimiento de Usuarios
+Opci¢n:
+Revisi¢n de Listado de Usuarios
+Revisar
+Cambiar Pasaporte
+Localizaci¢n de archivo de Bit cora
+Localizaci¢n de archivo de respaldo de Bit cora
+Localizaci¢n de archivo de Mensajes
+Longitud M¡nima de Pasaporte
+Longitud M xima de Pasaporte
+Numero M ximo de Intentos Fallados
+Tiempo de Espera despu‚s de Intento Fallado
+Tama¤o M ximo de archivo de Bit cora
+Llave para cambiar el Pasaporte
+Caracter de sustituci¢n en Pasaporte
+D¡as hasta que expire el Pasaporte
+D¡as hasta que expire la Cuenta
+Tiempo de inactividad para activar Protector de Pantalla
+Mensaje en Protector de Pantalla
+L¡nea de Comando para Acceso (Login)
+L¡nea de comando para Pasaporte
+Mensaje para Pasaporte Equivocado
+Mensaje para Nombre de Usuario Equivocado
+Mensaje para Largo de Pasaporte Equivocado
+Mensaje para Largo de Nombre Equivocado
+Mensaje en Bit cora para Pasaporte Equivocado
+Mensaje en Bit cora para Nombre de Usuario Equivocado
+Mensaje en Bit cora para Largo de Pasaporte Equivocado
+Mensaje en Bit cora para Largo de Nombre Equivocado
+Variable de Ambiente
+Habilitar Sentry en Windows
+Mostrar Titulo
+Formato de Fechas
+MAYUSCULAS/min£sculas
+Modo de Ventanas
+Habilitar Color
+Color de Textos
+Color de Fondos
+Color de Texto Resaltado
+Color de Fondo Resaltado
+No. M ximo de Accesos Inv lidos
+Tecleado R pido
+Borrado de Pantalla
+Pausa despu‚s de Ultimo Acceso
+Borrada de Seguridad
+Ver Resaltado
+Ver Color de Resaltado
+Deshabilitar CTRL-C
+Password Echo Count -- TRANSLATE
+Negro
+Azul
+Verde
+Siena
+Rojo
+Morado
+Caf‚
+Gris Claro
+Gris Oscuro
+Azul Claro
+Verde Claro
+Siena Claro
+Rojo Claro
+Morado Claro
+Amarillo
+Blanco
+Par metros de Inicializaci¢n
+MAS [Page Up ]
+MAS [Page Down ]
+Seleccione un par metro ¢ ESC para terminar:
+No hay informaci¢n disponible.
+Por omisi¢n:
+c:\Sentry.Log
+c:\Backup.Log
+c:\Sentry.Msg
+pasaporte
+Sentry must now exit to avoid corruption. *** TRANSLATE
+*** BLANK ***
+Esta es una Terminal Segura.
+*** BLANK ***
+Acceso Invalido.
+El usuario tecleo el pasaporte equivocado.
+El usuario tecleo el nombre de usuario equivocado.
+Largo de pasaporte equivocado.
+Largo de nombre equivocado.
+USUARIO
+Valor Actual:
+Nuevo valor (ENTER para Abortar):
+Por favor teclee un valor num‚rico.
+Par metro no modificado...
+no es una ruta de acceso valida.
+*** BLANK ***
+Por favor teclee una sola palabra. (Sin espacios)
+*** BLANK ***
+Por favor teclee una sola letra.
+*** BLANK ***
+*** BLANK ***
+*** BLANK ***
+Par metro Modificado:
+Mandar un Mensaje
+Mandar Mensaje(s)
+Mensaje:
+mandar un mensaje a:
+Proteger Archivo(s)
+PELIGRO: Una vez que el archivo es protegido, NUNCA se podr  retirar la protecci¢n.
+Aseg£rese de que tenga una copia del archivo antes de protegerlo y pruebe el archivo protegido para garantizar que funciona como se desea.
+Files in:  *** TRANSLATE
+Select a file to protect, D to chage Drive, ESC to quit. *** TRANSLATE
+Change to which drive [a-z]? *** TRANSLATE
+Could not change directory. *** TRANSLATE
+El archivo debe tener extensi¢n EXE, COM o BAT.
+Por favor teclee una ruta de acceso valida.
+Este archivo ya esta protegido por
+
+Las versiones Shareware de
+no pueden actualizar archivos protegidos por versiones registradas.
+caracteres de longitud
+Este archivo fue protegido por una versi¢n previa de
+La actualizaci¢n reconfigura los par metros de inicializaci¢n. La estructura de cuentas y par metros de inicializaci¢n ser n copiadas exactamente de la versi¢n de Sentry que esta siendo utilizada para actualizar el archivo.
+Si Usted escoge actualizar, necesitara modificar los par metros de inicializaci¢n y usuarios para cumplir con los ajustes deseados.
+Desea Usted actualizar
+Si
+actualizada a versi¢n
+No
+es un programa basado en [W]indows ¢ [D]os?
+No se puede proteger programas de Windows!
+Crear
+reemplazar¡a el archivo existente!
+Si Usted aun desea proteger este archivo, Usted deber  renombrar ese archivo para no duplicar el nombre de ning£n programa .EXE en ese directorio al instalar la protecci¢n.
+Archivo protegido:
+Exportar Par metros de Inicializaci¢n
+No se puede descartar los Par metros de Inicializaci¢n de un Archivo Protegido.!
+*** BLANK ***
+Par metros de inicializaci¢n exportados...
+La pr¢xima vez que se ejecute INSTALL.EXE, encontrara y usara estos par metros.
+*** BLANK ***
+Auditar Seguridad
+ Efectuara una auditoria de la seguridad de su sistema.
+Usted ser  informado de cualquier debilidad potencial y se le permitir  actualizar sus par metros.
+Revisando par metros del sistema
+en su AUTOEXEC.BAT
+- Su AUTOEXEC.BAT parece no existir
+- No hay llamadas a
+Desea Usted a¤adir una llamada a
+en su AUTOEXEC.BAT?
+*** BLANK ***
+- Su MSDOS.SYS parece no existir
+*** BLANK ***
+- No hay un "BootKeys=0" en su MSDOS.SYS
+Desea Usted a¤adir una l¡nea "BootKeys=0" a su MSDOS.SYS?
+*** BLANK ***
+*** BLANK ***
+*** BLANK ***
+- Su CONFIG.SYS parece no existir
+*** BLANK ***
+- Un comando "break on" existe en su CONFIG.SYS
+Desea Usted removerlo?
+dias
+segundos
+- No hay un comando "switches /n/f " en su CONFIG.SYS
+Desea Usted a¤adir el comando "switches /n/f" en su CONFIG.SYS?
+, valor muy bajo.
+Checando par metros de inicializaci¢n...
+- Su largo m¡nimo de pasaporte esta en
+Desea Usted subir el valor?
+Teclee el nuevo valor para Largo M¡nimo de Pasaporte
+- Su largo m ximo de pasaporte esta en
+Teclee el nuevo valor para Largo M ximo de Pasaporte
+- Los intentos permitidos para accesos inv lidos est n en
+, valor muy alto.
+Desea Usted bajar el valor?
+Teclee el numero de intentos de acceso inv lidos antes de que
+se bloquee
+- Su periodo de espera despu‚s de acceso invalido es de
+*** BLANK ***
+Teclee el no. de segundos de espera cuando un acceso sea incorrecto
+- Tiene habilitada la opci¢n de mostrar pasaportes en pantalla!
+- Desea Usted desplegar *'s en lugar del pasaporte?
+- Su pasaporte expirara en
+Teclee el no. de d¡as para nuevos pasaportes antes de que expiren
+- Su cuenta expirara en
+Teclee el no. de d¡as que las cuentas no usadas tendr n antes que expiren
+- Su protector de pantalla se activa en
+*** BLANK ***
+Teclee el no. de segundos de inactividad que deber n pasar antes de que se active el protector de pantalla
+- Usted tiene la sensitividad de MAY/min deshabilitada.
+- Desea Usted habilitarla?
+- Usted tiene la opci¢n de Borrado de Seguridad deshabilitada.
+- CTRL-C esta actualmente habilitado.
+- Desea Usted deshabilitarla?
+Checando Estructura de Cuentas...
+Usuario:
+*** BLANK ***
+Desea Usted borrarla?
+Ha excedido el m ximo numero de accesos inv lidos.
+Esta cuenta puede haber sido forzada.
+Desea Usted borrar esta cuenta?
+Es un Super Usuario con el m ximo numero de accesos inv lidos.
+Esto significa que si la cuenta es constantemente atacada, el Super Usuario podr¡a quedar deshabilitado!
+Desea Usted remover el numero m ximo de accesos inv lidos?
+No tiene un numero m ximo de accesos inv lidos.
+Esto significa que la cuenta puede ser constantemente atacada sin  quedar deshabilitada!
+Desea Usted a¤adir un numero m ximo de accesos inv lidos?
+enabled. *** TRANSLATE
+*** BLANK ***
+No tiene fecha de expiraci¢n en su cuenta.
+Desea Usted a¤adir una fecha de expiraci¢n?
+No tiene fecha de expiraci¢n en su pasaporte.
+Auditoria completa. Oprima una tecla...
+Auditoria de Seguridad realizada.
+Modificar comandos del Shell
+CUIDADO: Este procedimiento puede hacer que su sistema se detenga bajo algunas circunstancias! El proceso modifica su Interpretador de Comandos, lo que puede causar problemas con ciertas configuraciones.
+HAGA UN DISCO DE ARRANQUE ANTES DE INTENTAR ESTE PROCEDIMIENTO!
+Teclee la ruta de acceso hacia su COMMAND.COM
+File must have a .COM extension. *** TRANSLATE
+Archivo no encontrado.
+No se pudo obtener informaci¢n.
+Es posible que este Usted utilizando una versi¢n de COMMAND.COM que
+no reconozca ¢ que se trate de un Interpretador de Comandos invalido.
+[E]ditar, [D]eshabilitar o ESC para terminar.
+Teclear nuevo valor para
+CUIDADO: Los comandos del Shell no son del largo de los comandos originales y pueden causar problemas.
+Desea mantenerlos de cualquier manera?
+deshabilitado 
+Usted efectu¢ los siguientes cambios:
+Oprima cualquier tecla para continuar...
+esta deshabilitado
+Esta esto correcto?
+El interpretador de Comandos modificado ser  ejecutado.
+Por favor pru‚belo concienzudamente para asegurarse que no haya problemas.
+Oprima cualquier tecla para correr la prueba del Interpretador.
+Ejecutando la prueba del interpretador
+Shell de DOS
+Teclee "EXIT" para salir del Shell de DOS
+Regreso de la prueba de Shell de DOS.
+Hubo alg£n problema?
+No se hicieron cambios. Oprima cualquier tecla.
+[ ] Una llamada a Sentry en AUTOEXEC.BAT
+[ ] Una l¡nea "BootKeys"  en MSDOS.SYS
+[ ] Una l¡nea "switches" en CONFIG.SYS
+[ ] Un comando "break on" en CONFIG.SYS
+[ ] Una valor bajo para largo m ximo ¢ m¡nimo de pasaporte.
+[ ] Un valor alto para m ximo de intentos de acceso
+[ ] Un valor bajo para pausa de espera
+[ ] El despliegue de pasaporte deber¡a estar deshabilitado ¢ enmascarado.
+[ ] Una expiraci¢n de pasaporte de mas de 365 d¡as
+[ ] Una expiraci¢n de cuenta no usada de mas de 365 d¡as
+[ ] Una espera de protector de pantalla de mas de 600 seg.
+[ ] MAYUSCULAS / min£sculas esta deshabilitado
+[ ] Borrado de Seguridad esta deshabilitado
+[ ] CTRL-C esta habilitado
+[ ] Cuentas ya expiradas (deben ser borradas)
+[ ] No. de intentos de acceso fallados excedido
+[ ] Cuentas de Super Usuario con par metro de intentos m ximos de acceso Invalido
+[ ] Cuentas normales sin par metro de intentos m ximos de acceso Invalido
+[ ] Cuentas sin fecha de expiraci¢n
+[ ] Pasaportes sin fecha de expiraci¢n
+Ayuda de Auditoria
+Oprima ESPACIADOR para escoger art¡culos
+Oprima "A" para seleccionar Todos -->Should be Press "T"
+Oprima "T" para cambiar selecciones -->Should be Press "C"
+ENTER para aceptar ¢
+ESC para abortar
+Seleccione art¡culos a auditar:
+1. Editar Par metros de Inicializaci¢n
+2. Mandar Mensaje a Usuario
+3. Proteger un Archivo
+4. Exportar Par metros de Inicializaci¢n
+6. Auditoria de Seguridad
+7. Modificar Comandos del Interpretador
+8. Regresar a Men£ de Super Usuario
+Men£ de Mantenimiento del Sistema
+5. Import Initialization Settings *** TRANSLATE
+Usuario Cancelado.
+*** BLANK ***
+Teclee "N" en campo de a¤o para NO asignar expiraci¢n
+Teclee el a¤o (4 d¡gitos)
+El a¤o debe tener cuatro d¡gitos
+Teclee el mes (2 d¡gitos)
+Teclee el d¡a (2 d¡gitos)
+Esa fecha ya paso!
+Esta seguro de querer usarla?
+*** BLANK ***
+*** BLANK ***
+Por favor espere.
+Ayuda Inmediata
+es.hlp
+Error Abriendo Informaci¢n de ayuda!
+Oprima cualquier tecla para mas ayuda...
+F1 - Context Sensitive Online Help *** TRANSLATE
+Oprima cualquier tecla para regresar...
+F2 - Lock Screen *** TRANSLATE
+F3 - Select Language *** TRANSLATE
+No se puede entrar recursivamente a un DOS Shell (Oprima cualquier tecla).
+El usuario entro al DOS Shell
+*** BLANK ***
+*** BLANK ***
+*** BLANK ***
+DOS Shell Terminada.
+Acerca de
+*** BLANK ***
+Todos los derechos reservados conforme a ley.
+Para mayor informaci¢n, por favor mande correo electr¢nico a:
+¢ visite:
+*** BLANK ***
+*** BLANK ***
+1. Men£ de Mantenimiento de Usuarios
+2. Men£ de Mantenimiento de Bit cora
+3. Men£ de Mantenimiento de Sistema
+4. DOS Shell de Sentry
+5. Acerca de Sentry
+6. Salir del Men£ de Super Usuarios
+*** BLANK ***
+*** BLANK ***
+Nuevo Pasaporte:
+*** BLANK ***
+No puede usar el mismo pasaporte.
+*** BLANK ***
+El pasaporte de
+ ha sido cambiado
+El ultimo acceso fue el
+a las
+Mensaje
+Tiene un mensaje esperando
+DE:
+FECHA:
+[B]orrar, [C]ontestar, cualquier otra tecla para grabar...
+No es un usuario actual, imposible contestar.
+*** BLANK ***
+Desea borrar el original?
+Intentos de acceso inv lidos han ocurrido desde su ultimo acceso.
+ ha expirado
+NOTA: Su pasaporte ha expirado, Usted debe teclear un nuevo pasaporte para mantener su acceso.
+Ejecutar en modo protegido
+Como programa de Windows
+*** BLANK ***
+Programa Protegido de Windows
+NOTA: Sentry requiere efectuar operaciones de limpieza despu‚s de que el programa protegido haya terminado su ejecuci¢n. Sentry no puede determinar cuando terminan los programas de Windows, por lo que permanecer  activo hasta que Usted confirme que la ejecuci¢n del programa protegido ha terminado.
+Oprimir cualquier tecla antes de que la ejecuci¢n del archivo protegido haya terminado provocara un error de DOS y puede comprometer la seguridad del sistema.
+Oprima una tecla cuando el archivo protegido haya terminado su ejecuci¢n.
+Ejecuci¢n completa.
+*** BLANK ***
+*** BLANK ***
+*** BLANK ***
+*** BLANK ***
+*** BLANK ***
+Sistema de Seguridad para PC
+Registrado a:
+*** BLANK ***
+*** BLANK ***
+No. de Registro:
+*** BLANK ***
+Teclee "
+" en la línea de comando de Pasaporte para cambiar de    pasaporte.
+No. m ximo de intentos excedido.
+Ha sido manipulado por un intruso!!
+no tiene acceso de Super Usuario
+Ingreso como Super Usuario
+*** BLANK ***
+Ingreso al sistema.
+Bit cora consultada.
+Respaldo de Bit cora consultado.
+Consultar Bit cora.
+Consultar Respaldo de Bit cora
+Consultar [U]n Usuario ¢ [T]odos los Usuarios?
+Desea borrar el archivo de Bit cora de
+ [S/N]?
+ [S/N]?
+Respaldo de Bit cora
+La Bit cora ha sido borrada.
+La Respaldo de Bit cora ha sido borrada.
+Desea transferir la Bit cora al Archivo de Respaldo?
+Bit cora transferida al Archivo de Respaldo
+La Bit cora ha sido transferida al Archivo de Respaldo... (Oprima cualquier tecla)
+1. Revisar la Bit cora Primaria
+2. Revisar el Respaldo de Bit cora
+3. Mover Bit cora al Respaldo
+4. Regresar al Men£ de Super Usuario
+Men£ de Mantenimiento de Bit coras
+*** BLANK ***
+Imposible localizar Ambiente de trabajo.
+Ambiente de trabajo saturado - No Modificado.
+Error creando Respaldo de Archivo de Bit cora!
+Error creando Archivo de Bit cora!
+Error creando Archivo Temporal!
+Error abriendo Archivo de Bit cora!
+Error abriendo Archivo de Mensajes!
+Error abriendo Archivo Protegido!
+Error abriendo Sentryes.ins!
+Error abriendo Archivos de Sistema!
+Error abriendo Archivo Temporal!
+Error leyendo segmento de datos [Open]!
+Por favor ejecute el programa INSTALL.EXE
+Error revisando Archivo Temporal!
+Error en Informaci¢n de la Cuenta!
+Error en Par metros de Inicializaci¢n!
+Error interno de pantalla [Leyendo]
+Error interno de pantalla [Escribiendo]
+Falta de Memoria!
+Error en registro - Programa Abortado!
+This account has expired. *** TRANSLATE
+No encuentro LICENSE.TXT!
+Los Par metros de Inicializaci¢n son viejos!
+Los Par metros de Inicializaci¢n son nuevos!
+Executable Integrity Error! *** TRANSLATE
+Error Opening String File! *** TRANSLATE
+El usuario intento salir.
+Error de Sistema
+PELIGRO!
+Teclee Pasaporte:
+VERSION NO REGISTRADA
+La Versi¢n No Registrada no codifica los pasaportes!
+Por favor registre su copia si desea usar
+*ESTA ES UNA COPIA NO REGISTRADA*
+*      POR FAVOR REGISTRELA     *
+El directorio no existe. Desea Usted crearlo?
+*** BLANK ***
+Directorio invalido.
+Directorio creado.
+NOTA:
+Directorio NO fue creado
+Nombre de archivo invalido.
+Ruta de Acceso invalida.
+Permiso Negado.
+Error de DOS No.:
+es un directorio. Debe teclear un archivo.
+es solo-lectura.
+es de tipo escondido (Hidden)
+es archivo de sistema.
+sentryes.ins
+Select a Language *** TRANSATE
+) for the maximum number of invalid logins? *** TRANSLATE
+y
+ *** Executable Integrity Verified *** *** TRANSLATE

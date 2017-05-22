@@ -1,0 +1,1 @@
+@type ini >> sentry.exe

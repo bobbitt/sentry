@@ -1,0 +1,17 @@
+/Tde/x/c/d/k/Orcai /V3.10 /LC:\BC5\LIB +
+-v- C:\BC5\LIB\C0M.OBJ+
+-v- USER.OBJ+
+-v- SYSTEM.OBJ+
+-v- SYS.OBJ+
+-v- SUPER.OBJ+
+-v- SENTRY.OBJ+
+-v- LOG.OBJ+
+-v- ENV.OBJ+
+-v- COMMON.OBJ
+SENTRY.EXE
+
+-v- C:\BC5\LIB\OVERLAY.LIB+
+-v- C:\BC5\LIB\FP87.LIB+
+-v- C:\BC5\LIB\MATHM.LIB+
+-v- C:\BC5\LIB\CM.LIB
+

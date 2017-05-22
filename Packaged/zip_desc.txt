@@ -1,0 +1,3 @@
+Sentry
+PC Security Tool
+Copyright (C) 1995-1999, Cipher Logic Canada Inc.

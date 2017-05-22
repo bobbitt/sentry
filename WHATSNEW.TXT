@@ -1,0 +1,20 @@
+        Sentry V6.4
+        -----------
+        Release Date: 25 May 99
+
+          * Updated contact info for the author:
+
+            Orders:
+              Cipher Logic Canada Inc.
+              PO Box 412
+              Munster, ON
+              K0A 3P0
+              Canada
+
+            E-Mail:
+              info@cipherlogic.on.ca
+
+            Web:
+              http://www.cipherlogic.on.ca
+
+          * Fixed short superuser password problem

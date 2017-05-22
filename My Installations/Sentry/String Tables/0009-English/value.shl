@@ -1,0 +1,21 @@
+[Data]
+TITLE_MAIN=Sentry PC Security
+COMPANY_NAME=Cipher Logic Canada Inc.
+COMPANY_NAME16=CipherLg
+PRODUCT_VERSION=6.2
+ERROR_MOVEDATA=An error occurred during the move data process : %d
+UNINST_KEY=Sentry
+TITLE_CAPTIONBAR=Sentry Setup
+PRODUCT_NAME16=Sentry
+ERROR_VGARESOLUTION=This program requires VGA or better resolution.
+FOLDER_NAME=Sentry
+UNINST_DISPLAY_NAME=Sentry
+PRODUCT_KEY=Sentry.exe
+PRODUCT_NAME=Sentry
+ERROR_UNINSTSETUP=unInstaller setup failed to initialize.  You may not be able to uninstall this product.
+
+[General]
+Language=0009
+Type=STRINGTABLESPECIFIC
+Version=1.00.000
+

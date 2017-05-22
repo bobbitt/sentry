@@ -1,0 +1,128 @@
+////////////////////////////////////////////////////////////////////////////////
+///////////////////InstallShield Media Library Report Summary///////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+Media Name      : New Media
+Report Filename : C:\secur\sentry\My Installations\Sentry\Media\New Media\Report Files\6-10-1999 3.44.07PM.rpt
+Date            : 06/10/1999
+Time            : 3:44PM
+
+Number of Components:                3 
+Number of File Groups:               3 
+Number of Files:                    25 
+Total Size of Files:           642,181 (bytes)
+
+==========
+COMPONENTS
+==========
+
+
+     Program Files
+     Help Files
+     Security Tools
+
+
+////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////Report Details/////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+================================================================================
+                           COMPONENT: "Program Files"
+================================================================================
+
+SUMMARY:
+    Total Files:               10 (files for this component only)
+    Source Bytes:         204,063 (files for this component only)
+
+
+                **** File Group: "Program Executable Files" ****
+
+
+<Directory>: C:\secur\Sentry
+
+    Filename                    Date        Time      Size         Version      
+    --------------------------  ----------  --------  -----------  -------------
+    CBREAK.SYS                  03/05/1997  19:26:00          226               
+    SENTRY.GRP                  07/03/1996  07:47:00        1,329               
+    SENTRY.W95                  07/03/1996  07:47:00          995               
+    SENTRY.311                  03/04/1998  14:36:40          995               
+    --------------------------  ----------  --------  -----------  -------------
+    Count=4                                                 3,545               
+
+
+<Directory>: C:\secur\sentry
+
+    Filename                    Date        Time      Size         Version      
+    --------------------------  ----------  --------  -----------  -------------
+    SENTRY.PIF                  01/05/1999  14:13:46          995               
+    SENTRY.URL                  05/15/1999  21:58:20           54               
+    LICENSE.TXT                 05/07/1999  20:22:56        3,378               
+    LICENSE.SHA                 05/07/1999  20:21:04        3,337               
+    SENTRY.EXE                  06/10/1999  15:42:22      125,374               
+    install.exe                 06/10/1999  15:42:12       67,380               
+    --------------------------  ----------  --------  -----------  -------------
+    Count=6                                               200,518               
+
+
+================================================================================
+                            COMPONENT: "Help Files"
+================================================================================
+
+SUMMARY:
+    Total Files:               14 (files for this component only)
+    Source Bytes:         624,289 (files for this component only)
+
+
+                       **** File Group: "Help Files" ****
+
+
+<Directory>: C:\secur\Sentry
+
+    Filename                    Date        Time      Size         Version      
+    --------------------------  ----------  --------  -----------  -------------
+    README.COM                  07/03/1996  07:47:00        4,217               
+    --------------------------  ----------  --------  -----------  -------------
+    Count=1                                                 4,217               
+
+
+<Directory>: C:\secur\sentry
+
+    Filename                    Date        Time      Size         Version      
+    --------------------------  ----------  --------  -----------  -------------
+    ORDER.FRM                   05/15/1999  21:56:16        2,690               
+    QSTART.TXT                  08/28/1996  14:38:30        2,055               
+    readme.txt                  05/15/1999  21:57:22      143,628               
+    READMEES.TXT                05/15/1999  21:58:10      125,716               
+    SENTRY.HLP                  03/04/1998  17:09:08       24,732               
+    SENTRY.INS                  12/05/1998  20:34:12       11,701               
+    SENTRYES.HLP                03/04/1998  17:09:30       26,883               
+    SENTRYES.INS                01/25/1998  09:57:52       13,929               
+    STRING                      12/05/1998  20:39:56       15,665               
+    STRINGES                    12/05/1998  15:59:20       18,871               
+    FILE_ID.DIZ                 05/07/1999  19:29:56          416               
+    WHATSNEW.TXT                06/10/1999  15:38:06          467               
+    HISTORY.TXT                 06/10/1999  15:37:40       29,256               
+    --------------------------  ----------  --------  -----------  -------------
+    Count=13                                              416,009               
+
+
+================================================================================
+                          COMPONENT: "Security Tools"
+================================================================================
+
+SUMMARY:
+    Total Files:                1 (files for this component only)
+    Source Bytes:         642,181 (files for this component only)
+
+
+                     **** File Group: "Security Tools" ****
+
+
+<Directory>: C:\secur\sentry
+
+    Filename                    Date        Time      Size         Version      
+    --------------------------  ----------  --------  -----------  -------------
+    SDEL.EXE                    05/15/1999  22:05:14       17,892               
+    --------------------------  ----------  --------  -----------  -------------
+    Count=1                                                17,892               

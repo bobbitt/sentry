@@ -1,0 +1,120 @@
+[PackageForTheWeb]
+Version=1.0
+
+[Options]
+Company=NISS
+BasePath=C:\secur\sentry\Packaged\Registered\disk1
+SubFolders=1
+ApplicationName=Sentry
+Description=PC Security Tool
+Comments=
+Notice=Copyright (C) 1995-1999 Michael A. Bobbitt
+Version=6.4
+OutputSpec=C:\secur\sentry\Packaged\Registered\Sentry.exe
+Type=2
+Compress=1
+Sign=0
+Scan=1
+Files=16
+
+[Runtime]
+Run=SETUP.EXE
+CmdLine=/SMS
+License=
+Prompt=
+Password=
+DefaultPath=%PROGRAMFILES%\Sentry
+Language=
+WindowStyle=2
+Options=1
+
+[Extension]
+Server=
+Calls=0
+
+[Code Signing]
+CompanyURL=
+SpecFile=
+KeyFile=
+Method=0
+
+; ~~~~~~~~~~ File Section ~~~~~~~~~~~
+[File 1]
+Name=os.dat
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=1
+
+[File 2]
+Name=_ISDEL.EXE
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=65537
+
+[File 3]
+Name=SETUP.EXE
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=65537
+
+[File 4]
+Name=lang.dat
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=1
+
+[File 5]
+Name=_INST16.EX_
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=1
+
+[File 6]
+Name=_INST32I.EX_
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=1
+
+[File 7]
+Name=_SETUP.DLL
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=131089
+
+[File 8]
+Name=setup.ins
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=1
+
+[File 9]
+Name=_sys1.cab
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=1
+
+[File 10]
+Name=SETUP.BMP
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=1
+
+[File 11]
+Name=DATA.TAG
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=1
+
+[File 12]
+Name=SETUP.INI
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=1
+
+[File 13]
+Name=_user1.cab
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=1
+
+[File 14]
+Name=layout.bin
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=1
+
+[File 15]
+Name=data1.cab
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=1
+
+[File 16]
+Name=setup.lid
+Path=C:\secur\sentry\Packaged\Registered\disk1\
+Flags=1

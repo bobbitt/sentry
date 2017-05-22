@@ -1,0 +1,523 @@
+Old Password
+is changing passwords
+User List
+ * NONE *
+Maximum number of users exceeded! (MAXUSER=
+Current Users (ESC exits)
+Account
+Password
+Inv
+Max
+User Name
+Last Login
+Expiry
+Log
+Inv Log
+Select a user 
+Create User(s)
+NOTE: Pressing CTRL-ENTER after entering the login creates that user as a SuperUser.
+Login:
+Verify Password:
+This user has been created with SuperUser privileges.
+Do you want this account to have an expiry date?
+Do you want the password to have an expiry date?
+Do you want other than the default (
+Enter 'X' to assign unlimited invalid logins.
+Enter the number of sequential invalid logins before the user's account is automatically locked up, up to a maximum of 99. Enter selects the default
+Logins must be between
+Passwords must be between
+Password not verified!
+That user already exists!
+Created.
+Delete
+Delete User(s)
+This is a SuperUser!
+You cannot delete this user; they are the last SuperUser!
+Press any key to return to the SuperUser menu...
+Are you sure you want to delete
+Deleted.
+Toggle
+Toggle SuperUser Status
+NOTE: The user must re-enter their password to obtain or give up SuperUser access.
+You may override this by entering any other password, which will be this user's password from now on.
+You cannot remove SuperUser access from the last SuperUser!
+Are you sure you want to
+ remove SuperUser access from
+ grant SuperUser access to
+Password:
+Press any key to continue...
+SuperUser Access
+ Granted to
+ Revoked from
+User
+Change Account Expiry
+Set Account Expiry
+SuperUser Menu
+Current expiry date is
+This account has expired.
+This account has no expiry date.
+Do you want to change 
+'s expiry date?
+account expiry changed to 
+account expiry removed.
+Change Password Expiry
+Set Password Expiry
+(This password has expired.)
+This password has no expiry date.
+Import Initialization Settings
+Cannot import Initialization Settings with a Protected File!
+Initialization Settings Imported...
+password expiry changed to 
+The next time Sentry is run, it will pick up and use these settings.
+password expiry removed.
+Max Invalid Logins
+Assign Max Number of Invalid Logins
+This account will currently lock up after 
+invalid logins.
+This account has no limit on invalid logins.
+There are no settings to import!
+'s invalid login setting?
+'s invalid login setting is changed to
+'s invalid login setting removed.
+1. Create User
+2. Delete User
+3. View All Users
+4. Toggle SuperUser Status
+5. Change Account Expiry Date
+6. Change Password Expiry Date
+7. Change Account Password
+8. Assign Max Number of Invalid Logins
+9. Return to SuperUser Menu
+User Maintenance Menu
+Option:
+User List Viewed.
+View
+Change Password
+Location of the Log File
+Location of the Backup Log File
+Location of the Message File
+Minimum Password Length
+Maximum Password Length
+Maximum Invalid Tries
+Wait Time After an Invalid Login
+Max Log File Size
+Key to Change Password
+Password Echo Character
+Days Until Passwords Expire
+Days Until Accounts Expire
+Screen Saver Activation Time
+Screen Saver Message
+Login Prompt
+Password Prompt
+Wrong Password Message
+Wrong Login Message
+Bad Password Length Message
+Bad Login Length Message
+Wrong Password Log Message
+Wrong Login Log Message
+Bad Password Length Log Message
+Bad Login Length Log Message
+Environment Variable
+Enable Sentry with Windows
+Show Title
+Date Format
+Case Sensitivity
+Windowed Mode
+Enable Colour
+Text Colour
+Text Background
+Highlighted Text Colour
+Highlighted Text Background
+Maximum Invalid Logins
+Type Ahead
+Clear Screen
+Last Login Pause
+Secure Deletion
+View Highlighting
+View Highlighting Colour
+Disable CTRL-C
+Password Echo Count
+Black
+Blue
+Green
+Cyan
+Red
+Magenta
+Brown
+Light Gray
+Dark Gray
+Light Blue
+Light Green
+Light Cyan
+Light Red
+Light Magenta
+Yellow
+White
+Initialization Settings
+MORE [Page Up ]
+MORE [Page Down ]
+Select a setting or ESC when finished:
+No Information Available.
+Default:
+c:\Sentry.Log
+c:\Backup.Log
+c:\Sentry.Msg
+passwd
+Sentry must now exit to avoid corruption.
+*** BLANK ***
+This is a Secure Terminal.
+*** BLANK ***
+Invalid Login.
+User entered the wrong password.
+User entered the wrong login.
+Invalid Password Length.
+Invalid Login Length.
+USER
+Current Value:
+New Value (ENTER Aborts):
+Please enter a numeric value.
+Setting not changed...
+is not a valid path.
+*** BLANK ***
+Please enter a single word. (No spaces)
+*** BLANK ***
+Please enter a single character only.
+*** BLANK ***
+*** BLANK ***
+*** BLANK ***
+Setting Modified:
+Send A Message
+Send Message(s)
+Message:
+sent a message to
+Protect A File
+WARNING: Once a file is protected, it can NEVER be undone.
+Make sure you backup the file before protecting it, and test the protected file to ensure it works as planned.
+Files in:
+Select a file to protect, D to change Drive, ESC to quit.
+Change to which drive [a-z]?
+Could not change directory.
+File must have EXE, COM or BAT extension.
+Please enter a valid path.
+This file is already protected by
+Is
+Shareware versions of
+cannot upgrade files protected by a registered version.
+characters.
+This file is protected by the current, or an earlier version of
+Upgrading reconfigures the initialization settings. The account structure and initialization settings will be copied exactly from this version of Sentry being used to upgrade the file.
+If you choose to upgrade, you will need to modify the initialization settings and users to match your desired setup.
+Do you want to upgrade
+Yes
+upgraded to version
+No
+a [W]indows or [D]os based program?
+Cannot protect Windows programs!
+Creating
+would overwrite an existing file!
+If you still wish to protect this file, you will need to rename that file so that it will not duplicate the name of any existing ".exe" programs in that directory when protected.
+File Protected: 
+Export Initialization Settings
+Cannot dump the Initialization Settings of a Protected File!
+*** BLANK ***
+Initialization Settings Exported...
+The next time INSTALL.EXE is run, it will pick up and use these settings.
+*** BLANK ***
+Security Audit
+ will now perform an audit of your system's security.
+You will be informed of any potential weaknesses, and given an opportunity to update your settings.
+Checking System Settings...
+in your AUTOEXEC.BAT file.
+- Your AUTOEXEC.BAT file does not appear to exist.
+- There is no call to
+Do you wish to add a call to
+to your AUTOEXEC.BAT?
+*** BLANK ***
+- Your MSDOS.SYS file does not appear to exist.
+*** BLANK ***
+- There is no "BootKeys=0" in your MSDOS.SYS file.
+Do you wish to add a "BootKeys=0" line to your MSDOS.SYS?
+*** BLANK ***
+*** BLANK ***
+*** BLANK ***
+- Your CONFIG.SYS file does not appear to exist.
+*** BLANK ***
+- A "break on" command exists in your CONFIG.SYS file.
+Do you wish to remove it?
+days
+seconds
+- There is no "switches /n/f " in your CONFIG.SYS file.
+Do you wish to add a "switches /n/f" line to your CONFIG.SYS?
+, which is low.
+Checking Initialization Settings...
+- Your minimum password length is set to
+Do you wish to raise it?
+Enter the new minimum length for passwords
+- Your maximum password length is set to
+Enter the new maximum length for passwords
+- Your allowable invalid login attempts is set to 
+, which is high.
+Do you wish to lower it?
+Enter the number of invalid login attempts before
+locks up
+- Your invalid login wait delay is set to %d seconds
+*** BLANK ***
+Enter the number of seconds to delay when a login is incorrect
+- You have passwords echoed directly to the screen!
+- Do you wish to echo *'s instead?
+- Your password expiry is set to
+Enter the number of days new passwords have before they expire
+- Your account expiry is set to
+Enter the number of days unused accounts have before they expire
+- Your screen saver activation time is
+*** BLANK ***
+Enter the number of seconds of inactivity that may pass before the screen saver is activated
+- You have case sensitivity for login names turned off.
+- Do you wish to turn it on?
+- You have secure deletion turned off.
+- CTRL-C is currently enabled.
+- Do you wish to disable it?
+Checking Account Structure...
+User: 
+*** BLANK ***
+Do you wish to delete it?
+Has exceeded his allowable maximum invalid login limit.
+This account may have been the target of an attack.
+Do you wish to delete this account?
+Is a SuperUser with a maximum invalid login setting.
+This means if this account is repeatedly attacked, the SuperUser could be locked out!
+Do you wish to remove the maximum invalid login setting?
+Has no maximum invalid login setting.
+This means this account can be repeatedly attacked without being locked out!
+Do you wish to add a maximum invalid login setting?
+enabled.
+*** BLANK ***
+Has no expiry date on their account.
+Do you wish to add an expiry date?
+Has no expiry date on their password.
+Audit Complete. Press a key...
+Security Audit Performed.
+Modify Shell Commands
+WARNING: This procedure can cause your system to crash under certain circumstances! It modifies your command interpreter, which may cause problems with certain configurations.
+MAKE A BOOTDISK BEFORE ATTEMPTING THIS PROCEDURE!
+Enter the path to your COMMAND.COM
+File must have a .COM extension.
+File not found.
+No information could be obtained.
+It is possible you are using a version of COMMAND.COM that
+does not recognize, or that it's not a valid command interpreter.
+[E]dit, [D]isable or ESC to quit.
+Enter new value for
+WARNING: Shell commands that are not the same length as the original command may cause problems.
+Do you wish to keep it anyway?
+disabled.
+You have made the following changes:
+Press any key for more...
+is disabled.
+Is this correct?
+The modified command shell will now execute.
+Please test it thoroughly to ensure there are no problems.
+Press any key to run the test shell...
+Running the test shell.
+DOS Shell
+Type "EXIT" to leave the
+Returned from test shell.
+Were there any problems?
+No Changes Made. Press any key. 
+[ ] A call to Sentry in AUTOEXEC.BAT
+[ ] A "BootKeys" line in MSDOS.SYS
+[ ] A "switches" line in CONFIG.SYS
+[ ] A "break on" command in CONFIG.SYS
+[ ] A short max or short min password length
+[ ] A high number for maximum login attempts
+[ ] A low number for wait delay
+[ ] Password echoing should be off or masked
+[ ] A password expiry max of over 365 days
+[ ] An unused account expiry max of over 365 days
+[ ] A long wait for the screen saver (over 600)
+[ ] Case sensitivity is off
+[ ] Secure Deletion is off
+[ ] CTRL-C is enabled
+[ ] Accounts that have expired (should be deleted)
+[ ] # of failed login attempts is exceeded
+[ ] SuperUser accounts with a max inv log setting
+[ ] Normal accounts with no max inv log setting
+[ ] Accounts with no expiry date
+[ ] Passwords with no expiry date
+Audit Help
+SPACE to select an item
+'A' to select all items
+'T' to toggle all items
+ENTER to accept, or
+ESC to abort
+Select items to audit: 
+1. Edit Initialization Settings
+2. Send a Message to a User
+3. Protect a File
+4. Export Initialization Settings
+6. Security Audit
+7. Modify Shell Commands
+8. Return to SuperUser Menu
+System Maintenance Menu
+5. Import Initialization Settings
+User Locked Out.
+*** BLANK ***
+Enter 'N' at year prompt to assign no expiry date.
+Enter the year (4 digits):
+Year must be 4 digits!
+Enter the month (2 digits):
+Enter the day (2 digits):
+That date is in the past!
+Are you sure you want to use it?
+*** BLANK ***
+*** BLANK ***
+ Please Wait....
+Online Help
+.hlp
+Error Opening Help Information!
+Press any key for more help...
+F1 - Context Sensitive Online Help
+Press any key to return...
+F2 - Lock Screen
+F3 - Select Language
+Cannot enter DOS Shells recursively. (Press a key)
+User entered the
+*** BLANK ***
+*** BLANK ***
+*** BLANK ***
+DOS Shell finished.
+About
+*** BLANK ***
+All Rights Reserved.
+For more info, please send e-mail to
+or visit:
+*** BLANK ***
+*** BLANK ***
+1. User Maintenance Menu
+2. Log File Maintenance Menu
+3. System Maintenance Menu
+4. Sentry DOS Shell
+5. About Sentry
+6. Exit SuperUser Menu
+*** BLANK ***
+*** BLANK ***
+New Password:
+*** BLANK ***
+You cannot use the same password.
+*** BLANK ***
+
+'s password has been changed.
+Last login was on 
+at
+Message
+You have a message awaiting you.
+FROM:
+DATE:
+[D]elete, [R]eply, or any other to keep...
+Not a current user - cannot reply.
+*** BLANK ***
+Do you want to delete the original?
+invalid login attempt(s) have occurred since your last login.
+'s Password has Expired.
+NOTE: Your password has expired. You must enter a new one to retain your access.
+run in protected mode
+as a Windows program
+*** BLANK ***
+Windows Protected Program
+NOTE: Sentry needs to perform some cleanup operations after the protected file has finished execution. Sentry cannot determine when Windows programs terminate, so Sentry will remain active until you confirm that the protected file has finished execution.
+Pressing a key before the protected file has terminated will cause a DOS "Sharing Violation" and may compromise the security of your system.
+Press any key when the protected file has finished execution...
+Execution Complete.
+*** BLANK ***
+*** BLANK ***
+*** BLANK ***
+*** BLANK ***
+*** BLANK ***
+PC Security System
+Registered to:
+*** BLANK ***
+*** BLANK ***
+Registration #:
+*** BLANK ***
+Enter "
+" at the password prompt to set a new password.
+Exceeded maximum number of tries.
+has been tampered with!!
+does not have SuperUser access.
+logged in as SuperUser.
+*** BLANK ***
+logged in.
+Log File Viewed.
+Backup Log File Viewed.
+View Log File
+View Backup Log File
+View for [O]ne or [A]ll users?
+Would you like to clear
+'s log file [y/N]?
+the log file [y/N]?
+Backup Log File
+The log file has been cleared.
+The backup log file has been cleared.
+Do you want to move the log file to the backup file?
+Log File Moved to Backup.
+The log file has been moved to the backup file...(Press a key)
+1. View Primary Log File
+2. View Backup Log File
+3. Move Log File to Backup
+4. Return to SuperUser Menu
+Log File Maintenance Menu
+*** BLANK ***
+Cannot Locate Environment.
+Environment Overflow - Not Modified.
+Error Creating Backup Log File!
+Error Creating Log File!
+Error Creating Temp File!
+Error Opening Log File!
+Error Opening Message File!
+Error Opening Protected File!
+Error Opening Sentry.ins!
+Error Opening System Files!
+Error Opening Temp File!
+Error Reading Data Segment [Open]
+Please Run the INSTALL.EXE program.
+Error Scanning Temp File!
+Error in Account Information!
+Error in Initialization Settings!
+Internal Screen Error [Reading]
+Internal Screen Error [Writing]
+Out of memory!
+Registration Error - Program Aborted!
+This account has expired.
+Cannot Find LICENSE.TXT!
+The Initialization Settings Are Old!
+The Initialization Settings Are New!
+Executable Integrity Error!
+Error Opening String File!
+User Attempted to Exit.
+System Error
+WARNING!
+Enter Password:
+UNREGISTERED VERSION
+The ShareWare Version Does Not Encode Passwords!
+Please Register if you intend to use
+* THIS IS AN UNREGISTERED COPY. *
+*       PLEASE REGISTER.        *
+Directory does not exist. Do you wish to create it? 
+*** BLANK ***
+Invalid directory.
+Directory created.
+NOTE:
+Directory not created.
+Invalid file name.
+Invalid Path.
+Permission Denied.
+DOS Error Number:
+is a directory. You must enter a file.
+is read-only.
+is hidden.
+is a system file.
+sentry.ins
+Select a Language
+) for the maximum number of invalid logins?
+and
+ *** Executable Integrity Verified ***

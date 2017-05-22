@@ -1,0 +1,21 @@
+[Data]
+TITLE_MAIN=Sentry PC Security
+COMPANY_NAME=NightShade Computing
+COMPANY_NAME16=NightShd
+ERROR_MOVEDATA=An error occurred during the move data process : %d
+PRODUCT_VERSION=6.2
+UNINST_KEY=Sentry
+TITLE_CAPTIONBAR=Sentry Setup
+PRODUCT_NAME16=Sentry
+FOLDER_NAME=Sentry
+ERROR_VGARESOLUTION=This program requires VGA or better resolution.
+PRODUCT_KEY=Sentry.exe
+UNINST_DISPLAY_NAME=Sentry
+ERROR_UNINSTSETUP=unInstaller setup failed to initialize.  You may not be able to uninstall this product.
+PRODUCT_NAME=Sentry
+
+[General]
+Language=0009
+Type=STRINGTABLESPECIFIC
+Version=1.00.000
+

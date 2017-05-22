@@ -1,0 +1,91 @@
+
+ License Agreement
+
+ BEFORE USING THIS SOFTWARE, CAREFULLY READ THE TERMS AND CONDITIONS OF
+ THIS AGREEMENT.  BY USING THIS SOFTWARE, YOU CONSENT TO BE BOUND BY --
+ AND ARE BECOMING A PARTY TO -- THIS AGREEMENT.
+
+    IF YOU DO NOT ACCEPT ALL OF THE TERMS OF THIS LICENSE AGREEMENT,
+    DO NOT USE THE SOFTWARE.
+ 
+
+ 1.  Cipher Logic Canada Inc. (the "company") grants to you a
+ non-exclusive, non-sublicensable, non-transferable, license to use this
+ version of Sentry (the "Software") in binary executable form.
+
+
+
+
+
+
+
+
+ 2.  Software is provided 'as is' without express or implied warranties,
+ including warranties of merchantability and fitness for a particular
+ purpose or noninfringement.
+
+    The company shall not be liable under any theory for any damages
+ suffered by you or any user of the software.
+
+
+
+
+
+
+
+ 3. Title, ownership rights, and intellectual property rights, in and
+ to the Software, shall remain in the company.  You agree to abide by the
+ international copyright laws and all other applicable laws of Canada
+ including, but not limited to, export control laws.
+
+    You acknowledge that the Software in source code form remains a
+ confidential trade secret of the company and therefore you agree not to
+ modify the Software or attempt to decipher, decompile, disassemble or
+ reverse engineer the Software, except to the extent applicable laws
+ specifically prohibit such restriction.
+
+
+
+
+
+ 4. The company may terminate this License at any time by delivering
+ notice to you. Upon termination of this License by the company, you
+ agree to destroy or erase the Software.
+ 
+    You may terminate this License at any time by destroying or erasing
+ all of your copies of the Software.
+
+    This License is personal to you and you agree not to assign your
+ rights herein.
+
+    This License shall be governed by and construed in accordance with
+ the laws of Canada and, in matters affecting copyrights, trademarks
+ and patents, by Canadian federal law.  This License sets forth the
+ entire agreement between you and the company.
+
+
+ 5. The company shall not be liable for
+
+    (a) incidental, consequential, special or indirect damages of any
+ sort, whether arising in tort, contract or otherwise, even if
+ the company has been informed of the possibility of such damages, nor
+
+    (b) for any claim by any other party. This limitation of liability
+ shall not apply to liability for death or personal injury to the extent
+ applicable law prohibits such limitation.
+
+
+ 6. From time to time the company may, at his sole discretion, advise the
+ User of updates, upgrades, enhancements or improvements to the Software
+ and/or new releases of the Software (collectively, "Enhancements"), via
+ whatever method(s) determined by the company to be appropriate.
+                   
+    The company may license such Enhancements to the User, upon payment
+ of fees as may be established by Licensor from time to time. All such
+ Enhancements to the Software provided to the End-User shall also be
+ governed by the terms of this License.
+                   
+ ONLY REGISTERED USERS OF THE SOFTWARE WILL HAVE ANY ASSURANCE OF BEING
+ ADVISED OF, AND LICENSED TO USE, ANY ENHANCEMENTS TO THE SOFTWARE,
+                   
+ Copyright (C) 1995-1999 Cipher Logic Canada Inc.  All rights reserved.

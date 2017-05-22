@@ -1,0 +1,22 @@
+@echo off
+copy file_id.diz share
+copy history.txt share
+copy license.sha share\license.txt
+copy order.frm share
+copy qstart.txt share
+copy readme.com share
+copy readme.txt share
+copy readmees.txt share
+copy sentry.hlp share
+copy sentry.ins share
+copy sentry.pif share
+copy sentry.w95 share
+copy whatsnew.txt share
+copy sentry.exe share
+copy install.exe share
+copy cbreak.sys share
+copy sentry.url share
+copy sentryes.ins share
+copy sentryes.hlp share
+copy string share
+copy stringes share

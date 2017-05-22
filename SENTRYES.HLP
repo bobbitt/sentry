@@ -1,0 +1,611 @@
+El Menú de Mantenimiento de Usuarios 
+
+El Menú de Mantenimiento de Usuarios contiene todas las acciones
+que afectan a los Usuarios. Las siguientes opciones pueden ser
+accesadas en este Menú:
+
+    1.  Crear Usuario
+    2.  Borrar Usuario
+    3.  Revisar Usuarios
+    4.  Modificar derechos de Super Usuario
+    5.  Cambiar Fecha de Expiración de Cuenta
+    6.  Cambiar Fecha de Expiración de Pasaporte
+    7.  Cambiar Pasaporte de Cuenta 
+    8.  Asignar Máximo de Accesos Inválidos
+    9.  Regresar a Menú de Super Usuario
+
+El Menú de Mantenimiento de Archivo de Bitácora
+
+El Menú de Mantenimiento de Archivo de Bitácora contiene todas
+las acciones requeridas para el manejo del Archivo de Bitácora.
+Las siguientes opciones pueden ser accesadas en este Menú:
+
+    1. Revisar Archivo de Bitácora
+    2. Revisar Respaldo de Bitácora
+    3. Mover Archivo de Bitácora al Respaldo
+    4. Regresar a Menú de Super Usuario
+
+El Menú de Mantenimiento de Sistema
+
+El Menú de Mantenimiento de Sistema contiene funciones que
+permiten al Super Usuario realizar funciones especiales o
+relativas al Sistema. Las siguientes opciones pueden ser
+accesadas en este Menú:
+
+    1. Editar Parámetros de Inicialización 
+    2. Mandar un Mensaje a un Usuario 
+    3. Proteger un Archivo
+    4. Exportar Parámetros de Inicialización 
+    5. Realizar Auditoria de Seguridad 
+    6. Modificar Comandos del Shell 
+    7. Regresar a Menú de Super Usuario
+
+Cada función es descrita a continuación.
+
+Interpretador de Comandos de Sentry
+
+Seleccionar esta opción le llevara temporalmente a una línea de
+comando de DOS donde puede ejecutar cualquiera de los comandos
+normales del sistema operativo. Este Shell tiene memoria y
+ambiente limitados, por lo que solo debe ser usado en forma
+básica y se debe evitar ejecutar programas muy grandes ó
+complicados.
+
+Oprima "EXIT" para regresar al Menú de Super Usuario.
+
+Acerca de Sentry
+
+Esta opción simplemente le muestra información interesante ó útil
+sobre Sentry.
+
+Salir
+
+Esta opción simplemente le regresa a la línea de comando. Tiene
+exactamente la misma función que oprimir la tecla ESCAPE.
+
+
+
+
+
+Crear Usuario
+
+Esta opción le permite crear Usuario(s) en su Sistema. Antes que
+nada, usted debe proporcionar el nombre que desea asignar a ese
+Usuario. Si Usted desea crear un Usuario con privilegios de Super
+Usuario, teclee el nombre y oprima la tecla CONTROL al tiempo que
+oprime [ENTER]. Una vez que ha hecho esto, Sentry le pedirá el
+Pasaporte. El Usuario debe escoger y teclear su Pasaporte. Los
+Super Usuarios no necesitan conocer estos Pasaportes ya que
+pueden manejar las cuentas de cualquier manera. El Pasaporte se
+captura dos veces para eliminar errores de tecleado y luego es
+grabado en forma encriptada. La tecla ESCAPE abortara esta
+operación en cualquier momento.
+
+Nota: El sistema esta limitado a cien usuarios pero hay una
+versión sin restricciones disponible bajo pedido.
+
+Borrar Usuario
+
+La opción de borrar usuarios es muy sencilla. Le presenta una
+pantalla de todos los Usuarios, y Usted solo resalta con el
+cursor el Usuario que desea borrar. Los Super Usuarios son
+mostrados con un asterisco (*) a la derecha de su nombre. Oprima
+[Enter] para seleccionar el que desea borrar. Si el Usuario
+seleccionado es un Super Usuario, Sentry le advertirá y, sin
+importar el tipo, si confirma Usted la acción, ese usuario será
+borrado. Cualquier tecla distinta a "S" NO ejecutara el borrado.
+La tecla ESCAPE abortara esta operación en cualquier momento.
+
+Ver Usuarios
+
+Esta acción le permite ver todos los Usuarios con cuentas en su
+Sistema. Los Super Usuarios son mostrados con un asterisco(*)
+junto al nombre. El ultimo acceso (login), día, fecha, cuenta,
+Fecha de Expiración de cuenta y Fecha de Expiración de Pasaporte
+son también mostrados a la derecha del nombre del usuario.
+Adicionalmente, el numero de intentos frustrados desde el ultimo
+acceso valido y el máximo de accesos validos antes de cancelar la
+cuenta, son también mostrados. Una "X" en el "Max Inv Log"
+(máximo de accesos validos) significa que no hay limite de
+accesos inválidos. Usted puede usar PAGE UP y PAGE DOWN para
+navegar por las paginas que pueda haber de usuarios. Las flechas
+de cursor también estarán disponibles. La tecla ESCAPE abortara
+esta operación en cualquier momento.
+
+Cambiar estado de Super Usuario
+
+Cuando se selecciona esta opción, primero muestra un listado de
+todos los usuarios del sistema. Nuevamente los Super Usuarios son
+marcados con asterisco (*). Una vez que ha seleccionado un
+Usuario, Sentry preguntara si desea otorgar/retirar privilegios
+de Super Usuario al Usuario. Cualquier tecla diferente a "S" NO
+cambiara el estado del Usuario. Ahora el Usuario debe teclear un
+Pasaporte. (Ya que el estado de Super Usuario se codifica en el
+Pasaporte y el Pasaporte no puede ser decodificado, no es posible
+cambiar el estado de la cuenta sin cambiar también el Pasaporte).
+
+El Usuario puede usar su anterior Pasaporte o uno nuevo (el
+anterior será sobrescrito). En el peor escenario el Super Usuario
+puede reasignar un nuevo Pasaporte al Usuario si este no se
+encuentra presente para teclear su Pasaporte. (Un Usuario hostil
+puede perder los privilegios de Super Usuario sin tener que
+teclear su Pasaporte; Usted lo puede hacer por el).
+
+Cambiar Fecha de expiración de Cuenta
+
+Esta opción le permite definir cuando expira una cuenta en su
+sistema. Las cuentas expiradas ya no tienen acceso al sistema.
+Esta opción es conveniente cuando un usuario se retira ya que no
+tienen que acordarse de dar de baja su cuenta antes de retirarse.
+Usted puede dejarla expirar y removerla cuando pueda. 
+
+Esta opción trabaja a conjunto con la opción "Asignar Máximo de
+Accesos Inválidos. Una vez que una Cuenta alcanza su máximo de
+accesos inválidos secuenciales, expira. La única manera de
+reactivarla es cambiar la Fecha de Expiración de la Cuenta con
+esta opción.
+
+Una vez que selecciona esta opción, información sobre esta cuenta
+será mostrada. Si es cuenta de Super Usuario, Sentry se lo hará
+saber. Después le mostrara la fecha de expiración actual. Sentry
+le preguntara si desea cambiar la Fecha de Expiración del
+Usuario. Cualquier tecla diferente a "S" NO cambiara el estado
+del Usuario, de otra manera se le preguntara el año de
+vencimiento. Este debe ser en 4 dígitos (ej.: 1997). Si Usted
+teclea 'N' en el campo de año esta cuenta será permanentemente
+valida (sin Fecha de Expiración), Si Usted proporciona un año
+valido se le preguntara el mes de expiración en 2 dígitos (ej.:
+06 para Junio) y el día, también de 2 dígitos. Las cuentas
+expiran un segundo después de entrar al día indicado.
+
+Cambiar Fecha de Expiración de Pasaporte
+
+Esta opción le permite definir cuando expira el Pasaporte  de un
+Usuario. Una vez que este expira, el Usuario debe teclear uno
+nuevo. Esto obliga al Usuario a cambiar su Pasaporte. Una vez que
+un Pasaporte ha expirado, la siguiente vez que el Usuario accese,
+será obligado a teclear un nuevo Pasaporte. El nuevo Pasaporte es
+valido por el numero de días especificado en los Parámetros de
+Inicialización. Una vez que el Pasaporte ha expirado, el Usuario
+no puede usarlo otra vez y debe seleccionar uno nuevo. (NOTA:
+Sentry no mantiene registro histórico de Pasaportes, así que un
+Usuario puede alternar dos pasaportes sin problemas. Esta no es
+una practica segura y debe ser evitada).
+
+Una vez que selecciona esta opción, información sobre esta cuenta
+será mostrada. Si es cuenta de Super Usuario, Sentry se lo hará
+saber. Después le mostrara la fecha de expiración del Pasaporte.
+Sentry le preguntara si desea cambiar la Fecha de Expiración del
+Pasaporte. Cualquier tecla diferente a "S" NO cambiara el estado
+del Usuario, de otra manera se le preguntara el año de
+vencimiento. Este debe ser en 4 dígitos (ej.: 1997). Si Usted
+teclea 'N' en el campo de año esta cuenta será permanentemente
+valida (sin Fecha de Expiración), Si Usted proporciona un año
+valido se le preguntara el mes de expiración en 2 dígitos (ej.:
+06 para Junio) y el día, también de 2 dígitos. Los pasaportes
+expiran un segundo después de entrar al día indicado.
+
+Cambiar Pasaporte de Cuenta
+
+Esta opción permite al Super Usuario cambiar el Pasaporte de una
+cuenta, en caso que el Usuario lo olvide ó alguna otra cosa
+extraña haya pasado. Al asignar un nuevo Pasaporte a una cuenta,
+Usted debe especificarle una Fecha de Expiración  inmediata para
+forzar al Usuario a escoger uno nuevo. Si el Pasaporte previo no
+tenia Fecha de Expiración, ninguna será asignada al nuevo
+Pasaporte. De otra forma el Pasaporte expira en el numero de días
+asignado en los Parámetros de Inicialización. La tecla ESCAPE
+abortara esta operación en cualquier momento.
+
+Asignar Máximo de Accesos Inválidos
+
+Esto le permite establecer el numero Máximo de Accesos Inválidos
+permitido antes que una Cuenta sea deshabilitada. El valor por
+omisión se define en los Parámetros de Inicialización , y es
+asignado a todas las cuentas cuando son usadas por primera vez.
+
+Para asignar un nuevo máximo, simplemente seleccione "Asignar
+Máximos Accesos Inválidos en el menú de Super Usuario. Allí se le
+mostrara la lista de Usuarios y se le pedirá que seleccione el
+Usuario que desea cambiar. La tecla ESCAPE abortara esta
+operación en cualquier momento.
+
+Una vez que seleccione al Usuario, Se le informara en caso que
+ese Usuario sea un Super Usuario.
+
+NOTA: Usted NO debe asignar un máximo de Accesos Inválidos a la
+ultima cuenta de Super Usuario en el sistema. Si lo hace y
+alguien intenta entrar en esa cuenta, Usted podría quedar
+bloqueado fuera del menú de Super Usuario!
+
+A continuación se le dirá cual es el máximo de ese Usuario y si
+desea Usted cambiarlo. Cualquier tecla distinta a "S" abortara la
+operación. Ahora se le preguntara el numero máximo de accesos
+inválidos antes de que una cuenta sea deshabilitada. Teclear "N"
+o cero (0) hará el numero ilimitado.
+
+Este consciente que un numero menor a 10 le causara demasiados
+problemas. Gastaría Usted mucho tiempo rehabilitando cuentas de
+gente poco cuidadosa. Considere el asunto cuidadosamente. Además
+este consciente que cuando se cancela el acceso de una cuenta, lo
+que se esta haciendo realmente es hacerla expirar de inmediato y
+si la desea reactivar, tendrá Usted que cambiar la Fecha de
+Expiración. Esto es conveniente para saber cuando fue que la
+cuenta fue realmente cancelada ya que la Fecha de Expiración será
+la del día que fue cancelada.  
+
+Cada vez que hay un acceso valido a una cuenta, el contador de
+accesos inválidos es regresado a cero. Esto quiere decir que una
+Cuenta  no será cancelada si hay un acceso valido antes de que se
+alcance el limite de accesos inválidos. (Por ejemplo, digamos que
+una Cuenta tiene un máximo de 10 accesos inválidos. Si hay 7
+accesos inválidos antes de un valido y luego 5 inválidos mas, la
+cuenta no será cancelada. Deben ser 10 accesos inválidos
+secuenciales los que ocurran antes de que la cuenta sea
+cancelada).
+
+Una vez que haya realizado los cambios, Usted puede revisar la
+lista de Usuarios para asegurarse que todo sea aceptable.
+
+Regresar a Menú de Super Usuario
+
+Esta opción sencillamente lo regresa al Menú de Super Usuario
+menú. Es lo mismo que teclear ESCAPE.
+
+
+Ver Archivo de Bitácora
+
+Cada vez que un Usuario accesa el sistema, un registro es escrito
+a disco. Si Usted desea ver el registro en línea, seleccione esta
+opción. Se le preguntara si desea ver el Archivo de Bitácora para
+uno ó varios Usuarios. Teclear "u" (Un Usuario ) lo llevara al
+listado de Usuarios, donde puede seleccionar el Usuario que
+desee. Cualquier otra tecla le mostrara todos los Usuarios.
+
+El Archivo de Bitácora será mostrado pantalla por pantalla y
+Usted puede oprimir ESCAPE en cualquier momento para ir al final
+del archivo. Una vez que todo el Archivo de Bitácora ha sido
+mostrado, Sentry le preguntara si desea borrarlo. Si Usted estaba
+revisando un solo Usuario, Sentry le preguntara si desea borrar
+la información de bitácora de ese Usuario.
+
+Cualquier tecla distinta a "S" lo sacara de la opción dejando el
+Archivo de Bitácora intacto. Si Usted teclea un "S", Sentry
+borrara todos los registros. Si Usted esta viendo la bitácora de
+todos los Usuarios, todos los registros serán borrados. Si esta
+viendo la bitácora para un solo Usuario, solamente los registros
+de ese Usuario serán borrados.
+
+El Archivo de Bitácora por si mismo no ocupa mucho espacio en
+disco y por tanto debería ser mantenido como registro histórico.
+Usted puede necesitar referirse al Archivo de Bitácora para
+verificar algunos eventos. Si el espacio en disco es un problema,
+Usted puede usar la opción "Mover Archivo a Respaldo" descrita
+mas adelante.
+
+Usted debe siempre revisar el Archivo de Bitácora, ya que este le
+dirá si hay algún problema en su sistema. Todos los mensajes de
+error son guardados en la bitácora y esto le dirá si Sentry ha
+encontrado algunos problemas. Además, registra la hora y el
+nombre del Usuario tratando de accesar. Esto le permite
+identificar ataques potenciales al sistema. El archivo de
+bitácora esta escondido por Sentry, pero Usted también debería
+ponerlo donde este a salvo de manipulación por los Usuarios.
+Usted puede establecer su localización en Parámetros de
+Inicialización.
+
+Ver Respaldo de Archivo de Bitácora
+
+Esta opción es igual a Ver Archivo de Bitácora salvo que le
+permite revisar la información que ha respaldado. Esto es con
+propósitos estrictamente históricos para no perder la información
+del Archivo de Bitácora.
+
+Mover Archivo de Bitácora al Respaldo
+
+Esta opción mueve la información del Archivo de Bitácora al
+Archivo de Respaldo. El Archivo de Respaldo no es sobrescrito, la
+información es añadida al final de este. Esto lo hace mas fácil
+de manejar cuando el Archivo de Bitácora empieza a estar muy
+grande pero Usted no quiere borrarlo.
+
+Regresar a Menú de Super Usuario
+
+Esta opción simplemente lo regresa al menú de Super Usuario. Es
+lo mismo que oprimir la tecla ESC.
+
+
+
+
+
+
+
+Editar Parámetros de Inicialización
+
+Esta opción le permite editar los Parámetros de Inicialización.
+Después de la instalación, es critico que Usted revise cada
+atributo, y se asegure de que estos se conformen a sus deseos.
+Muchos de los Parámetros de Inicialización  tienen serias
+implicaciones de seguridad. Una vez que esta opción es
+seleccionada, todos los atributos son mostrados. Simplemente
+seleccione el atributo que desee modificar y la siguiente
+información será mostrada:
+
+        - Una línea de descripción del atributo.
+        - Una corta descripción del atributo y sus usos.
+        - Valores validos para el atributo, si existen.
+        - Notas sobre seguridad, si existen.
+        - El valor por omisión del atributo.
+        - El valor actual del atributo.
+
+En este momento se le preguntara cual es el nuevo valor para el
+atributo. Oprimir ENTER en una línea en blanco ó oprimir la tecla
+ESC aborta cualquier cambio al valor.
+
+Sentry revisa estrictamente los valores que Usted proporcione y
+no guardara ningún valor invalido.
+
+Lea la Sección 10 del Manual de Usuario para ver detallas de los
+valores individuales.
+
+Mandar un Mensaje a un Usuario
+
+Esta opción permite al Super Usuario mandar un mensaje de una
+línea a cualquier Usuario del Sistema  (ellos mismos incluidos).
+Una vez que esta opción es seleccionada, Usted debe escoger el
+Usuario al que le mandara el mensaje. Esto se hace desde la lista
+de Usuarios. Una vez hecho esto, se le preguntara cual es el
+mensaje. Si desea Usted mandar mas de una línea, deberá mandar
+dos ó mas mensajes al mismo Usuario.
+
+Una vez escrito su mensaje, se le regresara al menú de Super
+Usuario. En el siguiente acceso de esa persona, su mensaje será
+mostrado, incluyendo:
+
+  - Quien manda el mensaje 
+  - Fecha y Hora en que se mando
+  - El mensaje
+
+El Usuario tiene ahora la opción de borrar el mensaje. Si no lo
+borra, este será mostrado nuevamente en su siguiente acceso.
+
+NOTA: Los Mensajes son mostrados antes de cualquier información
+de Login. De esta manera puede Usted mandarle mensajes a personas
+cuyas cuentas han sido canceladas. Así, si lo desea, puede darles
+una explicación sobre la cancelación.
+
+Proteger un Archivo
+
+Esta opción le permite proteger archivos ejecutables (.EXE, .COM
+y .BAT). Cuando esta opción es seleccionada, le pide el nombre
+del archivo. Usted debe proporcionar la ruta de acceso valida y
+el archivo debe de ser ejecutable. Si el nombre del archivo es
+correcto, Sentry procesa el archivo y lo "protege". La protección
+significa que la siguiente vez que el archivo sea ejecutado,
+Sentry también será ejecutado. Si el Usuario teclea un nombre y
+pasaporte valido, el programa protegido se ejecutara. De otra
+manera, no ejecutara.
+
+Asegúrese de hacer un respaldo de cualquier archivo que Usted
+proteja ya que no hay manera de echar atrás esta protección - es
+permanente! 
+
+Esto es útil para proteger programas individuales. Si una persona
+logro entrar en su sistema, ya tiene manos libres para todo lo
+que hay en el. Esta opción le permite reducir acceso a programas
+individuales.
+
+El método de protección actualmente usado no funciona con todos
+los programas. Se han hecho pruebas con algunos que no funcionan
+correctamente una vez protegidos (aparentemente problemas de
+memoria ó de vídeo). Actualmente hay una perdida de memoria
+disponible bastante significativa con respecto al programa
+original. Además, la protección de programas de Windows no
+funciona actualmente).
+
+Lea la Sección 7 para detalles específicos sobre protección de
+programas.
+
+Exportar Parámetros de Inicialización
+
+Seleccionar esta opción exportara los Parámetros de
+Inicialización. Esto le permitirá usar los mismos parámetros y
+estructura de cuentas cuando mejore su versión. Este proceso es
+sencillo. Seleccione esta opción y los parámetros serán
+exportados. Ahora simplemente descomprima el nuevo Sentryxx.zip
+en su directorio y corra el programa install.exe. Install
+encontrará automáticamente la información exportada y le
+preguntara si desea usted usarla. Si su respuesta es afirmativa,
+los parámetros serán automáticamente actualizados en la nueva
+versión y cargados.
+
+Por favor tome nota: No debe usted exportar los parámetros a
+menos que tenga usted la intención de importarlos de inmediato a
+una nueva versión (esto podría causar un riesgo de seguridad).
+
+Import Initialization Settings *** TRANSLATE
+
+Importing your initialization settings can be useful for several
+purposes:
+
+ - Restoring a corrupted account structure from backup
+ - Quickly installing the same configuration on multiple machines
+
+Obviously, you must export settings before you can import them.
+(See the previous section)
+
+When this option is selected, you will be presented with a file
+list. Sentry's settings are always saved in a file called
+"settings," which will be shown on the list, if in the current
+directory. If there are subdirectories, they will be shown as
+well. If the settings file is not in the current directory,
+simply navigate through the drive until you find it. You can
+enter a subdirectory by selecting it and hitting enter. Likewise,
+you can "back up" to the parent directory by selecting the "..\"
+and hitting enter. To change drives, simply press 'D' followed by
+the new drive letter.
+
+Once you have located and selected your settings file, Sentry
+will proceed to import it, discarding it's current setup in
+favour of the new one. Once the import is complete, Sentry will
+exit, preventing a mix of the old and new settings from causing
+problems.
+
+It is often useful to import settings when performing a mass
+deployment of Sentry. To accomplish this, simply set up a single
+machine with the settings you require. Next, export those
+settings (see above) and copy the "settings" file to a floppy
+disk.
+
+If your are installing from scratch or upgrading, simply copy the
+settings file into the target directory before running
+install.exe. The new settings will be automatically sensed and
+used.
+
+If you are re-configuring existing installations of Sentry, all
+you need to do is run the import settings command, and locate the
+master settings file on diskette. The settings will be read in,
+and your installation of Sentry will be updated to match the
+master.
+
+Auditoria de Seguridad
+
+Este es una de las opciones mas potentes de Sentry. Al
+seleccionar esta opción usted hará que Sentry automáticamente
+busque debilidades en su sistema. Esta auditoria se efectúa
+básicamente en tres áreas:
+
+    - Su Sistema 
+    - Sus Parámetros de Inicialización 
+    - Su Estructura de Cuentas
+
+Conforme cada una de estas secciones es probada, el usuario será
+informado por Sentry sobre la detección. Si una sección no tiene
+debilidades, entonces un "OK" será mostrado. De otra manera,
+Sentry describirá la debilidad y le preguntara si desea usted
+corregirla. Oprimir "S" provocara la corrección automática del
+problema o le pedirá que teclee un nuevo valor, dependiendo de la
+situación.
+
+En cada sección, los siguientes puntos serán checados durante una
+auditoria:
+
+    Sistema 
+
+    Análisis de los siguientes puntos:
+    - no existe línea "switches" en CONFIG.SYS (fuera de Win95 solamente)
+    - no hay comando "BootKeys" en MSDOS.SYS (Win 95 solamente)
+    - no existe llamada a Sentry en el AUTOEXEC.BAT 
+    - existe un comando "break on" en CONFIG.SYS 
+
+    Parámetros de Inicialización 
+
+    Análisis de los siguientes puntos:
+    - un largo de pasaporte muy corto o muy largo
+    - un numero muy alto para máximo de accesos inválidos
+    - un valor bajo para espera forzada 
+    - despliegue de Pasaporte debe ser enmascarado o deshabilitado 
+    - La Fecha de Expiración de Pasaporte es de mas de 365 días 
+    - Una Fecha de Expiración de Cuenta no usada de mas de 365 días 
+    - Una espera de mas de 600 segundos para el protector de pantalla
+    - Sensibilidad de MAYUSCULAS / minúsculas deshabilitada 
+
+    Cuentas
+
+    Buscar lo siguiente:
+    - Cuentas que han expirado 
+    - Cuentas de Super Usuario con un parámetro de accesos inválidos habilitado 
+    - Cuentas normales con un parámetro de accesos inválidos deshabilitado 
+    - Cuentas donde excede el numero de intentos de acceso invalido 
+    - Cuentas sin Fecha de Expiración 
+    - Pasaportes sin Fecha de Expiración 
+
+Como un Super Usuario, usted debe ejecutar la auditoria con
+frecuencia. Si todo marcha como debe, esta se terminara en unos
+cuantos segundos y le alertara a problemas potenciales o
+actividad sospechosa de la que de otra manera usted no estaría
+consciente.
+
+El mensaje "Auditoria Terminada", aparecerá cuando se haya
+terminado esta. En este momento el usuario deberá oprimir
+cualquier tecla para regresar al menú de Super Usuarios.
+
+Modificar Comandos de Shell
+
+Esta opción le permite a un Super Usuario controlar los comandos
+que están disponibles para el Usuario en el DOS prompt. Esta
+opción puede ser invaluable cuando se implementa un plan total de
+seguridad.
+
+Para empezar, se le pregunta al Super Usuario la localización del
+interpretador de comandos. Este generalmente se encuentra en el
+directorio raíz (C:\) o en el directorio (C:\DOS) para
+instalaciones normales de DOS. O en el directorio (C:\Windows)
+para usuarios de Windows 95. Sentry utilizara la ruta de acceso
+que se encuentra en la variable de ambiente COMSPEC como el valor
+por omisión, haciendo mas fácil para usted encontrar el archivo
+correcto.
+
+Una vez que se teclee la localización del interpretador de
+comandos, Sentry lo revisa intentando descubrir los comandos que
+este controla. Si Sentry no puede encontrar comandos validos, le
+informara al Super Usuario y nada será modificado.
+
+Si Sentry puede localizar algunos comandos, estos serán
+desplegados en un formato de menú. En este momento el usuario
+puede deshabilitar o editar cualquiera de los comandos mostrados.
+
+NOTA: Se sugiere enfáticamente que se cree un disco de arranque
+antes de intentar cualquier cambio a su interpretador de
+comandos. Aun cuando Sentry ha sido probado con éxito con varios
+interpretadores de comandos (como DOS 6.22, Windows 95 y Norton
+DOS), puede actuar en una forma inconsistente si encuentra un
+formato desconocido. 
+
+Para deshabilitar un comando, sencillamente oprima una vez la
+tecla "d". Si se oprime "d" nuevamente el comando será
+rehabilitado. Para editar un comando oprima la tecla "e", y se le
+preguntara cual es el nuevo comando.
+
+OTRA NOTA: Es muy aconsejable que el nombre del nuevo comando
+tenga el mismo tamaño que el anterior. Cambiar el largo del
+nombre de un comando puede tener resultados impredecibles y es
+mas fácil que no funcione. En el menú, los comandos que han sido
+deshabilitados son marcados con una "x", los comandos que han
+sido editados son marcados con un "*" y los comandos que no han
+sido modificados son marcados con un "-".
+
+Una vez que todos los cambios han sido efectuados, simplemente
+oprima Enter. Todos los cambios serán sumarizados para verificar
+que no se hayan cometido errores. En este momento el Super
+Usuario debe asegurarse que todos los cambios estén correctos y
+proceder a aceptarlos o rechazarlos.
+
+Si los cambios son aceptados, Sentry ejecutara el interpretador
+de comandos modificado antes de reemplazar el original por el
+modificado. Esto quiere decir que si hay algún problema, usted
+puede descartar los cambios, y empezar otra vez.
+
+Cuando el nuevo interpretador sea ejecutado, pruébelo
+exhaustivamente. No realice operaciones grandes o complicadas ni
+corra programas muy grandes ya que esto puede desestabilizar el
+proceso. Una vez que este satisfecho teclee "EXIT" para regresar
+al menú de Sentry, donde se le preguntara si tuvo algún problema.
+
+Si usted contesta "N" a esta pregunta, su interpretador de
+comandos será reemplazado por el modificado, haciendo sus cambios
+permanentes. Oprimir cualquier otra tecla descartara estos
+cambios.
+
+UNA NOTA FINAL: Se sugiere mantener una copia "limpia" de su
+COMMAND.COM en algún lugar seguro ya que podría requerirla mas
+tarde. Muchos de los cambios que usted haga a través de Sentry
+también pueden ser deshechos, pero es mucho mas seguro
+simplemente copiar su original del respaldo. Mientras mas veces
+modifique usted su interpretador de comandos, mas oportunidades
+hay de que algo salga mal.
+
+Regresar a Menú de Super Usuario
+
+Esta opción sencillamente lo regresa al menú de Super Usuario. Es
+lo mismo que oprimir la tecla ESC.

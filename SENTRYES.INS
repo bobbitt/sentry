@@ -1,0 +1,329 @@
+Aquí se contiene la localización del archivo de bitácora. La
+bitácora debe ser mantenida en un lugar seguro, apartada de
+mirones y entrometidos
+
+Nota: Usted deberá cambiar el nombre del archivo. En vez de
+SENTRY.LOG a otro nombre menos llamativo. Un intruso potencial
+buscara el nombre SENTRY.LOG ó similares. Usted puede disfrazarlo
+con nombres como file_id.diz, chklist.ms, warm.com, etc, etc.
+
+Aquí se contiene la localización del archivo de copia de
+seguridad de la bitácora. Cuando se ha alcanzado el tamaño máximo
+del archivo de bitácora (max log file size), la mitad de este
+archivo es movida automáticamente al archivo de respaldo. Esto
+previene el que el archivo de bitácora se vuelva muy grande y
+poco manejable
+
+Aquí se contiene la localización del archivo de mensajes. El
+archivo de mensajes debe ser mantenido en un lugar seguro,
+apartada de mirones y entrometidos
+
+Nota: Usted deberá cambiar el nombre del archivo. En vez de SENTRY.LOG a
+otro nombre menos llamativo. Un intruso potencial buscara el nombre
+SENTRY.MSG ó similares. Usted puede disfrazarlo con nombres como
+file_id.diz, chklist.ms, warm.com, etc, etc.
+
+Ordena el largo mínimo para pasaportes e identificaciones (Login)
+
+Nota: Un valor de 4 debe ser el mínimo absoluto para Largo Mínimo
+de Pasaporte (MinPasswordLen). Un valor de 5 ó 6 seria mucho
+mejor. Los pasaportes cortos son mucho mas fáciles de quebrar ya
+que se tienen que hacer muchos menos intentos para lograr
+quebrarlos.
+
+Ordena el largo máximo para pasaportes e identificaciones
+
+Ordena el máximo de intentos que un usuario puede tratar de
+ingresar al sistema antes de ser rechazado
+
+NOTA: Este valor no debe de ser muy alto. Es muy raro que un
+usuario legitimo se equivoque en el ingreso tres veces seguidas.
+Un intruso potencial tendrá que intentar en muchas ocasiones
+antes de llegar a ningún lado. Ajustar Intentos Máximos
+(MaxTries) al derredor de 3 impedirá su avance notablemente ya
+que tendrá que reiniciar la maquina cada tercer intento fallado.
+
+Ordena el intervalo en segundos de espera después de que el
+usuario falla en ingresar al sistema (LOGIN). 
+
+NOTA: Ordenar el Periodo de Espera a 3 ó mas incrementa el tiempo
+que le tomara a un intruso entrar al sistema siguiendo una rutina
+metódica para adivinar ó descubrir pasaportes. Realmente no crea
+mucha inconveniencia para el usuario legitimo pero incrementa la
+seguridad notablemente
+
+Aquí se ordena el tamaño máximo de la bitácora antes de que la
+mitad mas vieja sea movida automáticamente al archivo de
+respaldo. El tamaño se especifica en numero de kilobytes (1024
+bytes).
+
+Un valor de 0 indica que no se haga respaldo de la bitácora.
+
+Ordena el símbolo a usar como pasaporte para cambiar pasaportes.
+
+Indique el asterisco "*" para deshabilitar cambios de pasaportes
+por los usuarios
+
+Ordena el símbolo que se mostrara en pantalla durante el ingreso
+del pasaporte
+
+Ingrese '?' para NO desplegar ningún caracter.
+Ingrese '!' para desplegar el caracter tecleado (no se
+recomienda).
+
+Indica el numero de días de validez de un pasaporte antes de que
+expire. Este es el valor por omisión usado cada vez que un
+pasaporte es cambiado. La fecha de expiración de pasaportes
+individuales puede ser especificada en el menú "SuperUsuario".
+
+NOTA: Es una buena idea darle vigencia de entre 180 y 365. Mas de
+un año de vigencia es un riesgo de seguridad por su duración.
+Menos de seis meses es un riesgo porque la gente empezara a
+olvidar sus nuevos pasaportes y los escribirá en algún lado. Esta
+cifra debe de depender realmente de que tan ocupado este el
+sistema.
+
+Cero (0) indica sin fecha de expiración.
+
+Indica el numero de días que una cuenta no usada es valida antes
+de que expire automáticamente. Este es el valor por omisión
+utilizado durante la creación de una nueva cuenta. La expiración
+de las cuentas individuales puede ser especificada en el menú
+"SuperUsuario".
+
+NOTA: Esta cifra deberá depender del nivel de actividad de su
+sistema. Los sistemas activos se pueden permitir una cifra mas
+baja que los sistemas con poca actividad. Usted deberá también
+tener en consideración la probabilidad de un intruso utilizando
+una cuenta vieja y sin uso. 
+
+Cero (0) indica: Nunca invalidar cuentas viejas.
+
+Indica el tiempo de inactividad (en segundos) que deberá pasar
+antes de que se active el protector de pantalla.
+
+0 = Never activate screen saver
+
+Este es el mensaje que se mostrara aleatoriamente en la pantalla
+cuando el protector de pantalla se active.
+
+Aquí se indica el valor de la línea de comando que es mostrada
+cuando se espera que el usuario teclee su nombre de usuario
+(Login). Modificar este valor le permite ajustar su ambiente de
+trabajo como mejor le acomode.
+
+Aquí se indica el valor de la línea de comando que es mostrada
+cuando se espera que el usuario teclee su pasaporte. Modificar
+este valor le permite ajustar su ambiente de trabajo como mejor
+le acomode.
+
+Aquí se indica el mensaje a mostrar cuando el usuario teclea el
+pasaporte equivocado.
+
+NOTA: Es una buena idea mantener el mismo mensaje para nombre
+equivocado y pasaporte equivocado. De otra manera, un intruso
+sabrá cuando YA encontró una cuenta (por ejemplo: si SENTRY
+responde con "Pasaporte Invalido", el intruso ya sabe que el
+nombre del usuario esta correcto). Mantener los dos mensajes
+iguales no le permite saber si es el nombre del usuario ó el
+pasaporte el que esta equivocado.
+
+Aquí se indica el mensaje a mostrar cuando el usuario teclea el
+nombre de usuario (Login) equivocado.
+
+NOTA: Es una buena idea mantener el mismo mensaje para nombre
+equivocado y pasaporte equivocado. De otra manera, un intruso
+sabrá cuando YA encontró una cuenta (por ejemplo: si SENTRY
+responde con "Pasaporte Invalido", el intruso ya sabe que el
+nombre del usuario esta correcto). Mantener los dos mensajes
+iguales no le permite saber si es el nombre del usuario ó el
+pasaporte el que esta equivocado.
+
+Aquí se indica el mensaje que será mostrado cuando un usuario
+teclea un pasaporte de largo invalido.
+
+NOTA: Es prudente mantener el mismo mensaje para los casos de
+Pasaporte Equivocado, Nombre Equivocado, Largo de Pasaporte
+Equivocado y Largo de Nombre Equivocado. Esto prevendrá que un
+intruso conozca el mínimo y máximo permitidos para nombres y
+pasaportes en su sistema. Conocer la longitud valida de un
+pasaporte puede reducir enormemente el tiempo necesario para
+encontrarlo ó adivinarlo.
+
+Aquí se indica el mensaje que será mostrado cuando un usuario
+teclea un nombre de usuario (Login) de largo invalido.
+
+NOTA: Es prudente mantener el mismo mensaje para los casos de
+Pasaporte Equivocado, Nombre Equivocado, Largo de Pasaporte
+Equivocado y Largo de Nombre Equivocado. Esto prevendrá que un
+intruso conozca el mínimo y máximo permitidos para nombres y
+pasaportes en su sistema. Conocer la longitud valida de un
+pasaporte puede reducir enormemente el tiempo necesario para
+encontrarlo ó adivinarlo.
+
+Aquí se indica el mensaje que será grabado en la bitácora cuando
+un usuario teclea el pasaporte equivocado.
+
+Aquí se indica el mensaje que será grabado en la bitácora cuando
+un usuario teclea el nombre de usuario equivocado.
+
+NOTA: Este mensaje debe de ser descriptivo ya que el SuperUsuario
+lo requerirá para determinar que clase de actividades han tenido
+lugar.
+
+Aquí se indica el mensaje que será grabado en la bitácora cuando
+un usuario teclea un pasaporte de longitud invalida.
+
+Aquí se indica el mensaje que será grabado en la bitácora cuando
+un usuario teclea un nombre de usuario (Login) de longitud
+invalida.
+
+Aquí se indica el nombre de la variable de ambiente utilizada
+para guardar el nombre de usuario una vez que ha efectuado un
+ingreso correcto (Login).
+
+NOTA: La variable de ambiente USUARIO ó USER es utilizada por
+muchos programas de red, tales como Novell. Al utilizar esta
+variable, Sentry puede ser utilizado en conjunción con estos
+sistemas.
+
+La bandera WINDOWS es especificada si Usted desea correr Sentry
+desde Windows. Técnicamente, esto permite a Sentry abrir una
+ventana de DOS después de un acceso correcto (Login). Indicar
+este valor como Uno (1) no tiene ningún efecto en el uso normal y
+no constituye un riesgo de seguridad
+
+(0= No Correr En Windows, 1=Correr En Windows)
+
+Aquí se determina si la pantalla de introducción es desplegada ó
+no. Usted puede elegir no desplegarla si Usted no desea que los
+usuarios sepan que programa esta siendo utilizado. Por otro lado,
+la información de registro deberá ser desplegada para propósitos
+de autentificacion. Esta opción fue agregada ya que la seguridad
+esta por encima de todo.
+
+(0-No Desplegar, 1=Desplegar)
+
+Esto le permitirá desplegar fechas en distintos formatos. Algunas
+personas prefieren unos formatos en vez de otros y aquí se le
+permite escoger el que mejor se adecue a sus necesidades.
+
+(0 = MM/DD/YYYY, 1 = DD/MM/YYYY)
+
+Aquí se indica la sensitividad de MAYUSCULAS/minúsculas. Si se
+escoge el valor "Insensitivo" las palabras Sentry, SENTRY y
+sentry serán tratadas por igual en la línea de comando de Login.
+Si se escoge el valor "Sensitivo" las tres palabras serán
+tratadas como distintos nombres de usuario.
+
+(0 = Sensitivo,  1 = Insensitivo)
+
+NOTA: Usar "Insensitivo" reduce el numero de Logins permitidos e
+incrementa la posibilidad de que un intruso encuentre el nombre
+de usuario correcto. Pese a esto, hay gente que prefiere utilizar
+el valor "Insensitivo".
+
+Aquí se le permite escoger entre ventanas normales ó ventanas con
+movimiento. Es estrictamente visual y no tiene ningún efecto en
+la seguridad.
+
+(1 = Modo Normal,  2 = Modo de ventanas en movimiento)
+
+Esto determina si Sentry se despliega en color ó no. Algunos
+usuarios de computadoras portátiles pueden preferir Blanco y
+Negro para mejor despliegue en sus pantallas.
+
+(0 = Blanco y Negro,  1 = Color)
+
+Usted puede especificar el contenido de TextoColor (TextColour)
+al valor del color en que desea que el texto normal aparezca. Los
+valores para distintos colores aparecen en la tabla que se
+muestra abajo. COLORES:
+
+Usted puede fijar el contenido de FondoTexto (TextBackground) al
+valor del color que desee como fondo de la pantalla. Los valores
+de los distintos colores se muestran en la tabla desplegada a
+continuación. COLORES:
+
+Usted puede indicar el contenido de ColorResaltado (HighColour)
+como el valor del color que Usted desee para texto resaltado. Los
+valores de los distintos colores son mostrados en la tabla que a
+continuación se muestra. COLORES:
+
+Usted puede indicar el contenido de FondoResaltado
+(HighBackground) como el valor del color que Usted desee para
+fondo resaltado. Los valores de los distintos colores son
+mostrados en la tabla que a continuación se muestra. COLORES:
+
+Aquí se indica el valor por omisión para el numero de ingresos
+(Login) inválidos consecutivos antes de que una cuenta sea
+cancelada. Solo un SuperUsuario puede volver a rehabilitar una
+cuenta que ha sido cancelada.
+
+Aquí se le permite determinar si Sentry hará caso de cualquier
+caracter que sea tecleado antes de que se inicie su ejecución.
+Con esta opción habilitada, el usuario puede teclear su nombre de
+usuario (Login) y pasaporte antes de que Sentry inicie su
+operación y será automáticamente usado. Esto es útil para ahorrar
+tiempo durante el ingreso.
+
+(0 = Ignorar caracteres, 1 = Aceptar caracteres)
+
+NOTA: Algunos administradores de sistemas inhiben esta opción ya
+que puede confundir a los usuarios y provocar accesos
+equivocados.
+
+Este indicador determina si la pantalla es borrada antes de
+correr Sentry. Algunos usuarios prefieren activar esta opción ya
+que la pantalla puede verse abarrotada de otra manera.
+
+(0 = NO Borrar Pantalla, 1 = Borrar Pantalla)
+
+Aquí se indica durante cuanto tiempo se muestra la información
+del ultimo acceso (Login) antes de borrar la pantalla. Un valor
+de cero (0) indica que no habrá pausa y la información del ultimo
+acceso no será borrada de la pantalla. Cualquier otro valor será
+el numero de segundos elapsados antes de borrar la pantalla. 
+
+Esta opción permite al SuperUsuario la activación ó desactivacion
+del Borrado de Seguridad. Si la opción se encuentra activada,
+cualquier archivo borrado por Sentry NO será recuperable.
+
+(0 = Borrado Normal, 1 = Borrado de Alta Seguridad, 2 = Borrado
+de Rápida Seguridad)
+
+Este ajuste controla como se muestra la información de los
+usuarios en el menú del SuperUsuario. Con la opción activada, los
+siguientes datos son resaltados, haciéndolos mas fáciles de
+notar:
+
+- SuperUsuarios
+- Cuentas inactivas
+- Cuentas expiradas
+- Pasaportes expirados
+- Máximo de Logins inválidos alcanzado
+
+Dado que esta opción provoca algunos retrasos en el proceso,
+Usted puede elegir el deshabilitarla.
+
+(0 = Desactivar Resaltado, 1 = Activar Resaltado)
+
+Usted puede indicar el valor del color deseado como fondo del
+texto normal. Los valores de los distintos colores se muestran en
+la siguiente tabla. COLORES:
+
+Esta opción le permite deshabilitar CTRL-C, CTRL-BREAK, y
+CTRL-ALT-DELETE. Usted puede desear hacerlo ya que el uso de
+estas combinaciones de teclas pueden en ocasiones permitir la
+evasión de los sistemas de seguridad. Esta opción solo debe ser
+habilitada en copias de Sentry que corren durante la
+inicialización de la maquina. Habilitar esta opción utiliza menos
+de 1 K de memoria convencional y se mantiene activa aun después
+de que Sentry ha terminado su ejecución.
+
+(0 = Habilitar CRTL-C, 1 = Deshabilitar CTRL-C)
+
+This allows you to set the number of characters echoed to the
+screen when entering your password. This can be useful to prevent
+"shoulder surfing," as the actual number of keypresses in your
+password is being disguised.

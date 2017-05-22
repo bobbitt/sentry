@@ -1,0 +1,290 @@
+This contains the location of the log file. The log file
+should be kept somewhere safe, tucked away from prying eyes.
+
+NOTE: You should change the name of the file from Sentry.log to some
+other, inconspicuous name. Potential intruders will search for the
+Sentry.log file. You can hide it under misleading names such as
+file_id.diz, chklist.ms, warm.com etc etc.
+
+This contains the location of the backup log file. When the max
+log file size has been reached, half of the log file is
+automatically moved to the backup log file. This prevents
+the primary log file from getting too large.
+
+This contains the location of the message file. The message
+file should be kept somewhere safe, tucked away from prying eyes.
+
+NOTE: You should change the name of the file from Sentry.msg to some
+other, inconspicuous name. Potential intruders will search for the
+Sentry.msg file. You can hide it under misleading names such as
+file_id.diz, chklist.ms, warm.com etc etc.
+
+Sets the minimum length for passwords and logins.
+
+NOTE: A value of 4 should be the absolute minimum for
+MinPasswordLen. A value of 5 or 6 would be even better. Short
+passwords are much easier to stumble across since less attempts
+have to be made before it is guessed.
+
+Sets the maximum length for passwords and logins.
+
+Sets the maximum times a user can attempt to log in before being
+locked out.
+
+NOTE: This should not be set too high. It is very rare for a
+legitimate user to botch a login attempt 3 times in a row. A
+potential intruder will usually have to make many attempts before
+getting anywhere. Setting MaxTries to around 3 will slow him down
+greatly, as he will have to reset after 3 failed attempts.
+
+Sets the delay in seconds to wait after the user fails to log in.
+
+NOTE: Setting the WaitTime to 3 or above greatly slows any
+methodical attempt to guess or discover passwords. It offers little
+inconvenience to the end users while providing added security.
+
+This sets the maximum size the log file can reach before the oldest
+half of it is automatically moved to the backup log file. The size
+is given in number of kilobytes (1024 bytes).
+
+0 = Never backup the log file.
+
+Sets the "key" to enter as a password to change passwords.
+
+Enter '*' to disallow password changes by users.
+
+Sets the character to be echoed to the screen when the password
+is being entered.
+
+Enter '?' to display no character.
+Enter '!' to display the actual character (not recommended).
+
+Sets the number of days a password is good before it expires.
+This is the default value used whenever a password is changed.
+Individual passwords can be set to expire on the SuperUser menu.
+
+NOTE: It is a good idea to have this set to between 180 and 365.
+Anything over a year is a security risk due to age.
+Anything under half a year is a risk because people will tend to
+forget their passwords and start writing them down. This setting
+should depend on how busy your system generally is.
+
+0 = Never expire passwords.
+
+Sets the number of days an unused account is good before it expires.
+This is the default value used whenever an account is created.
+Individual accounts can be set to expire on the SuperUser menu.
+
+NOTE: This setting should depend on the level of activity on your
+system. Active systems can afford to have a lower setting than
+generally inactive settings. You should also take into consideration
+the probability of an intruder using an old account.
+
+0 = Never expire unused accounts.
+
+This sets the amount of idle time (in seconds) that may pass before
+the screen saver is activated.
+
+0 = Never activate screen saver.
+
+This is the message that is displayed randomly on the screen when
+the screen saver is active.
+
+This sets the value of the prompt that is displayed when the user is
+expected to enter their login name. Modifying this allows you
+to customize your environment as you see fit.
+
+This sets the value of the prompt that is displayed when the user is
+expected to enter their password. Modifying this allows you
+to customize your environment as you see fit.
+
+This sets the message to be displayed when a user enters the wrong
+password.
+
+NOTE: It is a good idea to keep the wrong password and wrong login
+messages the same. Otherwise, a potential intruder will know when he
+has found an account (IE: If Sentry responds with "Invalid
+Password", he knows the login was correct). Keeping the two the same
+prevents an attacker from knowing if he even has the correct login.
+
+This sets the message to be displayed when a user enters the wrong
+login.
+
+NOTE: It is a good idea to keep the wrong password and wrong login
+messages the same. Otherwise, a potential intruder will know when he
+has found an account (IE: If Sentry responds with "Invalid
+Password", he knows the login was correct). Keeping the two the same
+prevents an attacker from knowing if he even has the correct login.
+
+This sets the message to be displayed when a user enters a password
+of invalid length.
+
+NOTE: It is wise to keep the wrong password length, wrong login
+length, wrong password and wrong login messages the same. This will
+prevent a potential attacker from knowing the max and min settings
+for passwords or logins on your system. (Knowing the length of a
+password can greatly decrease the amount of time required to
+crack it).
+
+This sets the message to be displayed when a user enters a login of
+invalid length.
+
+NOTE: It is wise to keep the wrong password length, wrong login
+length, wrong password and wrong login messages the same. This will
+prevent a potential attacker from knowing the max and min settings
+for passwords or logins on your system. (Knowing the length of a
+password can greatly decrease the amount of time required to
+crack it).
+
+This sets the message to be saved to the log file when a user enters
+the wrong password.
+
+This sets the message to be saved to the log file when a user enters
+the wrong login.
+
+NOTE: This message should be descriptive, since the SuperUser will
+use it to determine what sort of activities have been happening.
+
+This sets the message to be saved to the log file when a user enters
+a password of invalid length.
+
+This sets the message to be saved to the log file when a user enters
+a login of invalid length.
+
+This sets the environment variable used to store the user's login
+name after a successful login.
+
+NOTE: The environment variable USER is used by many networks, such
+Novell. By using this setting, Sentry can be used in conjunction
+with these networks.
+
+The Windows flag is set if you wish to run Sentry from Windows.
+Technically, this allows Sentry to open up a DOS shell after a
+successful login. Setting this option to 1 has no effect on normal
+use, and is not a security risk.
+
+(0=Do Not Run In Windows, 1=Run In Windows)
+
+This determines if the intro screen is displayed or not. You may
+choose not to display the title information if you don't want users
+to know what program you are using. On the other hand, the
+registration information should be displayed for authenticity's
+sake. I have added this option because security comes before all
+else.
+
+(0=Not Displayed, 1=Displayed)
+
+This will allow you to have dates displayed in different formats.
+Some people prefer different formats than others, so this will allow
+you to define the way dates are displayed.
+
+(0=MM/DD/YYYY, 1=DD/MM/YYYY)
+
+This sets the case sensitivity. If "Case Insensitive" is selected,
+Sentry, SENTRY and sentry  are all treated as the same at
+the login prompt. If case sensitivity is enabled, the three are all
+treated as different logins.
+
+(0=Case Sensitive, 1=Case Insensitive)
+
+NOTE: Using "Case Insensitive" reduces the number of allowable
+logins, and increases the probability of an attacker getting a
+correct login. Still, some people find it easier to work with Case
+Sensitivity off.
+
+This allows you to choose between normal windows, and "exploding"
+windows. This is strictly a visual setting, and has no effect on
+secirty.
+
+(1=Normal Windowed Mode, 2=Exploding Windowed Mode)
+
+This determines if colour will be displayed by Sentry or not. Some
+laptop users may wish to use the black and white setting for better
+readability.
+
+(0=Black and White, 1=Colour)
+
+You can set TextColour to the value of the colour you wish normal
+text to appear in. Colour values are shown in the chart below.
+COLOURS:
+
+You can set TextBackground to the value of the colour you wish
+normal text to have as a background. Colour values are shown in the
+chart below.
+COLOURS:
+
+You can set HighColour to the value of the colour you wish
+highlighted text to appear in. Colour values are shown in the
+chart below.
+COLOURS:
+
+You can set HighBackground to the value of the colour you wish
+highlighted text to have as a background. Colour values are shown
+in the chart below.
+COLOURS:
+
+This sets the default number of consecutive invalid logins possible
+before an account is locked out. Only a SuperUser can subsequently
+unlock an account.
+
+This allows you to determine if Sentry acknowledges characters typed
+before execution began. With this option enabled, the user can type
+their login and password before Sentry runs, and it will
+automatically be used. This is useful for saving time while
+logging in.
+
+(0=Ignore input, 1=Accept input)
+
+NOTE: Some System Administrators turn this option off because it can
+cause some users to get confused and log in incorrectly.
+
+This setting determines if the screen is cleared before running
+Sentry. Some users prefer to turn this option on as the screen can
+look cluttered otherwise.
+
+(0=Don't clear screen, 1=Clear screen)
+
+This setting determines how long the last login information is
+displayed on screen before the screen is cleared. A value of 0 means
+that there is no pause, and the last login information is not
+cleared from the screen. Any other value is the number of seconds to
+display the last login info.
+
+This option allows the SuperUser to turn secure deletion on or
+off. With this option on, any files deleted by Sentry are not
+recoverable.
+
+(0=Normal Deletion, 1=Very Secure Deletion, 2=Fast Secure Deletion)
+
+The setting controls how user information is displayed on the
+SuperUser menu. With view highlighting on, the following items are
+highlighted, making them easier to pick out:
+
+- Superusers         - Accounts that have not been used recently
+- Expired Accounts   - Expired Passwords
+- Exceeded maximum invalid logins
+
+As this options causes some slowdown, you may wish to disable it.
+(0=View Highlighting off, 1=View Highlighting on)
+
+You can set View to the value of the colour you wish
+normal text to have as a background. Colour values are shown in the
+chart below.
+COLOURS:
+
+This option allows you to disable CTRL-C, CTRL-BREAK, and
+CTRL-ALT-DELETE. You may wish to do this as using these key
+sequences can at times allow the user to bypass security
+elements. This setting should only be set of copies of Sentry
+that run during bootup. Enabling this feature uses less than 1k
+of conventional memory, and remains active even after Sentry has
+finished execution.
+Note: Using this option may cause unusual memory usage in Windows.
+If you notice that your memory usage is high, disable this option.
+
+(0=Enable CRTL-C, 1=Disable CTRL-C)
+
+This allows you to set the number of characters echoed to the screen
+when entering your password. This can be useful to prevent "shoulder
+surfing," as the actual number of keypresses in your password is
+being disguised.

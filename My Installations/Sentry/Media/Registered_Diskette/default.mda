@@ -1,0 +1,50 @@
+[Platforms]
+key0=0000000000000001
+key1=0000000000000010
+count=2
+
+[Filter]
+LANGUAGEDEFAULT=0009
+
+[GeneralInfo]
+MEDIATYPE=144M
+DATAASFILES=No
+BUILDTYPE=Full
+BuildLocation=C:\secur\Sentry\My Installations\Sentry\Media\Registered_Diskette
+BREAKBYTOPCOMPONENT=No
+REFRESH_DATAFILES=Yes
+REFRESH_SPLASH=Yes
+BUILDSIZE=
+Name=Registered_Diskette
+REVIEWREPORT=No
+REFRESH_IFILES=Yes
+PASSWORD=
+
+[SetupInfo]
+ENABLELANGDLG=Yes
+ALTERNATEISDELETENAME=
+APPLICATIONNAME=Sentry
+HIDESTATUSBAR=No
+WIN32SENABLE=No
+
+[InstallDateInfo]
+TYPE=BUILDTIME
+TIME=
+DATE=
+
+[FileInstallDateInfo]
+TYPE=ORIGINAL
+TIME=
+DATE=
+
+[Languages]
+key0=0009
+count=1
+
+[TagFileInfo]
+PRODUCTCATEGORY=System Tool
+APPLICATIONNAME=Sentry
+COMPANYNAME=NightShade Computing
+VERSION=6.2
+INFO=PC Security System
+

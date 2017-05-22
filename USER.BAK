@@ -1,0 +1,1558 @@
+/*
+  INCLUDES
+*/
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+#include "sentry.h"
+#ifdef __cplusplus
+}
+#endif
+
+/*
+  FUNCTIONS
+*/
+
+void cpass(void)
+/*
+  cpass(void) is the function called when a user wishes to change his
+  password. cpass(void) requires the user to enter their old password
+  (as verification), and then calls setp(void) to set the new password.
+                                  
+  na must be set to the login of the user changing passwords.
+*/
+{
+short int err=1,x=0;
+  while (err)
+  {
+    err=0;
+    _bk=0;
+
+    cprintf("\r\n");
+    pstr(1);
+    strncpy(pa,gin(":",0),max);
+    strcpy(temp,pa);
+    if ((strlen(pa)>max) || (strlen(pa)<min)) /* check length */
+      err=2;
+    strcpy(pa,penc(pa));    /* encode */
+    temp[strlen(temp)+1]=0;
+    temp[strlen(temp)]=STAMP;  /* add SU stamp */
+    strcpy(temp,penc(temp));  /* encode */
+    pass=ffwd(2,NULL);     /* goto accounts */
+    if (!err)
+      err=4;
+    while((fgets(lo,MAX,pass))!=NULL && (!streq(lo,DIV)))
+    {
+      x++;
+      fgets(ps,MAX,pass);
+      fgets(ti,MAX,pass);
+      chop2(lo);
+      chop2(ps);
+      if (ps[strlen(ps)-1]==STAMP)
+        chop(ps);
+      if (err==4)
+      {
+        if (csck(na,lo))
+        {
+          un=x;
+          err=0;
+          strcpy(tol,na);
+
+          strcat(tol," ");
+          strcat(tol,glstr(2));
+//          strcat(tol," is changing passwords.");
+//          strcat(tol," esta cambiando pasaportes.");
+
+          tolog(tol);
+          if (strcmp(pa,ps))
+          {
+            if (strcmp(temp,ps))
+              err=3;
+          }
+        }
+      }
+    }
+    switch (err)
+    {
+    case 2:
+      cprintf("%s",xplen);
+      cprintf("\r\n");
+      tolog(lxplen);
+      sleep(wait);
+      break;
+    case 3:
+      cprintf("%s",xpwd);
+      cprintf("\r\n");
+      tolog(lxpwd);
+      sleep(wait);
+      break;
+    case 4:
+      cprintf("%s",xlog);
+      cprintf("\r\n");
+      tolog(lxlog);
+      sleep(wait);
+      break;
+    }
+    fclose(pass);
+  }
+  un*=-1; /* Enable breaking out of setp() */
+  setp();
+}
+
+short int view(char *ac)
+/*
+  view() displays a list of all current users in the password file.
+  SuperUsers are denoted with a * to the right of their name. The cursor
+
+  keys are used to highlight a user, and the enter key will select that
+  user. The PAGE UP and PAGE DOWN keys can be used to show more screens
+  if they are available.
+  view() returns the ordinal value of the user selected (as per the
+  password file) as an integer.
+*/
+{
+short int x,y,z,sel,tp,exx[MAXUSER];
+long tn;
+char opt;
+view_restart: // Restart point for inserting and deleting users
+  sel=1;
+  tp=opt=0;
+  pass=ffwd(2,NULL);
+  x=0;
+  getdate(&td);
+  gettime(&nw);
+  tn=dostounix(&td,&nw);
+  crwin(1,1,79,24,tf,tb,1,glstr(3));
+  while(((fgets(lo,MAX,pass))!=NULL) && (!streq(lo,DIV)))
+  {
+    x++;
+    exx[x]=0;
+    if (x<MAXUSER)
+    {
+      fgets(ps,MAX,pass);
+      fgets(ti,MAX,pass);
+      chop2(lo);
+      chop2(ps);
+      if (ps[strlen(ps)-1]==STAMP)
+      {
+        strcat(lo," *");
+        exx[x]^=1;
+      }
+      prd();
+      strcpy(txt[x],lo);
+      for(y=strlen(lo);y<LLST;y++)
+        strcat(txt[x]," ");
+      unixtodos(ut,&td,&nw);
+      if ((ut<=ael) && ael)
+        exx[x]^=2;
+      if (df)
+        sprintf(lo,"%02d/%02d/%02d",td.da_day,td.da_mon,td.da_year);
+      else
+        sprintf(lo,"%02d/%02d/%02d",td.da_mon,td.da_day,td.da_year);
+      strcat(txt[x],lo);
+      sprintf(lo," %02d:%02d:%02d",nw.ti_hour,nw.ti_min,nw.ti_sec);
+      strcat(txt[x],lo);
+      strcpy(lo,txt[x]);
+      for(y=strlen(lo);y<AEST;y++)
+        strcat(txt[x]," ");
+      if (ed)
+      {
+        unixtodos(ed,&td,&nw);
+        if (df)
+          sprintf(lo,"%02d/%02d/%02d",td.da_day,td.da_mon,td.da_year);
+        else
+          sprintf(lo,"%02d/%02d/%02d",td.da_mon,td.da_day,td.da_year);
+        strcat(txt[x],lo);
+        if (ed<tn)
+          exx[x]^=4;
+      }
+      else
+        strcat(txt[x],glstr(4));
+      strcpy(lo,txt[x]);
+      for(y=strlen(lo);y<PEST;y++)
+        strcat(txt[x]," ");
+      if (pe)
+      {
+        unixtodos(pe,&td,&nw);
+        if (df)
+          sprintf(lo,"%02d/%02d/%02d",td.da_day,td.da_mon,td.da_year);
+        else
+          sprintf(lo,"%02d/%02d/%02d",td.da_mon,td.da_day,td.da_year);
+        strcat(txt[x],lo);
+        if (pe<tn)
+          exx[x]^=8;
+      }
+      else
+        strcat(txt[x],glstr(4));
+      strcpy(lo,txt[x]);
+      for(y=strlen(lo);y<ILST;y++)
+        strcat(txt[x]," ");
+      sprintf(lo,"%d",fla);
+      strcat(txt[x],lo);
+      strcpy(lo,txt[x]);
+			if ((fla>=ntl) && (ntl))
+        exx[x]^=16;
+      for(y=strlen(lo);y<NLST;y++)
+        strcat(txt[x]," ");
+      if (ntl)
+        sprintf(lo,"%d",ntl);
+      else
+        strcpy(lo,"X");
+      strcat(txt[x],lo);
+      if (!vwh)
+        exx[x]=0;
+    }
+    else
+    {
+      pstr(5);
+      cprintf("%d",MAXUSER);
+      cprintf(")");
+    }
+  }
+  fclose(pass);
+  while (1)
+  {
+    txb(tb);
+    txc(tf);
+    clrscr();
+    pstr(6);
+    cprintf("\r\n");
+    if (!tp)
+      cprintf("\r\n");
+    strcpy(lo,"");
+    strcpy(pa,lo);
+    for(y=strlen(pa);y<LLST;y++)
+      strcat(lo," ");
+    strcat(lo,"");
+    strcpy(pa,lo);
+    for(y=strlen(pa);y<AEST;y++)
+      strcat(lo," ");
+    strcat(lo,glstr(7));
+//    strcat(lo,"Account");
+    strcpy(pa,lo);
+    for(y=strlen(pa);y<PEST;y++)
+      strcat(lo," ");
+    strcat(lo,glstr(8));
+//    strcat(lo,"Password");
+    strcpy(pa,lo);
+    for(y=strlen(pa);y<ILST-2;y++)
+      strcat(lo," ");
+    strcat(lo,glstr(9));
+//    strcat(lo,"Inv");
+    strcpy(pa,lo);
+    for(y=strlen(pa);y<NLST-2;y++)
+      strcat(lo," ");
+    strcat(lo,glstr(10));
+//    strcat(lo,"Max");
+    cprintf("%s",lo);
+    cprintf("\r\n");
+    strcpy(lo,glstr(11));
+//    strcpy(lo,"User Name");
+    strcpy(pa,lo);
+    for(y=strlen(pa);y<LLST;y++)
+      strcat(lo," ");
+    strcat(lo,glstr(12));
+//    strcat(lo,"Last Login");
+    strcpy(pa,lo);
+    for(y=strlen(pa);y<AEST;y++)
+      strcat(lo," ");
+    strcat(lo,glstr(13));
+//    strcat(lo,"Expiry");
+    strcpy(pa,lo);
+    for(y=strlen(pa);y<PEST;y++)
+      strcat(lo," ");
+    strcat(lo,glstr(13));
+//    strcat(lo,"Expiry");
+    strcpy(pa,lo);
+    for(y=strlen(pa);y<ILST-2;y++)
+      strcat(lo," ");
+    strcat(lo,glstr(14));
+//    strcat(lo,"Log");
+    strcpy(pa,lo);
+    for(y=strlen(pa);y<NLST-2;y++)
+      strcat(lo," ");
+    strcat(lo,glstr(15));
+//    strcat(lo,"Inv Log");
+    cprintf("%s",lo);
+    cprintf("\r\n");
+    for(y=0;y<(NLST+6);y++)
+      cprintf("-");
+    if (tp)
+    {
+      gotoxy(NLST+4,1);
+      cprintf("");
+    }
+    cprintf("\r\n");
+    if (tp)
+      cprintf("\r\n\r\n\r\n");
+    for(y=tp;y<WIND+tp;y++)
+    {
+      if (y<=x)
+      {
+        if (sel==(y % WIND))
+        {
+          txb(hb);
+          txc(hf);
+          exx[0]=hf;
+        }
+        else
+        {
+          txb(tb);
+          txc(tf);
+          exx[0]=tf;
+        }
+        if (y)
+        {
+          if (!exx[y])
+            cprintf("%s",txt[y]);
+					else
+          {
+            txc(exx[0]);
+            if (biton(exx[y],0)) // SuperUser
+              txc(vwc);
+            // Print User Name
+            for(z=0;z<LLST;z++)
+              cprintf("%c",txt[y][z]);
+            txc(exx[0]);
+            if (biton(exx[y],1)) // Account has not been used
+              txc(vwc);
+            // Print Last Login
+            for(z=LLST;z<AEST;z++)
+              cprintf("%c",txt[y][z]);
+            txc(exx[0]);
+            if (biton(exx[y],2)) // Account Expired
+              txc(vwc);
+            // Print Account Expiry
+            for(z=AEST;z<PEST;z++)
+              cprintf("%c",txt[y][z]);
+            txc(exx[0]);
+            if (biton(exx[y],3)) // Password Expired
+              txc(vwc);
+            // Print Password Expiry
+            for(z=PEST;z<ILST;z++)
+              cprintf("%c",txt[y][z]);
+            txc(exx[0]);
+            if (biton(exx[y],4)) // Max Inv Logins exceeded
+              txc(vwc);
+            // Print Invalid Logins
+            for(z=ILST;z<NLST;z++)
+              cprintf("%c",txt[y][z]);
+            txc(exx[0]);
+				  	// Print Max Invalid Logins
+            for(z=NLST;z<strlen(txt[y]);z++)
+              cprintf("%c",txt[y][z]);
+          }
+//cprintf(" [%d]",exx[y]);
+          cprintf("\r\n");
+        }
+      }
+    }
+    txb(tb);
+    txc(tf);
+    if (tp+WIND<=x)
+    {
+      gotoxy(NLST+4,21);
+      cprintf("");
+    }
+    gotoxy(1,22);
+    pstr(16);
+    cprintf(" [");
+    cprintf("%s",ac);
+    cprintf("]: ");
+    opt=blch();
+    switch (opt)
+    {
+    case 13:
+      return(sel+tp);
+    case 0:
+      switch(ext)
+      {
+      case 82: // Insert User
+        cru();
+        goto view_restart;
+//        break;
+      case 83: // Delete User
+        del(sel+tp);
+        goto view_restart;
+//        break;
+      case 77:
+      case 80:
+        if ((sel<(WIND-1)) && ((sel+tp)<x))
+          sel++;
+          else
+          if ((sel+tp)<x)
+          {
+            tp+=WIND;
+            sel=0;
+          }
+        break;
+      case 72:
+      case 75:
+        if ((sel>1) || ((sel>0) && (tp>0)))
+          sel--;
+          else
+          if (tp>0)
+          {
+            tp-=WIND;
+            sel=WIND-1;
+          }
+        break;
+      case 73:
+        if (tp>0)
+        {
+          tp-=WIND;
+          if (!sel)
+            sel=1;
+        }
+        else
+          sel=1;
+        break;
+      case 81:
+        if ((tp+WIND)<=x)
+          tp+=WIND;
+          else
+          sel=x-tp;
+        if (!((sel+tp)<=x))
+          sel=x-tp;
+        break;
+      }
+      break;
+    case ESC:
+      return(0);
+    }
+  }
+}
+
+void cru(void)
+/*
+  cru() is the function used to create a new user. This function is
+  called only from the SuperUser menu. All normal verifying is performed
+  before the user information is saved.
+*/
+{
+  short int err=1;
+  char opt;
+  sul=0;
+  crwin(2,5,65,22,tf,tb,2,glstr(17));
+  if (!wm)
+    clrscr();
+  while (err>0)
+  {
+    err=0;
+    cprintf("\r\n\r\n");
+    pstr(18);
+//    cprintf("NOTE: Pressing CTRL-ENTER after entering the login creates");
+//    cprintf("\r\n      that user as a SuperUser.\r\n\r\n");
+    cprintf("\r\n\r\n");
+    _bk=1;
+    strncpy(na,gin(glstr(19),1),max);
+//    strncpy(na,gin("Login:",1),max);
+    strcpy(temp,na);
+    if (bk)
+      break;
+    if ((strlen(temp)>max) || (strlen(temp)<min))
+      err=1;
+    npas=ffwd(2,NULL);
+    while((fgets(lo,MAX,npas))!=NULL && (!streq(lo,DIV)))
+    {
+      fgets(ps,MAX,npas);
+      fgets(ti,MAX,npas);
+      chop2(lo);
+      if ((csck(temp,lo)) && (!err))
+        err=4;
+    }
+    tmpath(temp);
+    fclose(npas);
+    if ((npas=fopen(temp,"wb"))==NULL)
+      error(OPTMP);
+    pass=ffwd(3,npas);
+    ed=ftell(npas);
+    ed-=DIVLEN;
+    fseek(npas,ed,SEEK_SET);
+    if (!err)
+    {
+      _bk=1;
+      strncpy(pa,gin(glstr(47),0),max);
+//      strncpy(pa,gin("Password:",0),max);
+      if (bk)
+      {
+        sunlink(temp);
+        break;
+      }
+      if ((strlen(pa)>max) || (strlen(pa)<min))
+        err=2;
+      if (!err)
+      {
+        if (sul)
+        {
+          pa[strlen(pa)+1]=0;
+          pa[strlen(pa)]=STAMP;
+        }
+        strcpy(pa,penc(pa));
+        _bk=1;
+        strncpy(ps,gin(glstr(20),0),max);
+//        strncpy(ps,gin("Verify Password:",0),max);
+        if (bk)
+        {
+          sunlink(temp);
+          break;
+        }
+        if (sul)
+        {
+          ps[strlen(ps)+1]=0;
+          ps[strlen(ps)]=STAMP;
+        }
+        strcpy(ps,penc(ps));
+        if (strcmp(pa,ps))
+          err=3;
+        if (!err)
+        {
+          if (sul)
+          {
+            pa[strlen(pa)+1]=0;
+            pa[strlen(pa)]=STAMP;
+            cprintf("\r\n");
+            pstr(21);
+//            cprintf("This user has been created with SuperUser privileges.");
+            cprintf("\r\n");
+          }
+          cprintf("\r\n");
+          pstr(22);
+//          cprintf("\r\nDo you want this account to have an expiry date?");
+          cprintf(" ");
+          opt=blch();
+          yeah(opt)
+          {
+            pstr(211);
+//            cprintf("Yes");
+            ed=gdate();
+          }
+          else
+          {
+            pstr(213);
+//            cprintf("No");
+            ed=0;
+          }
+          cprintf("\r\n");
+          pstr(23);
+//          cprintf("\r\nDo you want the password to have an expiry date? ");
+          cprintf(" ");
+          opt=blch();
+          yeah(opt)
+          {
+            pstr(211);
+//            cprintf("Yes");
+            pe=gdate();
+          }
+          else
+          {
+            pstr(213);
+//            cprintf("No");
+            pe=0;
+          }
+          cprintf("\r\n");
+          pstr(24);
+          cprintf("%d",ltl);
+          pstr(521);
+//          cprintf("\r\nDo you want other than the default (%d) for the maximum\r\nnumber of invalid logins? ",ltl);
+          cprintf(" ");
+          opt=blch();
+          yeah(opt)
+          {
+            pstr(211);
+//            cprintf("Yes");
+            ntl=100;
+            while ((ntl>99) || (ntl<0))
+            {
+              cprintf("\r\n\r\n");
+              pstr(25);
+//              cprintf("\r\n\r\nEnter 'X' to assign unlimited invalid logins.");
+              cprintf("\r\n\r\n");
+              pstr(26);
+//              cprintf("\r\n\r\nEnter the number of sequential invalid logins before the");
+//              cprintf("\r\nuser's account is automatically locked up, up to a maximum");
+//              cprintf("\r\nof 99. Enter selects the default [%d].",ltl);
+              cprintf(" [%d].",ltl);
+              cprintf("\r\n");
+              strcpy(cp,gin(">",1));
+              ntl=atoi(cp);
+              if (!strlen(cp))
+                ntl=ltl;
+            }
+          }
+          else
+          {
+            pstr(213);
+//            cprintf("No");
+            ntl=ltl;
+          }
+          cprintf("\r\n");
+          ae=0;
+          /**** This variable is not used for any specific purpose
+                at this time! (it's a spare) */
+        }
+      }
+    }
+    switch (err)
+    {
+    case 1:
+      pstr(27);
+//      cprintf("Logins must be between ");
+      cprintf(" %d ",min);
+      pstr(522);
+//      cprintf(" and ");
+      cprintf(" %d ",max);
+//      cprintf(" characters.");
+      pstr(206);
+      cprintf("\r\n");
+      break;
+    case 2:
+      pstr(28);
+//      cprintf("Passwords must be between ");
+      cprintf(" %d ",min);
+      pstr(522);
+//      cprintf(" and ");
+      cprintf(" %d ",max);
+      pstr(206);
+//      cprintf(" characters.\r\n");
+      cprintf("\r\n");
+      break;
+    case 3:
+      pstr(29);
+      cprintf("\r\n");
+//      cprintf("Password not verified!\r\n");
+      break;
+    case 4:
+      pstr(30);
+      cprintf("\r\n");
+//      cprintf("That user already exists!\r\n");
+      break;
+    }
+    if (!err)
+    {
+      fprintf(npas,"%s\r\n",na);
+      fprintf(npas,"%s\r\n",pa);
+      strcpy(tol,glstr(52));
+//      strcpy(tol,"User ");
+      strcat(tol," ");
+      strcat(tol,na);
+      strcat(tol," ");
+      strcat(tol,glstr(31));
+//      strcat(tol," Created.");
+      tolog(tol);
+      getdate(&td);
+      gettime(&nw);
+      ut=dostounix(&td,&nw);
+      fla=0;
+      pwr;
+      fprintf(npas,"%s",DIV);
+    }
+    fcd(pass,npas);
+    if (!err)
+    {
+      sunlink(inam);
+      rename(temp,inam);
+    }
+    else
+      sunlink(temp);
+  }
+}
+
+void del(int x)
+/*
+  del() is the function called to delete a user. It is called only from
+  the SuperUser menu. It first calls view() so that the intended user
+  can be selected. A check is performed to make sure that the last
+  SuperUser listed in the password file is not being deleted.
+*/
+{
+  short y=0;
+  char opt;
+  if (!x)
+  {
+    strcpy(tol,glstr(32));
+    x=view(tol);
+//    x=view(glstr(32));
+//    x=view("Delete");
+  }
+  if (x)
+  {
+    crwin(2,7,60,17,tf,tb,2,glstr(33));
+//    crwin(2,7,60,17,tf,tb,2,"Delete User(s)");
+    if (!wm)
+      clrscr();
+    opt=0;
+    pass=ffwd(2,NULL);
+    /* Count the # of SuperUsers */
+    while((fgets(lo,MAX,pass))!=NULL && (!streq(lo,DIV)))
+    {
+      fgets(ps,MAX,pass);
+      if (ps[strlen(ps)-3]==STAMP)
+        opt++;
+      fgets(ti,MAX,pass);
+    }
+    fclose(pass);
+    tmpath(temp);
+    if ((npas=fopen(temp,"wb"))==NULL)
+      error(OPTMP);
+    pass=ffwd(2,npas);
+    /* Scan to find user */
+    while((y<x) && ((fgets(lo,MAX,pass))!=NULL))
+    {
+      strcpy(na,lo);
+      chop2(na);
+      y++;
+      fgets(ps,MAX,pass);
+      fgets(ti,MAX,pass);
+      if (y!=x)
+      {
+        fputs(lo,npas);
+        fputs(ps,npas);
+        fputs(ti,npas);
+      }
+      else
+      {
+        if (ps[strlen(ps)-3]==STAMP)
+        {
+          cprintf("\r\n");
+          pstr(34);
+//          cprintf("\r\nThis is a SuperUser!");
+        }
+        if ((opt==1) && (ps[strlen(ps)-3]==STAMP))
+        {
+          cprintf("\r\n\r\n");
+          pstr(35);
+          cprintf("\r\n\r\n");
+          pstr(36);
+//          cprintf("\r\n\r\nYou cannot delete this user, they are\r\n");
+//          cprintf("the last SuperUser!");
+//          cprintf("\r\n\r\nPress any key to return to the SuperUser menu...");
+          opt=blch();
+          opt=0;
+        }
+        else
+        {
+          cprintf("\r\n\r\n");
+          pstr(37);
+//          cprintf("\r\n\r\nAre you sure you want to delete ");
+          cprintf(" %s",na);
+          cprintf("? ");
+          opt=blch();
+        }
+        if ((opt!=yes) && (opt!=(yes+32)))
+        {
+          if (opt)
+          {
+            pstr(213);
+//            cprintf("No");
+          }
+          fputs(lo,npas);
+          fputs(ps,npas);
+          fputs(ti,npas);
+        }
+        else
+        {
+            pstr(211);
+//          cprintf("Yes");
+          strcpy(tol,glstr(52));
+//          strcpy(tol,"User ");
+          strcat(tol," ");
+          strcat(tol,na);
+          strcat(tol," ");
+          strcat(tol,glstr(38));
+//          strcat(tol," Deleted.");
+          tolog(tol);
+        }
+      }
+    }
+    fcd(pass,npas);
+    sunlink(inam);
+    rename(temp,inam);
+  }
+}
+
+void toggle(void)
+/*
+  toggle() is the function called to toggle SuperUser status. It is
+  called only from the SuperUser menu. It first calls view() so that the
+
+  intended user can be selected. The user's password must be entered
+  to replace the old password and access group. A check is performed so
+  that SuperUser privileges cannot be removed from the last SuperUser.
+*/
+{
+  short int v,err=0,y=0;
+  char opt;
+  strcpy(tol,glstr(39));
+  v=view(tol);
+//  v=view(glstr(39));
+//  v=view("Toggle");
+  if (v)
+  {
+    crwin(2,5,69,22,tf,tb,2,glstr(40));
+//    crwin(2,5,69,22,tf,tb,2,"Toggle SuperUser Status");
+    if (!wm)
+      clrscr();
+    cprintf("\r\n");
+    pstr(41);
+    cprintf("\r\n");
+    pstr(42);
+    cprintf("\r\n");
+//    cprintf("\r\nNOTE: The user must re-enter their password to obtain or give up\r\n");
+//    cprintf("      SuperUser access.\r\n");
+//    cprintf("      You may override this by entering any other password, which\r\n");
+//    cprintf("      will be this user's password from now on.\r\n");
+    opt=0;
+    pass=ffwd(2,NULL);
+    /* Count the number of SuperUsers */
+    while((fgets(lo,MAX,pass))!=NULL && (!streq(lo,DIV)))
+    {
+      fgets(ps,MAX,pass);
+      if (ps[strlen(ps)-3]==STAMP)
+        opt++;
+      fgets(ti,MAX,pass);
+    }
+    fclose(pass);
+    tmpath(temp);
+    if ((npas=fopen(temp,"wb"))==NULL)
+      error(OPTMP);
+    pass=ffwd(2,npas);
+    while((y<v) && (fgets(lo,MAX,pass))!=NULL)
+    {
+      strcpy(na,lo);
+      chop2(na);
+      y++;
+      fgets(ps,MAX,pass);
+      fgets(ti,MAX,pass);
+      if (y!=v)
+      {
+        fputs(lo,npas);
+        fputs(ps,npas);
+        fputs(ti,npas);
+      }
+      else
+      {
+        sul=0;
+        if ((opt==1) && (ps[strlen(ps)-3]==STAMP))
+        {
+          cprintf("\r\n");
+          pstr(43);
+//          cprintf("\r\nYou cannot remove SuperUser access from the last SuperUser!");
+          cprintf("\r\n\r\n");
+          pstr(36);
+//          cprintf("\r\n\r\nPress any key to return to the SuperUser menu...");
+          opt=blch();
+          opt=0;
+        }
+        else
+        {
+          cprintf("\r\n\r\n");
+          pstr(44);
+//          cprintf("\r\n\r\nAre you sure you want to ");
+          if (ps[strlen(ps)-3]==STAMP)
+          {
+            pstr(45);
+//            cprintf("remove SuperUser access from");
+          }
+          else
+          {
+            pstr(46);
+//            cprintf("grant SuperUser access to");
+            sul=1;
+          }
+          cprintf(" ");
+          cprintf("%s",na);
+          cprintf("? ");
+          opt=blch();
+        }
+        yeah(opt)
+        {
+          pstr(211);
+//          cprintf("Yes");
+          _bk=0;
+          cprintf("\r\n\r\n");
+          strncpy(pa,gin(glstr(47),0),max);
+//          strncpy(pa,gin("\r\n\r\nPassword:",0),max);
+          if ((strlen(pa)>max) || (strlen(pa)<min))
+          {
+            pstr(28);
+//            cprintf("Passwords must be between ");
+            cprintf(" %d ",min);
+            pstr(522);
+//            cprintf(" and ");
+            cprintf(" %d ",max);
+            pstr(206);
+//            cprintf(" characters.\r\n");
+            cprintf("\r\n\r\n");
+            pstr(48);
+//            cprintf("Press any key to continue...");
+            opt=blch();
+            err=2;
+          }
+          if (!err)
+          {
+            if (sul)
+            {
+              pa[strlen(pa)+1]=0;
+              pa[strlen(pa)]=STAMP;
+            }
+            strcpy(pa,penc(pa));
+            _bk=0;
+            strncpy(na,gin(glstr(20),0),max);
+//            strncpy(na,gin("Verify Password:",0),max);
+            if (sul)
+            {
+              na[strlen(na)+1]=0;
+              na[strlen(na)]=STAMP;
+            }
+            strcpy(na,penc(na));
+            if (strcmp(pa,na))
+            {
+              pstr(29);
+//              cprintf("Password not verified!\r\n");
+              cprintf("\r\n\r\n");
+              pstr(48);
+//              cprintf("\r\nPress any key to continue...");
+              opt=blch();
+              err=3;
+            }
+            if (!sul)
+            {
+              na[strlen(na)+2]=0;
+              na[strlen(na)+1]='\n';
+              na[strlen(na)]='\r';
+            }
+            else
+            {
+              na[strlen(na)+3]=0;
+              na[strlen(na)+2]='\n';
+              na[strlen(na)+1]='\r';
+              na[strlen(na)]=STAMP;
+            }
+            if (!err)
+            {
+              strcpy(ps,na);
+              strcpy(tol,glstr(49));
+//              strcpy(tol,"SuperUser Access ");
+              if (sul)
+              {
+                strcat(tol,glstr(50));
+//                strcat(tol,"Granted to");
+              }
+              else
+              {
+                strcat(tol,glstr(51));
+//                strcat(tol,"Revoked from");
+              }
+              strcat(tol," ");
+              strcat(tol,glstr(52));
+              strcat(tol," ");
+//              strcat(tol," user ");
+              strcpy(na,lo);
+              chop2(na);
+              strcat(tol,na);
+              strcat(tol,".");
+              tolog(tol);
+            }
+          }
+          if (err)
+          {
+            ps[strlen(ps)+2]=0;
+            ps[strlen(ps)+1]='\n';
+            ps[strlen(ps)+1]='\r';
+          }
+        }
+        else
+        {
+            pstr(213);
+//          cprintf("No");
+        }
+        fputs(lo,npas);
+        fputs(ps,npas);
+        fputs(ti,npas);
+      }
+    }
+    fcd(pass,npas);
+    sunlink(inam);
+    rename(temp,inam);
+  }
+}
+
+void cex(void)
+/*
+  cex(void) creates an expiry date for an account. The account to be
+  adjusted is selected via view(void). That account's current expiry
+  settings are then shown, and the user is asked if they want to alter
+  them. If they answer yes, the date new expiry is entered via
+  gdate(void) and saved in the password file.
+*/
+{
+  short int x;
+  long zs;
+  char opt;
+  strcpy(tol,glstr(53));
+  x=view(tol);
+//  x=view(glstr(53));
+//  x=view("Change Account Expiry");
+  if (x)
+  {
+    crwin(2,5,65,22,tf,tb,2,glstr(54));
+//    crwin(2,5,65,22,tf,tb,2,"Set Account Expiry");
+    if (!wm)
+      clrscr();
+    tmpath(temp);
+    if ((npas=fopen(temp,"wb"))==NULL)
+      error(OPTMP);
+    pass=ffwd(2,npas);
+    guser(x);
+    strcpy(na,lo);
+    chop2(na);
+    if (ps[strlen(ps)-1]==STAMP)
+    {
+      cprintf("\r\n");
+      pstr(34);
+      cprintf("\r\n");
+//      cprintf("\r\nThis is a SuperUser!\r\n");
+    }
+    if (ed)
+    {
+      unixtodos(ed,&td,&nw);
+      cprintf("\r\n");
+      pstr(56);
+      cprintf(" ");
+//      cprintf("\r\nCurrent expiry date is ");
+      if (df)
+        cprintf("%02d/%02d/%02d.\r\n",td.da_day,td.da_mon,td.da_year);
+      else
+        cprintf("%02d/%02d/%02d.\r\n",td.da_mon,td.da_day,td.da_year);
+      getdate(&td);
+      gettime(&nw);
+      zs=dostounix(&td,&nw);
+      if (zs>ed)
+      {
+        cprintf("(");
+        pstr(57);
+        cprintf(")\r\n");
+//        cprintf("(This account has expired.)\r\n");
+      }
+    }
+    else
+    {
+      pstr(58);
+      cprintf("\r\n");
+//      cprintf("\r\nThis account has no expiry date.\r\n");
+    }
+    pstr(59);
+//    cprintf("Do you want to change ");
+    cprintf(" %s",na);
+    pstr(60);
+    cprintf(" ");
+//    cprintf("'s expiry date? ");
+    opt=blch();
+    if ((opt!=yes) && (opt!=(yes+32)))
+    {
+      pstr(211);
+//      cprintf("Yes");
+      fputs(lo,npas);
+      fputs(ps,npas);
+      fputs(ti,npas);
+    }
+    else
+    {
+      pstr(213);
+//      cprintf("No");
+      ed=gdate();
+      fputs(lo,npas);
+      fputs(ps,npas);
+      pwr;
+      chop2(lo);
+      if (ed)
+      {
+        unixtodos(ed,&td,&nw);
+        strcpy(tol,glstr(52));
+        strcat(tol," ");
+//        strcpy(tol,"User ");
+        strcat(tol,lo);
+        strcat(tol," ");        strcat(tol,glstr(61));        strcat(tol," ");//        strcat(tol," account expiry changed to ");
+        if (df)
+          sprintf(lo,"%02d/%02d/%02d",td.da_day,td.da_mon,td.da_year);
+        else
+          sprintf(lo,"%02d/%02d/%02d",td.da_mon,td.da_day,td.da_year);
+        strcat(tol,lo);
+        strcat(tol,".");
+      }
+      else
+      {
+        strcpy(tol,glstr(52));
+        strcat(tol," ");
+//        strcpy(tol,"User ");
+        strcat(tol,lo);
+        strcat(tol," ");
+        strcat(tol,glstr(62));
+//        strcat(tol," account expiry removed.");
+      }
+      tolog(tol);
+    }
+    fcd(pass,npas);
+    sunlink(inam);
+    rename(temp,inam);
+  }
+}
+
+void pex(void)
+/*
+  pex(void) creates an expiry date for a password. The account to be
+  adjusted is selected via view(void). That account's current password
+  expiry settings are then shown, and the user is asked if they want to
+  alter them. If they answer yes, the new expiry date is entered via
+  gdate(void) and saved in the password file.
+*/
+{
+  short int x;
+  long zs;
+  char opt;
+  strcpy(tol,glstr(63));
+  x=view(tol);
+//  x=view(glstr(63));
+//  x=view("Change Password Expiry");
+  if (x)
+  {
+    crwin(2,5,65,22,tf,tb,2,glstr(64));
+//    crwin(2,5,65,22,tf,tb,2,"Set Password Expiry");
+    if (!wm)
+      clrscr();
+    tmpath(temp);
+    if ((npas=fopen(temp,"wb"))==NULL)
+      error(OPTMP);
+    pass=ffwd(2,npas);
+    guser(x);
+    strcpy(na,lo);
+    chop2(na);
+    if (ps[strlen(ps)-1]==STAMP)
+    {
+      cprintf("\r\n");
+      pstr(34);
+      cprintf("\r\n");
+//      cprintf("\r\nThis is a SuperUser!\r\n");
+    }
+    if (pe)
+    {
+      unixtodos(pe,&td,&nw);
+      cprintf("\r\n");
+      pstr(56);
+      cprintf(" ");
+//      cprintf("\r\nCurrent expiry date is ");
+      if (df)
+        cprintf("%02d/%02d/%02d.\r\n",td.da_day,td.da_mon,td.da_year);
+      else
+        cprintf("%02d/%02d/%02d.\r\n",td.da_mon,td.da_day,td.da_year);
+      getdate(&td);
+      gettime(&nw);
+      zs=dostounix(&td,&nw);
+      if (zs>pe)
+      {
+        pstr(65);
+        cprintf("\r\n");
+//        cprintf("(This password has expired.)\r\n");
+      }
+    }
+    else
+    {
+      cprintf("\r\n");
+      pstr(66);
+      cprintf("\r\n");
+//      cprintf("\r\nThis password has no expiry date.\r\n");
+    }
+    pstr(59);
+//    cprintf("Do you want to change ");
+    cprintf(" %s",na);
+    pstr(60);
+    cprintf(" ");
+//    cprintf("'s expiry date? ");
+    opt=blch();
+    if ((opt!=yes) && (opt!=(yes+32)))
+    {
+      pstr(211);
+//      cprintf("Yes");
+      fputs(lo,npas);
+      fputs(ps,npas);
+      fputs(ti,npas);
+    }
+    else
+    {
+      pstr(213);
+//      cprintf("No");
+      pe=gdate();
+      fputs(lo,npas);
+      fputs(ps,npas);
+      pwr;
+      chop2(lo);
+      if (pe)
+      {
+        unixtodos(pe,&td,&nw);
+        sprintf(tol,"%s %s ",glstr(52),lo);
+//        sprintf(tol,"User %s ",lo);
+        strcat(tol,glstr(70));
+        strcat(tol," ");
+//        password expiry changed to
+        if (df)
+          sprintf(lo,"%02d/%02d/%02d",td.da_day,td.da_mon,td.da_year);
+        else
+          sprintf(lo,"%02d/%02d/%02d",td.da_mon,td.da_day,td.da_year);
+        strcat(tol,lo);
+        strcat(tol,".");
+      }
+      else
+      {
+        sprintf(tol,"%s %s ",glstr(52),lo);
+//        sprintf(tol,"User %s ",lo);
+        strcat(tol,glstr(72));
+//        sprintf(tol,"User %s password expiry removed.",lo);
+      }
+      tolog(tol);
+    }
+    fcd(pass,npas);
+    sunlink(inam);
+    rename(temp,inam);
+  }
+}
+
+void alock(void)
+/*
+  alock(void) allows accounts to be locked out after a certain number of
+  sequential invalid logins. alock(void) calls view(void) first so the
+  proper account can be selected. It then prompts the user for a new
+  "max invalid login" value.
+*/
+{
+  short int x,y=0;
+  char opt;
+  strcpy(tol,glstr(73));
+  x=view(tol);
+//  x=view(glstr(73));
+//  x=view("Max Invalid Logins");
+  if (x)
+  {
+    crwin(2,5,65,22,tf,tb,2,glstr(74));
+//    crwin(2,5,65,22,tf,tb,2,"Assign Max Number of Invalid Logins");
+    if (!wm)
+      clrscr();
+    tmpath(temp);
+    if ((npas=fopen(temp,"wb"))==NULL)
+      error(CRTMP);
+    pass=ffwd(2,npas);
+    while((y<x) && (fgets(lo,MAX,pass))!=NULL)
+    {
+      strcpy(na,lo);
+      chop2(na);
+      y++;
+      fgets(ps,MAX,pass);
+      fgets(ti,MAX,pass);
+      if (y!=x)
+      {
+        fputs(lo,npas);
+        fputs(ps,npas);
+        fputs(ti,npas);
+      }
+      else
+      {
+        if (ps[strlen(ps)-1]==STAMP)
+        {
+          cprintf("\r\n");
+          pstr(34);
+          cprintf("\r\n");
+//          cprintf("\r\nThis is a SuperUser!\r\n");
+        }
+        prd();
+        if (ntl)
+        {
+          cprintf("\r\n");
+          pstr(75);
+          cprintf(" %d ",ntl);
+          pstr(76);
+          cprintf("\r\n");
+//          cprintf("\r\nThis account will currently lock up after %d invalid logins.\r\n",ntl);
+        }
+        else
+        {
+          cprintf("\r\n");
+          pstr(77);
+          cprintf("\r\n");
+//          cprintf("\r\nThis account has no limit on invalid logins.\r\n");
+        }
+        pstr(59);
+        cprintf(" %s",na);
+        pstr(79);
+        cprintf(" ");
+//        cprintf("Do you want to change %s's invalid login setting? ",na);
+        opt=blch();
+        if ((opt!=yes) && (opt!=(yes+32)))
+        {
+          pstr(211);
+//          cprintf("Yes");
+          fputs(lo,npas);
+          fputs(ps,npas);
+          fputs(ti,npas);
+        }
+        else
+        {
+          pstr(213);
+//          cprintf("No");
+          ntl=100;
+          while ((ntl>99) || (ntl<0))
+          {
+              cprintf("\r\n\r\n");
+              pstr(25);
+//              cprintf("\r\n\r\nEnter 'X' to assign unlimited invalid logins.");
+              cprintf("\r\n\r\n");
+              pstr(26);
+//              cprintf("\r\n\r\nEnter the number of sequential invalid logins before the");
+//              cprintf("\r\nuser's account is automatically locked up, up to a maximum");
+//              cprintf("\r\nof 99. Enter selects the default [%d].",ltl);
+              cprintf(" [%d].",ltl);
+            cprintf("\r\n");
+            strcpy(na,gin(">",1));
+            ntl=atoi(na);
+            if (!strlen(na))
+              ntl=ltl;
+          }
+          fputs(lo,npas);
+          fputs(ps,npas);
+          pwr;
+          chop2(lo);
+          if (ntl)
+          {
+            strcpy(tol,lo);
+            strcat(tol,glstr(80));
+            strcat(tol," ");
+            strcat(tol,itoa(ntl,NULL,10));
+            strcat(tol,".");
+//            sprintf(tol,"%s's invalid login setting is changed to %d.",lo,ntl);
+          }
+          else
+          {
+            strcpy(tol,lo);
+            strcat(tol,glstr(81));
+//            sprintf(tol,"%s's invalid login setting removed.");
+          }
+          tolog(tol);
+        }
+      }
+    }
+    fcd(pass,npas);
+    sunlink(inam);
+    rename(temp,inam);
+  }
+}
+
+void usrinit(void)
+/*
+  usrinit() initializes the User Maintenance menu options in the
+  string txt[].
+  This is done seperately from the user() function so that it can be
+  performed as required. view() and super() also uses the txt[] variable, so
+  usrinit() must be called after each call to view().
+*/
+{
+  strcpy(txt[1],glstr(82));
+  strcpy(txt[2],glstr(83));
+  strcpy(txt[3],glstr(84));
+  strcpy(txt[4],glstr(85));
+  strcpy(txt[5],glstr(86));
+  strcpy(txt[6],glstr(87));
+  strcpy(txt[7],glstr(88));
+  strcpy(txt[8],glstr(89));
+  strcpy(txt[USOPT],glstr(90));
+//  strcpy(txt[1],"1. Create User");
+//  strcpy(txt[2],"2. Delete User");
+//  strcpy(txt[3],"3. View All Users");
+//  strcpy(txt[4],"4. Toggle SuperUser Status");
+//  strcpy(txt[5],"5. Change Account Expiry Date");
+//  strcpy(txt[6],"6. Change Password Expiry Date");
+//  strcpy(txt[7],"7. Change Account Password");
+//  strcpy(txt[8],"8. Assign Max Number of Invalid Logins");
+//  strcpy(txt[USOPT],"9. Return to SuperUser Menu");
+  if (!puttext(1,1,80,25,msc))
+    error(SCWR);
+  crwin(10,7,57,20,tf,tb,2,glstr(91));
+//  crwin(10,7,52,20,tf,tb,2,"User Maintenance Menu");
+}
+
+void user(void)
+/*
+  user() contains all User Maintenance otpions.
+*/
+{
+  short int x,y;
+  char opt,sel=1;
+  usrinit();
+  y=opt=0;
+  while (1) /* This is iffy (but it works) */
+  {
+    hl=sel+10;
+    clrscr();
+    txb(tb);
+    txc(tf);
+    cprintf("\r\n");
+    for(x=1;x<=USOPT;x++)
+    {
+      if (sel==x)
+      {
+        txb(hb);
+        txc(hf);
+      }
+      else
+      {
+        txb(tb);
+        txc(tf);
+      }
+      cprintf("%s",txt[x]);
+      cprintf("\r\n");
+    }
+    txb(tb);
+    txc(tf);
+    cprintf("\r\n");
+    pstr(92);
+    cprintf(" ");
+//    cprintf("\r\nOption: ");
+    opt=blch();
+    if (isdigit(opt))
+    {
+      if (((opt-'0')<=USOPT) && ((opt-'0')!=0))
+      {
+        sel=opt-'0';
+        opt=13;
+      }
+    }
+    switch (opt)
+    {
+    case 'S': /* Quick jump to system menu */
+      sys();
+      break;
+    case 'L': /* Quick jump to log file menu */
+      logm();
+      break;
+    case 'c':
+      sel=1;
+      opt=13;
+      break;
+    case 'd':
+      sel=2;
+      opt=13;
+      break;
+    case 'v':
+      sel=3;
+      opt=13;
+      break;
+    case 't':
+      sel=4;
+      opt=13;
+      break;
+    case 'a':
+      sel=5;
+      opt=13;
+      break;
+    case 'e':
+      sel=6;
+      opt=13;
+      break;
+    case 'p':
+      sel=7;
+      opt=13;
+      break;
+    case 'm':
+    case 'l':
+      sel=8;
+      opt=13;
+      break;
+    case ESC:  /* Escape */
+    case 'r':
+    case 's':
+    case 'x':
+      sel=USOPT;
+      opt=13;
+      break;
+    case 0:
+      switch(ext)
+      {
+      case 77:   /* Cursor Right/Down */
+      case 80:
+        if (sel<USOPT)
+          sel++;
+        break;
+      case 75:    /* Cursor Up/Left */
+      case 72:
+        if (sel>1)
+          sel--;
+        break;
+      case 73:  /* Page Up */
+        sel=1;
+        break;
+      case 81:   /* Page Down */
+        sel=USOPT;
+        break;
+      }
+      break;
+    }
+    hl=sel+10;
+    if (opt==13)
+      switch (sel)
+      {
+      case 1:
+        cru();
+        y=1;
+        break;
+      case 2:
+        del(0);
+        y=1;
+        break;
+      case 3:
+        tolog(glstr(93));
+//        tolog("User List Viewed.");
+        strcpy(tol,glstr(94));
+        view(tol);
+//        view(glstr(94));
+//        view("View");
+        y=1;
+        break;
+      case 4:
+        toggle();
+        y=1;
+        break;
+      case 5:
+        cex();
+        y=1;
+        break;
+      case 6:
+        pex();
+        y=1;
+        break;
+      case 7:
+        strcpy(tol,glstr(95));
+        un=view(tol)*-1;
+//        un=view("Change Password")*-1;
+        if (un)
+        {
+          crwin(2,5,65,22,tf,tb,2,glstr(95));
+//          crwin(2,5,65,22,tf,tb,2,"Change Password");
+          if (!wm)
+            clrscr();
+          setp();
+        }
+        y=1;
+        break;
+      case 8:
+        alock();
+        y=1;
+        break;
+      case USOPT:
+        su=sul=1;
+        super();
+        break;
+      }
+    if (y)
+      usrinit();
+    y=opt=0;
+  }
+}

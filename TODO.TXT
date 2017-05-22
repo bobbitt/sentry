@@ -1,0 +1,348 @@
+**** ADDITIONS ****
+
+[--------------------------------------------------------------------------]
+
+Use START /W to wait for DOS prompt.
+
+[--------------------------------------------------------------------------]
+
+Create a batch file to ci -r%ver all *.c and *.h files, then co -l them
+again. (To store the source code of a new release)
+
+[--------------------------------------------------------------------------]
+
+    If Sentry goes looking for log files or message files or whatever
+and *cannot* find them, a couple of things should happen:
+
+        1.  A default file of an appropriate name should be created in
+the current directory that Sentry (or the protected file) is running in,
+the software should *not* freeze up, and software should proceed to the
+next steps ...
+
+        2.  A screen message should appear -- something to the affect
+of:
+
+                File errors have been found.  Temporary measures have
+been taken to enable this program to run, but the System Adminsitrator
+or SuperUser should be advised as soon as possiible.
+
+        3.  A letter should be sent to SuperUsers, advising them of the
+problem, the name(s) of the temporary file(s) created, and that
+Initialization Settings need to be modified to set up the new desired
+permanent values for each Sentry file.
+
+        4.  If login, password, or whatever else is happening is
+otherwise OK, continue with normal execution of Sentry.exe.
+
+[--------------------------------------------------------------------------]
+
+Hard disk locking.
+
+[--------------------------------------------------------------------------]
+
+DOS Shell:
+
+- Password Protect
+- Add an environment variable to prevent recursive shelling.
+- [Sentry] $p$g prompt
+
+[--------------------------------------------------------------------------]
+
+Make it possible to pass settings from a ShareWare version to a
+registered version.
+
+[--------------------------------------------------------------------------]
+
+Merge all bad login and bad password messages into one.
+
+[--------------------------------------------------------------------------]
+
+Investigate the possibility of using
+INSTALL c:\work\sentry\sentry.exe
+in the CONFIG.SYS file.
+
+INSTALL loads the program into memory, and accesses it from there as
+needed.
+
+[--------------------------------------------------------------------------]
+
+Make error messages easier to understand.
+
+[--------------------------------------------------------------------------]
+
+Make the install process automatically detect a multi-boot setup and
+prompt the user: "Do you want to protect all boot configurations?"
+
+[--------------------------------------------------------------------------]
+
+Make the uninstall process find and remove the log files automatically.
+
+[--------------------------------------------------------------------------]
+
+Don't just pad passwords on screen. Pad them when they're stored too.
+
+[--------------------------------------------------------------------------]
+
+Add a "most secure" option to the initialization settings, that
+automatically sets everything to it's most secure setting. (as opposed
+to setting it up for ease of use).
+
+Criticality: Important
+ETC:         4 Hours
+
+[--------------------------------------------------------------------------]
+
+Encrypt ini settings and account info.
+- Load info into memory
+- Decrypt
+- Read/write from memory buffer
+- Encrypt
+- Write back to file
+
+Criticality: Top
+ETC:         15 Hours
+
+[--------------------------------------------------------------------------]
+
+Secure install option:
+  - Change COMMAND.COM to load another file first. This file executes
+    Sentry, and then the regular AUTOEXEC.BAT.
+
+  - Also: remove/rename built-in shell commands from COMMAND.COM.
+
+Criticality: Important
+ETC:         3 Hours
+
+[--------------------------------------------------------------------------]
+
+From a user:
+    One other suggestion I submit is could you please in some later
+    update provide logging of all command line entries. That is, not
+    just the copies or deletes. But any entry such as dir.
+
+I think for this it would have to be a seperate program (but part of the
+Sentry package).
+
+Criticality: Important
+ETC:         5 Hours
+
+[--------------------------------------------------------------------------]
+
+- Allow protected mode on more files.
+  - find out why ffm fails, etc
+  - what path does it execute in?
+- Better protected file encryption.
+
+Criticality: Important
+ETC:         3 Hours
+
+[--------------------------------------------------------------------------]
+
+- Additions to messaging system:
+  * Option to have "confirmation" sent to SuperUser.
+  * Possibility of other users sending mail
+     - Without seeing or guessing userlist(!)
+  * Allow multi-line messages
+  * Allow a "broadcast" message (motd) by SuperUser
+     - Expiry date?
+
+Criticality: Important
+ETC:         4 Hours
+
+[--------------------------------------------------------------------------]
+
+Last week I obtained a copy of Sentry via the Internet. The program is
+nearly exactly what I was looking for. My compliments to you. Especially
+the logfile-feature is a necessity for me. The reason why I will not use
+your program yet is the impossibility to log the number of printouts
+made by the several users.
+
+1). The computer on which I would like to install Sentry is used by
+about 30 people. I want to be able to trace the number of pages printed
+out by every individual logged in to that computer. Therefore, I would
+like to suggest to add a kind of program or add some- thing to the
+program which can count the number of pages printed out by the user who
+is logged in. Probebly, in a certain way it should guard or scan one of
+the LPT or COM ports (depending on where the printer is connected on)
+for a signal of which can be concluded that te printer is printing a
+(next) page. I don't have the skills to go into further techical details
+so I leave it to this suggestion. I hope it's a good one... There should
+be found a sollution for losing the printout-data by turning off the
+computer whithout logging out. Maybe it's a sollution to update the
+logfile every X minutes or directly after a printjob is done.
+
+The result of this (part of the) program (i.e. the number of pages
+printed out) should be added to the existing logfile. As a result the
+logfile might contain the following:
+
+        .
+        .
+        .
+[20/12/1995 - 11:37:41] ---------------------------------
+[20/12/1995 - 11:37:42] *********************************
+[20/12/1995 - 11:37:42] * THIS IS AN UNREGISTERED COPY. *
+[20/12/1995 - 11:37:42] *       PLEASE REGISTER.        *
+[20/12/1995 - 11:37:42] *********************************
+[20/12/1995 - 11:38:25] Johnson logged in.
+[20/12/1995 - 11:54:34] Johnson printed 53 pages and logged out.   <<=== !!!
+
+
+2). If the computer is about to be turned off (correctly) by the user
+the program should leave a screenmessage, something like:
+
+
+
+      User JOHNSON printed 53 pages during this session.
+
+
+                5555555555    33333333333
+                55                  333
+                55                 33
+                555555          33333
+                     555            333
+                       555            333
+                        555            333
+                       555            333
+                     555            333
+                555555         333333
+
+
+The reason for this is to give the user the feeling he's beeing checked.
+
+Criticality: Important
+ETC:         7 Hours
+
+[--------------------------------------------------------------------------]
+
+- Allow the SuperUser to set read/write/execute privileges for various
+users on various drives. I have no idea how I will do this.
+
+From a user:
+   Concerning file protection, how likely is it that you might include
+   an option to lock off any file or directory including the root of
+   directory of any local drive (including partitions) given, the user's
+   login status?  I actually have a program that lets you choose
+   individual files or directories to be inacessible to any user.
+
+I have a program very similar to the one you describe (called PC-Vault I
+think). This option has been on the "To Do" list for quite some time,
+but I have not yet been able to find a secure method of hiding
+directories. I hope to add the ability to encrypt/decrypt files from the
+SuperUser menu, but again, the search for a secure algorithm has slowed
+that down.
+
+   ** Note: using
+            subst d: c:\newdir
+            creates a new drive d with no files.
+            subst c: a:\newdir
+            makes drive c: inacessable.
+            subst a: c:\newdir
+            makes drive a: inacessable.
+
+    Each user could have an extra byte of account information that
+    contains access information.
+
+    EG:     10000000
+    drives: ABCDEFGH
+
+            Where a 1 means access, and a 0 means no access.
+            A user must have access to at least one drive.
+
+Criticality: Important
+ETC:         10 Hours
+
+[--------------------------------------------------------------------------]
+
+- Fix the menu display routine to not clear the screen after each
+keypress.
+
+Criticality: Important
+ETC:         3 Hours
+
+[--------------------------------------------------------------------------]
+
+- Add the ability to encode/decode files.
+
+  * On the superuser menu
+  * Uses all or part of the user's password (encrypted)
+  * Uses some encryption algorithm that I don't have yet.
+
+Criticality: Medium
+ETC:         4 Hours
+
+[--------------------------------------------------------------------------]
+
+- Add the ability to lock directories. Each user would have an "access
+list" and those directories that the user does not have access to would
+be locked. (During login, all directories on the "lock list" would be
+locked, and then those directories that the user has access to would be
+unlocked).
+
+Locking consists of:
+
+         - Renaming the directory to a name with invalid characters in
+         it. This would be a name that cannot be entered at the DOS
+         prompt.
+
+         - Hiding the directory.
+
+         - Possibly moving the directory to another, inconspicuous (or
+           even random) location.
+
+         - Changing the directory to a file??
+
+         - What about locking files?
+
+Criticality: Low
+ETC:         6 Hours
+
+[--------------------------------------------------------------------------]
+
+1) Would it be possible for you to include floppy disk reboot protection
+via a SuperUser option as some other programs provide?
+
+As I understand it, this would mean an option to modify the CMOS
+settings, correct? (IE: it changes the boot drive order from A,C to
+C,A). That would be useful for the install program (and/or on the
+SuperUser menu). Since I have never edited the CMOS settings via an
+external program, I'm not sure how feasible it is, but I will research
+it.
+
+Criticality: Low
+ETC:         5 Hours
+
+[--------------------------------------------------------------------------]
+
+- Make windowed screens more "professional" in appearance. This
+includes:
+
+        - Active/Inactive window colours
+        - Background colour/texture
+        - Windows disappear when closed. Text beneath is restored.
+          Use a linked list of gettext() calls.
+
+Criticality: Low
+ETC:         4 Hours
+
+[--------------------------------------------------------------------------]
+
+- Allow the use of a mouse to select options from the menus. Also have
+"close" buttons on windows that can be exited from. Allow windows to be
+moved around the screen via the mouse.
+
+Criticality: Low
+ETC:         3 Hours
+
+[--------------------------------------------------------------------------]
+
+**** BUGS ****
+
+[--------------------------------------------------------------------------]
+
+- Fix the muiti-page scroller to have WIND options on the first page
+(currently has WIND-1 options due to 0 being an invalid response).
+
+Criticality: Low
+ETC:         3 Hours
+
+[--------------------------------------------------------------------------]

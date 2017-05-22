@@ -1,0 +1,589 @@
+The User Maintenance Menu
+
+The User Maintenance Menu contains all actions that affect
+users. The following options can be accessed through the User
+Maintenance Menu:
+
+    1.  Create User
+    2.  Delete User
+    3.  View Users
+    4.  Toggle SuperUser Status
+    5.  Change Account Exipry Date
+    6.  Change Password Expiry Date
+    7.  Change Account Password
+    8.  Assign Max Invalid Logins
+    9.  Return to SuperUser Menu
+
+The Log File Maintenance Menu
+
+The Log File Maintenance Menu contains all actions required to
+manage the log file. The following options can be accessed
+through the Log File Maintenance Menu:
+
+    1. View Log File
+    2. View Backup Log File
+    3. Move Log File to Backup
+    4. Return to SuperUser Menu
+
+System Maintenance Menu
+
+The System Maintenance Menu contains functions which allow the
+SuperUser to perform special functions or system related tasks.
+The following options can be accessed through the System
+Maintenance Menu:
+
+    1. Edit Initialization Settings
+    2. Send a Message to a User
+    3. Protect a File
+    4. Export Initialization Settings
+    5. Security Audit
+    6. Modify Shell Commands
+    7. Return to SuperUser Menu
+
+Each option is described below.
+
+Sentry DOS Shell
+
+Selecting this option temporarily drops the SuperUser to a DOS
+shell where they can execute any normal DOS commands. This shell
+has limited memory and environment space, and should only be
+used for simple file maintenance. Do not attempt to run any
+large or complicated files while in the DOS shell.
+
+Type "EXIT" to return to the SuperUser menu.
+
+About Sentry
+
+This option simply shows some "nice to know" information
+about Sentry.
+
+Exit
+
+This simply returns you to the DOS prompt. It is the same as
+pressing the ESCAPE key.
+
+
+
+
+
+Create User
+
+This option allows you to create users on your system. First of
+all, you must enter the username (or login) you wish to assign
+to that user. If you wish to create a user with SuperUser
+status, type in the username and hold down the CONTROL key when
+pressing enter. Otherwise, just press enter. Once that is
+complete, Sentry asks for the password. The user should choose
+and enter their own password. SuperUsers need not know what the
+passwords are since they can still manage the accounts without
+knowing them. The password is entered twice to ensure no typos
+were made, and then saved in encoded form. The ESCAPE key will
+abort this operationat any time.
+
+Note: There is currently a maximum of 100 users allowed. This
+limit can be exceeded if required (contact me for a larger
+capacity version).
+
+Delete User
+
+The delete option is very simple. It brings up a list of all
+users, and you simply use the cursor keys to highlight the user
+you wish to delete. SuperUsers are denoted by a * to the right
+of their username. Press enter to select the appropriate user.
+If the selected user is a SuperUser, Sentry will give a warning.
+SuperUser or not, Sentry will then ask if you are sure you want
+to delete them. Any input other than a 'y' will not perform the
+delete. The ESCAPE key will abort this option at any time.
+
+View Users
+
+This option allows you to view all users who currently have
+accounts on your system. SuperUsers are again denoted by a * to
+the right of their login name. The last login date/time, account
+expiry date and password expiry date are also shown to the right
+of the user's login name. In addition, the number of invalid
+logins since the users last valid login are shown with the
+number of invalid logins allowed before an account is locked up.
+An "X" in the "Max Inv Log" (Maximum Number of Invalid Logins
+Allowed) column means there is no limit. You can use the PAGE UP
+and PAGE DOWN keys to scroll forward and back if there are
+multiple pages of users. Arrows will be present if there are
+additional pages above/below. The ESCAPE key will exit back
+to the main menu.
+
+Toggle SuperUser Status
+
+When this option is selected, it first brings up a list of all
+users on the system. Again, SuperUsers are denoted by a *. Once
+you have selected a user, Sentry will ask you if you want to
+grant/revoke SuperUser access to/from the appropriate user. Any
+input other than a 'y' will not change that users status. Now
+the user must enter a password. (Since the SuperUser status is
+encoded in the password, and the password can never be decoded,
+I can't change SuperUser access without resetting the password).
+The user can re-enter their old password, or enter a new one
+(the old one will be over-written). In a worst case scenario,
+the SuperUser can re-assign a new password to the user if he is
+unavailable to enter a new password himself. (A hostile user can
+have SuperUser access revoked without having to enter a new
+password; you can do it for him).
+
+Change Account Exipry Date
+
+This option lets you define when an account will expire on your
+system. Expired accounts no longer have access. This option is
+useful if a user will be leaving. Then you don't have to
+remember to delete their account on the day they leave. You can
+set it to expire, and delete it when you remember.
+
+This option also works in conjunction with the "Assign Max
+Invalid Logins" option. Once an account reaches it's maximum
+number of sequential invalid logins, it expires. The only way to
+re-activate the account is to change the expiry date with this
+option.
+
+Once you select this option, some information about the account
+will be displayed. If it is a SuperUser account, Sentry will
+tell you so. It will then display the account's current expiry
+date. You will be asked if you are sure you want to change that
+user's expiry date. Any input other than a 'y' will abort the
+process, otherwise you will be prompted for the year the account
+will expire. The year must be entered as 4 digits (IE: 1997). If
+you enter 'N' at the year prompt, no expiry date is assigned to
+that account (it is valid forever). If you enter a valid year,
+you will then be prompted for the expiry month, which is entered
+as 2 digits (IE: 06 for June) followed by the expiry day, which
+is also entered as 2 digits. Accounts expire at one second past
+midnight on the date of expiry.
+
+Change Password Expiry Date
+
+This option lets you define when a users password will expire.
+Once the password has expired, the user must enter a new one.
+This forces the user to change their password. Once a password
+has expired, the next time the user logs in he will be forced to
+enter a new password. The new password is valid for the number
+of days set by the initialization settings. Once a password has
+expired, the user cannot re-enter it. He must select a new
+password. (NOTE: Sentry does not keep historical records on
+passwords, so a user may alternate back and forth between 2
+passwords. This is not a secure practice and should be avoided).
+
+Once you select this option, some information about the account
+will be displayed. If it is a SuperUser account, Sentry will
+tell you so. It will then display the current expiry date for
+the password. You will be asked if you are sure you want to
+change that user's expiry date. Any input other than a 'y' will
+abort the process, otherwise you will be prompted for the year
+the password will expire. The year must be entered as 4 digits
+(IE: 1997). If you enter 'N' at the year prompt, no expiry date
+is assigned to that password (it is valid forever). If you enter
+a valid year, you will then be prompted for the expiry month,
+which is entered as 2 digits (IE: 06 for June) followed by the
+expiry day, which is also entered as 2 digits. Passwords expire
+at one second past midnight on the date of expiry.
+
+Change Account Password
+
+This option allows the SuperUser to change an account's
+password, in case the user forgot it, or some other strange
+disaster has occurred. When assigning a new password to an
+account, you should set the expiry date to be immediately, so the
+user is forced to choose a new one. If the previous password had
+no expiry date, none is assigned to the new password. Otherwise
+the password expires in the number of days assigned in the
+initialization settings. You can abort at any time by pressing
+the ESCAPE key.
+
+Assign Max Invalid Logins
+
+This allows you to set the maximum number of invalid logins
+allowed before an account is disabled. The default number is
+defined in the initialization settings, and is assigned to all
+accounts when they are first used.
+
+To assign a new maximum, simply select the "Assign Max Invalid
+Logins" option from the SuperUser menu. From here you will be
+shown the complete user list, and asked to select the user you
+wish to change. Pressing the ESCAPE key will abort the operation
+here.
+
+Once you have selected the user, you will be informed if that
+user is a SuperUser.
+
+NOTE: You should not assign a maximum number of invalid logins
+to your last SuperUser account. If you do, and someone attempts
+to break in to that account, you could be locked out of the
+SuperUser menu!
+
+Next you will be told what the user's current max invalid login
+setting is, and asked if you want to change it. Any input other
+than a 'Y' will abort the operation. Now you will be asked to
+enter the number of invalid login attempts before an account is
+disabled. Entering 'N' or a 0 will mean that there can be
+unlimited invalid login attempts made.
+
+Please note that a value of less than 10 may cause you more
+trouble than good. You may be spending a lot of time re-setting
+accounts if you pick too low a value, so consider this
+carefully. Also note that when an account is locked up, it is
+actually set to expire immediately. As a result, if you wish to
+re-activate an account, you must change the account's expiry
+date (see above). This is also handy for determining when the
+account was actually de-activated. The expiry date for that
+account it set the day it was locked out.
+
+Every time a successful login is made to an account, the invalid
+login counter is reset. This means that an account will not be
+locked out if it has a valid login before the maximum is
+reached. (For example, say an account has a maximum of 10
+invalid logins. If there are 7 invalid logins before a
+successful login, and then 5 more invalid logins, the account
+will not be locked up. There must be 10 sequential invalid
+logins for the account to be disabled.)
+
+Once you have finished making the change, you can view the user
+list to make sure it is acceptable.
+
+Return to SuperUser Menu
+
+This option simply returns you to the SuperUser menu. It is the
+same as hitting the ESC key.
+
+
+View Log File
+
+Every time a user logs in, a record is kept on disk. If you want
+to view that online record, select this option. You will be
+asked if you want to view the log file for one or all users.
+Entering 'o' (for one user) will bring you to the userlist,
+where you can select the user you wish to view. Any other input
+will show the log for all users.
+
+The log file will be displayed one screen at a time. You can
+press ESC at any time to skip to the end of the file. Once the
+entire log file has been displayed, Sentry will ask you if you
+want to clear the log file. If you were viewing a single user's
+log, Sentry will ask if you want to clear their file.
+
+Any input other than 'y' will exit, leaving the log file in
+tact. If you answer with a 'y', Sentry will clear out the old
+entries. When viewing the log for all users, that means that all
+entries will be removed. When viewing the log for a single user,
+only that user's entries will be removed.
+
+The log file itself will not consume much disk space, and so it
+should be left in tact for historical reasons. You may find it
+necessary to refer back to the log file to verify certain
+events. If disk space is a constraint, you can use the "Move Log
+File to Backup" option described later.
+
+You should always keep a close eye on the log file as this will
+often tell you when something is wrong on your system. All error
+messages are saved to the log file, so you can see if Sentry has
+run into any problems. Also, it records the current time, and
+the username of the user attempting to log in. This will help
+you to identify any potential attacks on your system. The log
+file is hidden by Sentry, but you should also place it somewhere
+safe so that users cannot tamper with it. You can set the
+location of the log file via the initialization settings.
+
+View Backup Log File
+
+This option is the same as "View Log File" except it allows you
+to view the information you have backed up. This is strictly for
+historical purposes, so log file information is not lost.
+
+Move Log File to Backup
+
+This moves all of the information in the current log file to the
+backup file. The backup file is not overwritten, the new
+information is appended to it. This makes it easier to manage
+when the log file gets large, but you don't want to clear it.
+
+Return to SuperUser Menu
+
+This option simply returns you to the SuperUser menu. It is the
+same as hitting the ESC key.
+
+
+
+
+
+
+
+Edit Initialization Settings
+
+This option allows you to edit the initialization settings.
+After installation, it is critical that you go through each and
+every attribute, and make sure it is set to your liking. Many of
+the initialization settings have serious implications on
+security. Once this option is selected, all of the attributes
+are displayed. Simply select the attribute you wish to modify,
+and you will be given the following information:
+
+        - A one line description of the attribute.
+        - A brief description of the attribute and it's uses.
+        - Valid settings for the attribute, if applicable.
+        - Any security notes, if applicable.
+        - The default value for the attribute.
+        - The current value for the attribute.
+
+At this time, you will be prompted to enter a new value for the
+attribute. Pressing ENTER on a blank line, or pressing the ESC
+key aborts any changes to the current value.
+
+Sentry performs strict checking on the values you enter, and
+will not save an invalid value.
+
+See section 10 of the readme file for details on
+individual settings.
+
+Send a Message to a User
+
+This option allows the SuperUser to send a one-line message to
+any user on the system (including themselves). Once this option is
+selected, you must pick the user you wish to send a message to
+from the list of all users. Once this is done, you will be
+prompted for your one-line message. If you wish to send more
+than one line, simply send two or more messages to the same user.
+After you have entered your message, you will be returned to the
+SuperUser menu. The next time that person logs in, your message
+will be displayed, including:
+
+  - Who the message is from
+  - The time and date the message was sent
+  - The message itself
+
+The user then has the option to delete the message. If they do
+not delete the message, they will see it again on their next
+login.
+
+NOTE: Messages are displayed before any login information, so
+you can send messages to users that are locked out. That way, if
+you wish to send an explanation, you can.
+
+Protect a File
+
+This option allows you to protect executable files (.EXE, .COM
+and .BAT). When this option is selected, it prompts for the file
+name. You must enter a path to a file that exists, and the file
+must be executable. If the file name is correct, Sentry then
+processes that file, and "protects" it. Protection means that
+the next time that file is run, Sentry will execute. If the user
+enters a valid login and password, then the original file
+executes. If not, then the file is not executed.
+
+Make sure you make a backup of any files you wish to protect, as
+there is no way to "unprotect" them - it's permanent!
+
+This is useful for protecting individual files. After all, if a
+person successfully logs into your computer, they have free
+access to anything there. This will allow you to tighten up
+access to individual files.
+
+The current method of protection does not work with all files.
+That is to say, I have tested it on some files that do not run
+correctly once protected. (It seems to be memory or video
+conflicts). Currently, a protected file has about 100k less
+memory available to it than if it was run normally. Also,
+protecting programs that run in Windows does not work. These
+issues are "on the list" for research.
+
+See section 7 for specific details on protecting files.
+
+Export Initialization Settings
+
+Selecting this option will export the Initialization Settings.
+This will allow you to use the same settings and account
+structure when you upgrade. The process for this is simple.
+Select this option, and it will export the settings. Now simply
+unzip the new SentryXX.zip into your directory (overwriting all
+files), and run the Install.exe program. Install will
+automatically sense the exported information, and ask if you
+want to use it. If you say yes, the settings are automatically
+updated to the new version, and loaded in.
+
+Please note that you should not export the settings unless you
+plan to import them right away into a new version (it can cause
+a slight security risk).
+
+Import Initialization Settings
+
+Importing your initialization settings can be useful for several
+purposes:
+
+ - Restoring a corrupted account structure from backup
+ - Quickly installing the same configuration on multiple machines
+
+Obviously, you must export settings before you can import them.
+(See the previous section)
+
+When this option is selected, you will be presented with a file
+list. Sentry's settings are always saved in a file called
+"settings," which will be shown on the list, if in the current
+directory. If there are subdirectories, they will be shown as
+well. If the settings file is not in the current directory,
+simply navigate through the drive until you find it. You can
+enter a subdirectory by selecting it and hitting enter. Likewise,
+you can "back up" to the parent directory by selecting the "..\"
+and hitting enter. To change drives, simply press 'D' followed by
+the new drive letter.
+
+Once you have located and selected your settings file, Sentry
+will proceed to import it, discarding it's current setup in
+favour of the new one. Once the import is complete, Sentry will
+exit, preventing a mix of the old and new settings from causing
+problems.
+
+It is often useful to import settings when performing a mass
+deployment of Sentry. To accomplish this, simply set up a single
+machine with the settings you require. Next, export those
+settings (see above) and copy the "settings" file to a floppy
+disk.
+
+If your are installing from scratch or upgrading, simply copy the
+settings file into the target directory before running
+install.exe. The new settings will be automatically sensed and
+used.
+
+If you are re-configuring existing installations of Sentry, all
+you need to do is run the import settings command, and locate the
+master settings file on diskette. The settings will be read in,
+and your installation of Sentry will be updated to match the
+master.
+
+Security Audit
+
+This is one of the more powerful options in Sentry. Selecting
+this option will cause Sentry to automatically search for
+weaknesses in your setup. The audit searches in three main areas:
+
+    - Your System
+    - Your Initialization Settings
+    - Your Account Structure
+
+As each of these sections is tested, the user will be informed
+of Sentry's findings. If a section has no weaknesses detected,
+then an "Ok" will appear. Otherwise, Sentry will describe the
+weakness, and ask if you want to fix it. Pressing 'y' will
+either fix the problem automatically, or prompt you for a new
+value, depending on the situation.
+
+In each section, the following items are checked during an
+audit:
+
+    System
+
+    Check for the following:
+    - no "switches" line in CONFIG.SYS (non-Win95 only)
+    - no "BootKeys" line in MSDOS.SYS (Win 95 only)
+    - no call to Sentry from the AUTOEXEC.BAT file
+    - a "break on" command in the CONFIG.SYS file
+
+    Initialization Settings
+
+    Check for the following:
+    - a short max or short min password length
+    - a high number for maximum login attempts
+    - a low number for wait delay
+    - password echoing should be off or masked
+    - a password expiry max of over 365 days
+    - an unused account expiry max of over 365 days
+    - a long wait for the screen saver (over 600)
+    - case sensitivity is off
+
+    Accounts
+
+    Check for the following:
+    - accounts that have expired
+    - SuperUser accounts with a max inv log setting
+    - normal accounts with no max inv log setting
+    - accounts where the number of failed login attempts is
+        exceeded
+    - accounts with no expiry date
+    - passwords with no expiry date
+
+As a SuperUser, you should run the audit frequently. If all is
+well, it completes in a few seconds, but it can alert you to
+potential problems or suspicious activity that you might not be
+aware of otherwise.
+
+The message "Audit Complete" will appear when the audit is
+finished. At this point, the user may press any key to return
+to the SuperUser menu.
+
+Modify Shell Commands
+
+This option allows the SuperUser to control the commands
+are available to users at the DOS prompt. This option can be
+extremely valuable when implementing a total security plan.
+
+To begin with, the SuperUser is prompted for the location of the
+command interpreter. This is usually located in the root
+directory (C:\), or in C:\DOS for regular DOS installations, or
+in C:\windows for Windows 95 users. Sentry will use the location
+held in the COMSPEC environment variable as the default, making
+it easier for you to find the right file.
+
+Once you enter the location of your command interpreter, Sentry
+scans it in an attempt to discover what commands it controls. If
+Sentry cannot find any valid commands, it will inform the
+SuperUser, and nothing will be modified.
+
+If Sentry can locate some commands, they will be displayed in a
+menu format. At this point, the user may disable or edit any of
+the commands shown.
+
+NOTE: It is *strongly* advised that a bookdisk is made before
+attempting any changes to your command interpreter. Although
+Sentry has been tested successfully on various command
+interperters (such as DOS 6.22, Windows 95 an Noron DOS), it may
+act in an inconsistent manner when faced with an unknown
+format.
+
+To disable a command, simply hit 'd' once. Hitting 'd' again
+will re-enable the command. To edit a command, simply hit 'e'
+and you will be prompted for the new command.
+
+ANOTHER NOTE: Is is also very advisable to make the new command
+the same length as the old command. Changing the length of a
+command can also have unpredicatable results, and is less likely
+to work.
+
+On the menu, commands that have been disabled are designated
+with a 'X', while commands that have been edied are designated
+with a '*', and commands that have not been modified are
+designated with a '-'.
+
+Once all required changes have been made, simply press enter.
+All changes will be summarized, to make sure no mistakes have
+been made. At this point, the SuperUser should ensure that all
+changes look ok, and then either accept or reject them.
+
+If the changes are accepted, Sentry runs the modified command
+interpreter as a test, before replacing the real interpreter.
+This means that if there are any problems, you can discard the
+changes, and start again.
+
+When the new shell runs, make sure you test it thoroughly. Don't
+perform any "large" operations or run any major programs, as
+that may upset the process. Once you are satisfied, type "EXIT"
+to return to Sentry, where you will be asked if there were any
+problems.
+
+If you answer 'N' to this prompt, your command interperter will
+be replaced with the new one, effectively making the changes
+permanent. Any other input will discard the changes.
+
+ONE FINAL NOTE: It is advisable to keep a "clean" copy of your
+COMMAND.COM somewhere safe, as you may want it later. Many of
+the changes you make throguh Sentry can also be undone through
+Sentry, however it is much safer to simply restore your original
+from backup. The more times you modify the same command
+interpreter, the greater the chance of something going wrong.
+
+Return to SuperUser Menu
+
+This option simply returns you to the SuperUser menu. It is the
+same as hitting the ESC key.

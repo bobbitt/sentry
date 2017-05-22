@@ -1,0 +1,52 @@
+[Language]
+LanguageSupport0=0009
+
+[OperatingSystem]
+OSSupport=0000000000000011
+
+[Data]
+CurrentMedia=New Media
+CurrentComponentDef=Default.cdf
+ProductName=Sentry
+set_mifserial=
+DevEnvironment=Borland C++
+AppExe=C:\SECUR\SENTRY\SHARE\Sentry.exe
+set_dlldebug=No
+EmailAddresss=
+Instructions=Instructions.txt
+set_testmode=No
+set_mif=No
+SummaryText=
+Department=
+HomeURL=
+Author=
+Type=Generic Application
+InstallRoot=C:\SECUR\SENTRY\My Installations\Sentry
+Version=6.1
+InstallationGUID=b35d8466-f02d-11d1-b902-00c04fdeb630
+set_level=Level 3
+CurrentFileGroupDef=Default.fdf
+Notes=Notes.txt
+set_maxerr=50
+set_args=
+set_miffile=Status.mif
+set_dllcmdline=
+Copyright=
+set_warnaserr=No
+CurrentPlatform=
+Category=
+set_preproc=
+CurrentLanguage=English
+CompanyName=NightShade Computing
+Description=Description.txt
+set_maxwarn=50
+set_crc=Yes
+
+[MediaInfo]
+mediadata0=Default/Media\Default
+mediadata1=New Media/Media\New Media
+
+[General]
+Type=INSTALLMAIN
+Version=1.00.000
+

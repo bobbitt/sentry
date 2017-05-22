@@ -1,0 +1,1549 @@
+/*
+  INCLUDES
+*/
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+#include "install.h"
+#if USER
+#include "crypt.c"
+#endif
+#ifdef __cplusplus
+}
+#endif
+
+/*
+  GLOBAL VARIABLES
+*/
+
+FILE *fn,*ini,*npas,*LANG;
+char lo[MAX],temp[192],ssm[MAX],inam[MAX],t2[192],t3[192];
+char sd[MAXDRIVE]; /* Start Drive */
+char sp[MAXPATH];  /* Start Path */
+char id[MAXDRIVE]; /* Install Drive */
+char ip[MAXPATH];  /* Install Path */
+char ins[MAXDRIVE+MAXPATH]; /* Path to install.exe */
+char msc[80*25*2]; /* Array to hold initial screen */
+char SALT[4]; // crypt() Salt
+char regto[30]; // Registered User
+char regch[16]; // Checksum
+char regno[9];
+char lang_name[10]; // Contains the name of the language file
+char BUSY[22]; // "Please Wait...." banner
+//char yes;  // Character used to respond to "yes" prompts
+//char no;  // Character used to respond to "no" prompts
+
+short int df,bk,_bk=0;
+short int sul,max,col,hb,rclf,rctop,rcri,rcbot,rcfrg,rcbak;
+short int scrb=300; /* Screen Saver time */
+short int wm=2;  /* Windowed Mode on (exploding) */
+short int col=1; /* Colour on */
+short int tf=15; /* Text Colour */
+short int tb=1;  /* Text Background */
+short int hf=7;  /* Highlighted Colour */
+short int hb=10; /* Highlighted Background */
+short int sdel=1; /* Secure Deletion on */
+short int un;    /* Install/Uninstall */
+short int lang; // Language 0=English, 1=Spanish
+short int sl; // set_lang non-recursive flag
+
+unsigned long CHECK; // Checksum Value
+
+struct date td;
+struct time nw;
+struct text_info sta; /* Startup video attributes */
+
+/*
+  FUNCTIONS
+*/
+
+void fin(short int ec)
+/*
+  fin(short int ec) is the function called to cleanly exit from Sentry,
+  regardless of where execution currently is. It writes a final entry to
+  the log, closes all files, and hides the log and password files.
+  fin(short int ec) takes an integer parameter which is passed as the
+  exit code on termination.
+  fin(short int ec) is always the last function executed in Sentry.
+*/
+{
+  flushall();
+  fcloseall();
+  crwin(1,1,79,24,WINTXTCOL,WINBAKCOL,0,"");
+  gotoxy(1,24);
+  /* Re-set startup video attributes */
+/*  if (!puttext(1,1,80,25,msc))
+    error(SCWR);*/
+  window(sta.winleft,sta.wintop,sta.winright,sta.winbottom);
+  textattr(sta.attribute);
+  textmode(sta.currmode);
+  gotoxy(sta.curx,sta.cury);
+  exit(ec);
+}
+
+void sfile(void)
+/*
+  sfile() modifies the system files during the install. It adds a call
+  to Sentry to the AUTOEXEC.BAT file. For DOS, it adds a switches
+  command to CONFIG.SYS, and removes any break on commands. For Windows
+  95, it adds a BootKeys command to the MSDOS.SYS file.
+*/
+{
+  /* Add/Remove call to Sentry to AUTOEXEC.BAT */
+  cprintf("\r\nUpdating %s...",AUTO);
+  if ((ini=fopen(AUTO,"r"))==NULL)
+  {
+    if (un)
+    {
+      cprintf("\r\n");
+      cprintf("%s",AUTO);
+      cprintf(" not found...\r\n");
+    }
+    else
+    {
+      if ((ini=fopen(AUTO,"w"))==NULL)
+        error(OPSYS);
+      else
+      {
+//        fprintf(ini,"@%s%s%s\n",id,ip,SENTRY);
+        fprintf(npas,"@echo off\ncls\n");
+        if (strlen(id))
+          fprintf(ini,"%s",id);
+        else
+          fprintf(ini,"%s",sd);
+        if (ip[0]=='\\')
+          fprintf(ini,"%s",ip);
+        else
+          fprintf(ini,"%s%s",sp,ip);
+        fprintf(ini,"%s\n",SENTRY);
+//        fprintf(ini,"@echo off\ncls\n%s\ncd %s\n%s\ncd \\\n",id,ip,SENTRY);
+        fclose(ini);
+      }
+    }
+  }
+  else
+  {
+    tmpnam(lo);
+    strcpy(temp,"c:\\");
+    strcat(temp,lo);
+    if ((npas=fopen(temp,"w"))==NULL)
+      error(CRTMP);
+    if (!un)  /* If in install mode add line */
+    {
+      fprintf(npas,"@echo off\ncls\n");
+      if (strlen(id))
+        fprintf(npas,"%s",id);
+      else
+        fprintf(npas,"%s",sd);
+      if (ip[0]=='\\')
+        fprintf(npas,"%s",ip);
+      else
+        fprintf(npas,"%s%s",sp,ip);
+      fprintf(npas,"%s\n",SENTRY);
+
+    }
+    while((fgets(lo,MAX,ini))!=NULL)
+    {
+      /* Check to see if old call to Sentry exists */
+      strncpy(t2,strlwr(lo),192);
+//      if (!(t2[strlen(t2)-8]=='\\' && t2[strlen(t2)-7]=='s' && t2[strlen(t2)-6]=='e' && t2[strlen(t2)-5]=='n' && t2[strlen(t2)-4]=='t' && t2[strlen(t2)-3]=='r' && t2[strlen(t2)-2]=='y'))
+      if (!(t2[strlen(t2)-7]=='s' && t2[strlen(t2)-6]=='e' && t2[strlen(t2)-5]=='n' && t2[strlen(t2)-4]=='t' && t2[strlen(t2)-3]=='r' && t2[strlen(t2)-2]=='y'))
+        fprintf(npas,"%s",lo);
+    }
+    fclose(npas);
+    fclose(ini);
+    sunlink(AUBK);
+    rename(AUTO,AUBK);
+    rename(temp,AUTO);
+  }
+  if (Win95())
+  {
+    /* Add/Remove BootKeys=0 to MSDOS.SYS */
+    cprintf("\r\nUpdating %s...",MSDO);
+    _rtl_chmod(MSDO,1,-FA_HIDDEN-FA_SYSTEM);
+    _rtl_chmod(MSBK,1,-FA_HIDDEN-FA_SYSTEM);
+    if ((ini=fopen(MSDO,"r"))==NULL)
+      error(OPSYS);
+    tmpnam(lo);
+    strcpy(temp,"c:\\");
+    strcat(temp,lo);
+    if ((npas=fopen(temp,"w"))==NULL)
+      error(CRTMP);
+    while((fgets(lo,MAX,ini))!=NULL)
+    {
+      /* Check to make sure BootKeys command does not already exist */
+      if (strncmp(lo,"BootKeys",8))
+        fprintf(npas,"%s",lo);
+      if ((!strncmp(lo,"[Options]",9)) && (!un))
+        fprintf(npas,"BootKeys=0\n"); /* If in install mode add line */
+    }
+    fclose(npas);
+    fclose(ini);
+    sunlink(MSBK);
+    rename(MSDO,MSBK);
+    rename(temp,MSDO);
+    _rtl_chmod(MSDO,1,FA_HIDDEN+FA_SYSTEM);
+    _rtl_chmod(MSBK,1,FA_HIDDEN+FA_SYSTEM);
+  }
+  else
+  {
+    /* Add switches /n/f to CONFIG.SYS */
+    cprintf("\r\nUpdating %s...",CONF);
+    if ((ini=fopen(CONF,"r"))==NULL)
+    {
+      if (un)
+      {
+        cprintf("\r\n");
+        cprintf("%s",CONF);
+        cprintf(" not found...\r\n");
+      }
+      else
+      {
+        if ((ini=fopen(CONF,"w"))==NULL)
+          error(OPSYS);
+        else
+        {
+          fprintf(ini,"switches /n/f\n");
+          fclose(ini);
+        }
+      }
+    }
+    else
+    {
+      tmpnam(lo);
+      strcpy(temp,"c:\\");
+      strcat(temp,lo);
+      if ((npas=fopen(temp,"w"))==NULL)
+        error(CRTMP);
+      if (!un) /* If in install mode add line */
+        fprintf(npas,"switches /n/f\n");
+      while((fgets(lo,MAX,ini))!=NULL)
+      {
+        strncpy(t2,strlwr(lo),192);
+        /* Turn all BREAK commands into BREAK=OFF */
+        if (!strncmp(t2,"break",5))
+          strcpy(lo,"break off\n");
+        /* Check to make sure switches command does not already exist */
+        if (strncmp(t2,"switches",8))
+          fprintf(npas,"%s",lo);
+      }
+      fclose(npas);
+      fclose(ini);
+      sunlink(COBK);
+      rename(CONF,COBK);
+      rename(temp,CONF);
+    }
+  }
+}
+
+void secres(void)
+/*
+  secres() installs Sentry for Windows 3.x/Windows 95. It copies
+  Sentry.grp and Sentry.pif to the Windows directory, and for Windows
+  3.x it adds a restrictions section to PROGMAN.INI.
+*/
+{
+short int x;
+  if (Win95())
+  {
+    rename("sentry.pif","sentry.311");
+    rename("sentry.w95","sentry.pif");
+  }
+  /* Get Windows Directory */
+  bk=1;
+  while (bk)
+  {
+    bk=0;
+    if (un)
+       cprintf("\r\n\r\nEnter * to skip the Windows uninstall.");
+    strncpy(lo,gin("\r\n\r\nEnter Path to Windows Directory [c:\\Windows]:",1),MAX);
+    if (!streq(lo,"*") || !un)
+    {
+      if (strlen(lo)==0)
+        strcpy(lo,"c:\\Windows");
+      strncpy(temp,lo,192);
+      strcat(temp,"\\nul");
+      if ((ini=fopen(temp,"r"))==NULL)
+      {
+        cprintf("\r\nDirectory does not exist.");
+        bk=1;
+      }
+      fclose(ini);
+    }
+    else
+      cprintf("\r\nSkipped...");
+  }
+  if (!streq(lo,"*") || !un)
+  {
+    strlwr(lo);
+    fnsplit(lo,id,ip,temp,t2);
+    strcat(ip,temp);
+    strcat(ip,t2);
+    if (streq(lo,"."))
+    {
+      strncpy(ip,sp,MAXPATH);
+      strncpy(id,sd,MAXDRIVE);
+      chop(ip);
+    }
+    strncpy(temp,ip,192);
+    strcat(temp,"\\");
+    /* Copy/Delete sentry.pif and sentry.grp to/from Windows directory */
+    if (!(streq(sp,temp) && streq(sd,id)) || un)
+    {
+      if (!un)
+      {
+        strcpy(temp,"copy ");
+        strcat(temp,sd);
+        strcat(temp,sp);
+      }
+      else
+      {
+        strncpy(temp,id,192);
+        strcat(temp,ip);
+        strcat(temp,"\\");
+      }
+      strcat(temp,SENTRY);
+      strcat(temp,".");
+      strncpy(t2,temp,192);
+      strcat(temp,"pif ");
+      strcat(t2,"grp ");
+      strcpy(lo,"");
+      if (!un)
+      {
+        strncpy(lo,id,MAX);
+        strcat(lo,ip);
+        strcat(lo,">nul");
+        strcat(t2,lo);
+        strcat(temp,lo);
+        system(temp);
+        system(t2);
+      }
+      else
+      {
+        if ((ini=fopen(temp,"r"))!=NULL)
+           sunlink(temp);
+        fclose(ini);
+        if ((ini=fopen(t2,"r"))!=NULL)
+           sunlink(t2);
+        fclose(ini);
+      }
+    }
+    else
+      cprintf("\r\n[Current directory - files not copied]");
+
+/***** Install/Uninstall sentry.pif and sentry.grp files to Windows *****/
+
+    /* Add/Remove [Restrictions] to PROGMAN.INI */
+    if (!Win95())
+    {
+      x=1;
+      strncpy(t2,id,192);
+      strcat(t2,ip);
+      strcat(t2,"\\");
+      strncpy(t3,t2,192);
+      strcat(t2,PROG);
+      strcat(t3,PRBK);
+      cprintf("\r\nUpdating %s...",t2);
+      if ((ini=fopen(t2,"r"))==NULL)
+      {
+        if ((ini=fopen(t2,"w"))==NULL)
+          error(OPSYS);
+      }
+      else
+      {
+        tmpnam(lo);
+        strncpy(temp,id,192);
+        strcat(temp,ip);
+        strcat(temp,"\\");
+        strcat(temp,lo);
+        if ((npas=fopen(temp,"w"))==NULL)
+          error(CRTMP);
+        while((fgets(lo,MAX,ini))!=NULL)
+        {
+          /* Remove [Restrictions] section */
+          if (lo[0]=='[')
+            x=1;
+          if (!strncmp(lo,"[Restrictions]",14))
+            x=0;
+          if (x)
+            fprintf(npas,"%s",lo);
+        }
+        fclose(npas);
+        fclose(ini);
+        sunlink(t3);
+        rename(t2,t3);
+        rename(temp,t2);
+        if ((ini=fopen(t2,"a"))==NULL)
+          error(OPSYS);
+      }
+      if  (!un)
+      {
+        fprintf(ini,"\n[Restrictions]\n\n");
+        cprintf("\r\n\r\nDo you want to be able to exit Windows? ");
+        x=blch();
+        yeah(x)
+        {
+          pstr(211);
+//          cprintf("Yes");
+          fprintf(ini,"NoClose=0\n");
+        }
+        else
+        {
+          pstr(213);
+//        	 cprintf("No");
+          fprintf(ini,"NoClose=1\n");
+        }
+        cprintf("\r\n\r\nDo you want to be able create, move, copy,");
+        cprintf("\r\ndelete or modify groups or icons? ");
+        x=blch();
+        yeah(x)
+        {
+          pstr(211);
+//        	 cprintf("Yes");
+          fprintf(ini,"EditLevel=0\n");
+        }
+        else
+        {
+          pstr(213);
+//        	 cprintf("No");
+          fprintf(ini,"EditLevel=4\n");
+        }
+        cprintf("\r\n\r\nDo you want to be able to use");
+        cprintf("\r\nthe Run command from the File menu? ");
+        x=blch();
+        yeah(x)
+        {
+          pstr(211);
+//        	cprintf("Yes");
+          fprintf(ini,"NoRun=0\n");
+        }
+        else
+        {
+          pstr(213);
+//        	cprintf("No");
+          fprintf(ini,"NoRun=1\n");
+        }
+        cprintf("\r\n\r\nDo you want to be able to toggle Save Settings");
+        cprintf("\r\nOn Exit from the Edit menu? ");
+        x=blch();
+        yeah(x)
+        {
+          pstr(211);
+//        	cprintf("Yes");
+          fprintf(ini,"NoSave=0\n");
+        }
+        else
+        {
+          pstr(213);
+//        	cprintf("No");
+          fprintf(ini,"NoSave=1\n");
+        }
+        cprintf("\r\n\r\nDo you want to save changes to the Program");
+        cprintf("\r\nManager, groups, icons and windows on exit? ");
+        x=blch();
+        yeah(x)
+        {
+          pstr(211);
+//        	cprintf("Yes");
+          fprintf(ini,"NoSaveSettings=0\n");
+        }
+        else
+        {
+          pstr(213);
+//        	cprintf("No");
+          fprintf(ini,"NoSaveSettings=1\n");
+        }
+      }
+      fclose(ini);
+    }
+  }
+}
+
+int regset(int st)
+/*
+  regset() prompts for all the registration information, and outputs ot on
+  the file stream npas.
+  st is the status, and determines if a DIV marker is written.
+  if st is negative, don't prompt for info, it's already loaded
+  if (st==2) don't add another divider
+  if (st==3) auto install, take SALT off of regch
+*/
+{
+short int vir=0;
+char rtmp[MAX];
+#if USER
+short int m=0,x;
+char pa[MAX],na[MAX];
+unsigned long y;
+  if (st<0) // st is negative, skip reginfo entry - it's already there...
+  {
+    st*=-1; // turn positive
+    m=1;  // break out of loop
+  }
+  while (!m)
+  {
+    cprintf("\r\n\r\nNow you must enter the the appropriate registration information to");
+    cprintf("\r\nenable Sentry.");
+    cprintf("\r\n\r\nThis information has been included either in the initial");
+    cprintf("\r\nletter, or the notification of upgrade.");
+    bk=1;
+    while (bk)
+    {
+      bk=0;
+      strncpy(regto,gin("\r\n\r\nRegistered to:",1),30);
+      if (strlen(regto)==0)
+        bk=1;
+    }
+    bk=1;
+    while (bk)
+    {
+      bk=0;
+      strncpy(regno,gin("\r\nRegistration number:",1),9);
+      if (strlen(regno)==0)
+        bk=1;
+    }
+    bk=1;
+    while (bk)
+    {
+      bk=0;
+      strncpy(regch,gin("\r\nRegistration code:",1),13);
+      if (strlen(regch)==0)
+        bk=1;
+    }
+    cprintf("\r\n\r\nIs this correct? ");
+    m=blch();
+    nope(m)
+    {
+          pstr(213);
+//      cprintf("No\r\n");
+      m=0;
+    }
+    else
+    {
+          pstr(211);
+//      cprintf("Yes\r\n");
+    }
+    cprintf("\r\n");
+    SALT[2]=0;
+    SALT[0]=regch[strlen(regch)-2]; // Grab SALT off of regch
+    SALT[1]=regch[strlen(regch)-1];
+    chop2(regch);      // Reduce regch
+  }
+
+  if (st==3)
+  {
+    SALT[2]=0;
+    SALT[0]=regch[strlen(regch)-2]; // Grab SALT off of regch
+    SALT[1]=regch[strlen(regch)-1];
+    chop2(regch);      // Reduce regch
+  }
+
+// Check to see if this is an Anti-Virus version
+  strcpy(rtmp,regto);
+  y=atol(regno);
+  x=0;
+  while (y>0)
+  {
+    x+=(short)(y-(y/10)*10);
+    y/=10;
+  }
+  itoa(x-1,na,10); // SALT-1 for Anti-Virus Versions
+  strcpy(pa,na);
+  strcat(pa,regch);
+  if (streq(UNIXcrypt(rtmp,na),pa))
+        vir=1; // Virus Checking On
+#else
+  strcpy(regto,"Shareware");
+  strcpy(regno,"19981110");
+  strcpy(SALT,"ZX");
+  strcpy(regch,"");
+#endif
+  if (st!=2)
+    fputs(DIV,npas);
+  fputs(SALT,npas);  // SALT
+  fputs("\r\n",npas);
+  fputs(regno,npas);  // Registration number
+  fputs("\r\n",npas);
+  fputs(regto,npas); // Registered User
+  fputs("\r\n",npas);
+  fputs(regch,npas); // Registration Code
+  fputs("\r\n",npas);
+  if (vir)
+  {
+    ltoa(CHECK,rtmp,10); // Convert to string
+    fputs(rtmp,npas);   // Write out Checksum
+    fputs("\r\n",npas);
+  }
+  return(vir);
+}
+
+void main(int argc,char* argv[])
+/*
+  main() is the main function for install. It starts up, prompts the
+  user, takes the appropriate action, and shuts down.
+*/
+{
+struct ffblk ffblk;
+char scr[80*25*2],ModSys;
+short int tx,ty,rrl,rrt,rrb,rrr,rrk,rrf,spp=0,vc=1,auto_install=0,passwd_diff;
+int x,yz,zz,bp;
+short int v48=1,v43=1,v37=1,v50=1,v52=1,v58=1;
+char buf[BUFSZ+2],ff[DIVLEN+2],stg[MAX],username[MAX],password[MAX],verify[MAX];
+  ctrlbrk(tsk);
+  /* Get current video attributes */
+  gettextinfo(&sta);
+  textmode(C80);
+  if (!gettext(1,1,80,25,msc))
+    error(SCRD);
+
+  if (argc==7)
+  {
+    strncpy(regto,argv[1],29);
+    strncpy(regno,argv[2],8);
+    strncpy(regch,argv[3],15);
+    strncpy(username,argv[4],MAX-1);
+    strncpy(password,argv[5],MAX-2);
+    ModSys=argv[6][0];
+    auto_install=1;
+
+
+#if DEBUG
+    crwin(2,1,77,17,WINBAKCOL,WINTXTCOL,2,"");
+    cprintf("RegTo: %s\r\n",regto);
+    cprintf("RegNo: %s\r\n",regno);
+    cprintf("RegCh: %s\r\n",regch);
+    cprintf("Username: %s\r\n",username);
+    cprintf("Password: %s\r\n",password);
+    cprintf("ModSys: %c\r\n",ModSys);
+    blch();
+#endif
+  }
+
+  strlwr(argv[0]);
+  x=fnsplit(argv[0],sd,sp,lo,temp);
+  strcpy(ins,sd);
+  strcat(ins,sp);
+
+  // Language (0=English, 1=Spanish)
+
+//  lang=0; // Set to English for test purposes
+//  lang=1; // Set to Spanish for test purposes
+  set_lang(0); // Set language, don't prompt
+
+//  if (!auto_install)
+//  {
+//    set_lang(1); // Set language, prompt
+//  }
+
+  sl=0;
+
+  if (auto_install)
+  {
+    // Install path is the same as start path (passed in by InstallSheild)
+    strncpy(ip,sp,MAXPATH);
+    strncpy(id,sd,MAXDRIVE);
+  }
+  strcpy(ssm,"Sentry Install / Uninstall");
+#if !USER
+  if (!auto_install)
+  {
+    shar(0);
+  }
+#endif
+  if (!auto_install)
+  {
+    if ((ini=fopen("license.txt","r"))==NULL)
+      error(LICEN);
+    else
+    {
+      crwin(3,3,77,22,WINTXTCOL,WINBAKCOL,2,"License Agreement");
+      x=0;
+      while(fgets(temp,MAX,ini)!=NULL)
+      {
+        if (x>15)
+        {
+          cprintf("\r\n Press any key for more...");
+          x=blch();
+          clrscr();
+          x=0;
+        }
+        cprintf("%s\r",temp); /* Read licensing info */
+        x++;
+      }
+      cprintf("\r\n");
+    }
+    fclose(ini);
+    x=0;
+    cprintf("\r\nPress 'a' to accept the terms of this agreement, or");
+    cprintf("\r\nPress 'x' to refuse. (Refusing Aborts the installation)");
+    while ((x!='a') && (x!='A') && (x!='x') && (x!='X'))
+      x=blch();
+    if ((x=='x') || (x=='X'))
+      fin(0);
+  }
+  if (!puttext(1,1,80,25,msc))
+    error(SCWR);
+  crwin(3,2,77,7,WINTXTCOL,WINBAKCOL,2,"");
+  textcolor(DEFTXTCOL);
+  cprintf("ÚÄÄÄÄÄÄÄÄÄÄ¿  ");
+  textcolor(AUCOL);
+  cprintf("PC Security System  ");
+  textcolor(RGCOL);
+  cprintf("       Sentry Install Process");
+  textcolor(DEFTXTCOL);
+  cprintf("\r\n³");
+  textcolor(TICOL);
+  cprintf("%s ",SENTRY);
+  cprintf("%s",ver);
+  textcolor(DEFTXTCOL);
+  cprintf("³  ");
+  textcolor(AUCOL);
+  cprintf("Copyright (C) 1995-1999,");
+  textcolor(DEFTXTCOL );
+  cprintf("\r\nÀÄÄÄÄÄÄÄÄÄÄÙ  ");
+  textcolor(AUCOL);
+  cprintf("Cipher Logic Canada Inc.");
+  textcolor(RGCOL);
+  cprintf("   Please Read All");
+  textcolor(AUCOL);
+  cprintf("\r\n              ");
+  cprintf(EMAIL);
+  textcolor(RGCOL);
+  cprintf("     Information Carefully");
+  crwin(3,9,77,24,WINTXTCOL,WINBAKCOL,2,"");
+
+  if (!auto_install)
+  {
+    cprintf("NOTE: Installing or uninstalling %s deletes the INSTALL.EXE file!\r\n",SENTRY);
+    cprintf("It is *STRONGLY* advised you make a backup of %s and related\r\n",SENTRY);
+    cprintf("files before proceeding any further.\r\n");
+
+    bk=1;
+    while (bk)
+    {
+      cprintf("\r\nEnter Path to Install %s (Enter * to Uninstall)\r\n\r\n",SENTRY);
+      strncpy(lo,gin("Install Path [c:\\Sentry]:",1),MAX);
+      un=0;
+      if (streq(lo,"*"))
+      {
+        cprintf("\r\n**** Uninstalling %s ****\r\n",SENTRY);
+        un=1;
+        cprintf("\r\nUpdating your system files will remove any references to %s,",SENTRY);
+        cprintf("\r\nso %s will no longer execute when your computer starts up.\r\n\r\n",SENTRY);
+        cprintf("Files to be changed:\r\n * %s\r\n * %s\r\n",AUTO,Win95()?MSDO:CONF);
+        cprintf("\r\nDo you wish to update your system files? ");
+        x=blch();
+        yeah(x)
+        {
+          pstr(211);
+//        cprintf("Yes");
+          sfile();
+        }
+        else
+        {
+          pstr(213);
+//        	cprintf("No");
+        }
+        /* Delete all files and remove directory */
+        cprintf("\r\n\n\rDo you wish to delete %s from your hard drive? ",SENTRY);
+        x=blch();
+        yeah(x)
+        {
+          pstr(211);
+//          cprintf("Yes");
+          strncpy(temp,sd,192);
+          strcat(temp,sp);
+          strcat(temp,"\\*.*");
+          x=findfirst(temp,&ffblk,0); /* Delete all files */
+          while (!x)
+          {
+            sunlink(ffblk.ff_name);
+            x=findnext(&ffblk);
+          }
+          system("cd \\");
+          strncpy(temp,sd,192);
+          strcat(temp,sp);
+          chop(temp);
+          rmdir(temp);
+        }
+        else
+        {
+          pstr(211);
+//          cprintf("No");
+        }
+        secres();
+        cprintf("\r\n\r\n%s has been uninstalled.",SENTRY);
+        cprintf("\r\n\r\nNOTE: You will have to remove the log file, backup log file,");
+        cprintf("\r\n      and message files manually.");
+        fin(0);
+      }
+      if (strlen(lo)==0)
+        strcpy(lo,"c:\\Sentry");
+      bk=!cpath(1,lo);
+    }
+    cprintf("\r\nInstalling to %s...",lo);
+    x=fnsplit(lo,id,ip,temp,t2);
+    strcat(ip,temp);
+    strcat(ip,t2);
+    if (streq(lo,"."))
+    {
+      strncpy(ip,sp,MAXPATH);
+      strncpy(id,sd,MAXDRIVE);
+      chop(ip);
+    }
+    strncpy(temp,ip,192);
+    strcat(temp,"\\");
+    strncpy(t2,temp,192);
+    strcat(t2,"sentry.exe");
+    if ((ini=fopen(t2,"r"))!=NULL)
+    {
+      // *** PROBLEM: Sentry seems to detect that it's already installed even when it's not.
+      cprintf("\r\n\r\nSentry is currently installed in this directory.");
+      cprintf("\r\nDo you wish to overwrite it and continue installing? ");
+      x=blch();
+      yeah(x)
+      {
+        pstr(211);
+//        cprintf("Yes");
+      }
+      else
+      {
+        pstr(213);
+//        cprintf("No");
+        fin(0);
+      }
+    }
+    fclose(ini);
+    if (!(streq(sp,temp) && streq(sd,id))) /* Copy files to new directory */
+    {
+      cprintf("\r\n\r\nCopying files...");
+      if (strlen(ssm))
+      {
+        tx=wherex();
+        ty=wherey();
+        rrl=rclf;
+        rrt=rctop;
+        rrb=rcbot;
+        rrr=rcri;
+        rrf=rcfrg;
+        rrk=rcbak;
+        if (!gettext(1,1,80,25,scr))
+          error(SCRD);
+        crwin(60,1,80,3,tf,tb,2,"");
+        cprintf(BUSY);
+      }
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+      strcpy(temp,"copy ");
+      strcat(temp,sd);
+      strcat(temp,sp);  // temp=="copy x:/path/to/files/"
+      strncpy(t2,temp,192);
+      strcpy(t3," ");
+      strcat(t3,id);
+      strcat(t3,ip);
+      strcat(t3,">nul"); // t3==" x:/path/to/install/>nul"
+      strncpy(temp,t2,192);
+      strcat(temp,"sentry.*");
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+      strncpy(temp,t2,192);
+      strcat(temp,"sentryes.*");  // Spanish files
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+#if USER
+      strncpy(temp,t2,192);
+      strcat(temp,"sdel.exe");
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+#endif
+      // Copy Sentry.URL to c:\windows\desktop
+      if ((_fullpath(temp,"c:\\windows\\desktop",192)!=NULL) && (Win95())) // If Win95 and desktop exists
+      {
+        strncpy(temp,t2,192);
+        strcat(temp,"sentry.url");
+        strcat(temp," c:\\windows\\desktop >nul");
+        system(temp);
+        if (strlen(ssm))
+        {
+          cprintf("%c%c",DEL,SPIN[spp]);
+          spp++;
+          spp%=4;
+        }
+      }
+      strncpy(temp,t2,192);
+      strcat(temp,BREAK);
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+      strncpy(temp,t2,192);
+      strcat(temp,"readme.com");
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+      strncpy(temp,t2,192);
+      strcat(temp,"readme.txt");
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+      strncpy(temp,t2,192);
+      strcat(temp,"readmees.txt");
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+      strncpy(temp,t2,192);
+      strcat(temp,"string");
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+      strncpy(temp,t2,192);
+      strcat(temp,"stringes");
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+      strncpy(temp,t2,192);
+      strcat(temp,"whatsnew.txt");
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+      strncpy(temp,t2,192);
+      strcat(temp,"license.txt");
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+      strncpy(temp,t2,192);
+      strcat(temp,"history.txt");
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+      strncpy(temp,t2,192);
+      strcat(temp,"qstart.txt");
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+      strncpy(temp,t2,192);
+      strcat(temp,"file_id.diz");
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+      strncpy(temp,t2,192);
+      strcat(temp,"order.frm");
+      strcat(temp,t3);
+      system(temp);
+      if (strlen(ssm))
+      {
+        cprintf("%c%c",DEL,SPIN[spp]);
+        spp++;
+        spp%=4;
+      }
+      if (strlen(ssm))
+      {
+        if (!puttext(1,1,80,25,scr))
+          error(SCWR);
+        rclf=rrl;
+        rctop=rrt;
+        rcbot=rrb;
+        rcri=rrr;
+        rcfrg=rrf;
+        rcbak=rrk;
+        window(rrl,rrt,rrr,rrb);
+          txb(rrk);
+        txc(rrf);
+        gotoxy(tx,ty);
+      }
+    }
+    else
+      cprintf("\r\n[Current directory - files not copied]");
+  }
+  if (ip[strlen(ip)-1]!='\\')
+    strcat(ip,"\\");
+  strncpy(inam,id,MAX);
+  strcat(inam,ip);
+  strcat(inam,"Sentry.exe");
+  cprintf("\r\n\r\nScanning for %s Initialization Settings...\r\n",SENTRY);
+  tmpnam(lo);
+  strncpy(temp,id,192);
+  strcat(temp,ip);
+  strcat(temp,lo);
+  // Get anti-virus checksum
+  if ((npas=fopen(temp,"wb"))==NULL)
+    error(CRTMP);
+  if ((fn=fopen(inam,"rb"))==NULL)
+    error(RDOP);
+  bp=0;
+  for(zz=0;zz<=DIVLEN;zz++)
+    ff[zz]=0;
+  x=1;    // Used for determining something, later on
+  argc=5; // Number of search iterations
+  while(argc)
+  {
+    yz=1;
+    while(yz && !feof(fn))
+    {
+      buf[bp]=fgetc(fn);
+      if (vc && yz)
+        CHECK+=buf[bp];
+      for(zz=0;zz<DIVLEN-1;zz++)
+        ff[zz]=ff[zz+1];
+      ff[zz]=buf[bp];
+      ff[zz+1]=0;
+      yz=!streq(ff,DIV);
+      if (bp==BUFSZ)
+      {
+        for(zz=0;zz<=bp;zz++)
+          fputc(buf[zz],npas);
+        bp=-1;
+      }
+      bp++;
+    }
+    if (vc && (argc==1)) // Evaluate Checksum
+    {
+// cprintf("Found at:[CHECK:%lu][@:%ld]\r\n",CHECK,ftell(fn));blch();
+      vc=0; // Stop checksum after first marker is found
+    }
+    argc--;
+  }
+  for(zz=0;zz<bp;zz++)
+    fputc(buf[zz],npas);
+  if (feof(fn))
+    strcpy(t3,"ZX");
+  else
+  {
+    fgets(t3,MAX,fn);
+    chop(t3);
+  }
+  fclose(fn);
+#if !USER
+  if (!streq(t3,"ZX"))
+  {
+    cprintf("\r\n\r\nYou are trying to upgdae a registered version with\r\n");
+    cprintf("a Shareware version. Please use the registered version of\r\n");
+    cprintf("INSTALL.EXE that was sent to you.\r\n\r\n");
+    cprintf("Press any key to exit...");
+    fclose(npas);
+    sunlink(temp);
+    blch();
+    fin(1);
+  }
+#endif
+  strncpy(stg,id,MAX);
+  strcat(stg,ip);
+  strcat(stg,"settings.");
+  if (_rtl_chmod(stg,0,0)==-1)
+  {
+    strncpy(stg,sd,MAX);
+    strcat(stg,sp);
+    strcat(stg,"settings.");
+  }
+  _rtl_chmod(stg,1,-FA_HIDDEN);
+  spp=zz=0;
+  if ((fn=fopen(stg,"r"))!=NULL) // Open "settings" file
+  {
+    // Settings file exists
+    fgets(t3,MAX,fn);
+    if ((isdigit(t3[0])) && (t3[1]=='.') && (isdigit(t3[2]))) // Is it the version?
+    {  // No registration info found in "settings" file
+      regset(0);
+    }
+    else
+    {  // Registration info found in "settings" file
+      if (yz)  // No marker previously found??
+        fputs(DIV,npas); // Then make one.
+      chop(t3);
+      strncpy(SALT,t3,3);
+      fgets(regno,MAX,fn);
+      chop(regno);
+      fgets(regto,MAX,fn);
+      chop(regto);
+      fgets(regch,MAX,fn);
+      chop(regch);
+      if (regset(-2)) // Don't prompt for settings, I just loaded them...
+        fgets(t3,MAX,fn); // Get checksum if it's an AV version
+      fgets(t3,MAX,fn); // Get Divider
+      fgets(t3,MAX,fn); // Get version
+    }
+    spp=1;
+    chop(t3);
+    if (strcmp(t3,ver)<=0)
+    {
+      cprintf("\r\nFound Initialization Settings From a Previous Version!\r\n\r\nDo you wish to import them? ");
+      x=blch();
+      yeah(x)
+      {
+        pstr(211);
+//        cprintf("Yes");
+        fputs(DIV,npas); // Start INI  settings
+        fprintf(npas,"%s\r\n",ver);
+        x=bp=0;
+        while((fgets(t2,MAX,fn))!=NULL)
+        {
+          x++;
+          if ((strcmp(t3,"3.7")<0) && (x==2))    /* Add backup log file name */
+          {
+            bp++;
+            bk=1;
+            while (bk)
+            {
+              strncpy(lo,gin("\r\n\r\nEnter Path for Backup Log file [c:\\Sentry\\Backup.Log]:",1),MAX);
+              if (strlen(lo)==0)
+                strcpy(lo,"c:\\Sentry\\Backup.Log");
+              bk=!cpath(0,lo);
+            }
+          	cprintf("\r\n\r\nPath is %s.",lo);
+            fputs(lo,npas);
+            fputs("\r\n",npas);
+          }
+          if ((strcmp(t3,"3.7")<0) && ((x-bp)==6) && (v37))
+          {                                 /* Add backup log max size */
+            v37=0;
+            bp++;
+            fputs("20\r\n",npas);
+          }
+          if ((strcmp(t3,"4.3")<0) && ((x+bp)==37) && (v43))
+          {                                   /* Type-ahead and */
+            v43=0;                            /* Clear screen */
+            bp+=2;
+            fputs("1\r\n0\r\n",npas);
+          }
+          if ((strcmp(t3,"4.8")<0) && ((x+bp)==39) && (v48))
+          {                                   /* Last Login Pause */
+            v48=0;
+            bp++;
+            fputs("0\r\n",npas);
+          }
+          if ((strcmp(t3,"5.0")<0) && ((x+bp)==40) && (v50))
+          {                                   // Secure Deletion
+            v50=0;                            // View Highlighting
+            bp+=3;                            // View Highlighting Colour
+            fputs("1\r\n1\r\n12\r\n",npas);
+          }
+          if ((strcmp(t3,"5.2")<0) && ((x+bp)==43) && (v52))
+          {                                   // Disable CTRL-C
+            v52=0;
+            bp++;
+            fputs("1\r\n",npas);
+          }
+          if ((strcmp(t3,"5.8")<0) && ((x+bp)==44) && (v58))
+          {                                   // Disable CTRL-C
+            v58=0;
+            bp++;
+            fputs("3\r\n",npas);
+          }
+          chop(t2);
+          fputs(t2,npas);
+          fputs("\r\n",npas);
+        }
+        x=0;
+        zz=1;
+        fclose(fn);
+        sunlink(stg);
+        strncpy(stg,sd,MAX);
+        strcat(stg,sp);
+        strcat(stg,"settings.");
+        sunlink(stg);
+        cprintf("\r\n\r\nSettings Imported.\r\n");
+      }
+      else
+      {
+        pstr(213);
+//        cprintf("No");
+        x=1;
+        cprintf("\r\n\r\nSettings not imported.\r\n");
+      }
+    }
+  }
+  _rtl_chmod(stg,1,FA_HIDDEN);
+  if (x)
+  {
+    x=0;
+    if (yz)
+    /* No Initialization settings exist */
+    {
+      x=1;
+      if (!auto_install)
+      {
+        cprintf("\r\nCurrent Version Contains no Initialization Settings...\r\nUsing Defaults...");
+        bk=1;
+        while (bk)
+        {
+          strncpy(username,gin("\r\n\r\nEnter the SuperUser's login name:",1),MAX);
+          if (strlen(username)==0)
+            bk=1;
+        }
+        bk=1;
+        passwd_diff=1;
+        while (passwd_diff)
+        {
+          while (bk)
+          {
+            strncpy(password,gin("\r\n\r\nEnter the SuperUser's password:",0),MAX);
+            if (strlen(password)==0)
+              bk=1;
+          }
+           bk=1;
+          while (bk)
+          {
+            strncpy(verify,gin("\r\n\r\nVerify the SuperUser's password:",0),MAX);
+            if (strlen(verify)==0)
+              bk=1;
+          }
+          passwd_diff=strcmp(password,verify);
+          if (passwd_diff)
+          {
+            cprintf("\n\nPasswords differ! Try again.");
+          }
+        }
+        cprintf("\r\n\r\nNOTE: When you log in for the first time, use this information.\r\n\r\n");
+/*
+      textcolor(AUCOL);
+      pstr(19);
+      cprintf(" ");
+//      cprintf("Login: ");
+      textcolor(RGCOL);
+      cprintf("%s",SENTRY);
+      textcolor(AUCOL);
+      cprintf("\r\n");
+      pstr(47);
+      cprintf(" ");
+//      cprintf("\r\nPassword: ");
+      textcolor(RGCOL);
+      cprintf("%s\r\n\r\n",SENTRY);
+      textcolor(DEFTXTCOL);
+      cprintf("Please note the capitalizations. This account should be\r\nremoved as soon as possible after use.");
+*/
+        cprintf("\r\n\r\nPress any key to acknowledge...");
+        blch();
+      }
+    }
+    else
+    /* Initialization settings to be overwritten */
+    {
+      cprintf("\r\nInitialization Settings Already Exist in Current Version!\r\n\r\nOverwrite with Defaults? ");
+      x=blch();
+      yeah(x)
+      {
+        pstr(211);
+//        cprintf("Yes");
+        cprintf("\r\n\r\nSettings Overwritten.");
+        x=2;
+      }
+      else
+      {
+        pstr(213);
+//        cprintf("No");
+        cprintf("\r\n\r\nSettings not overwritten.\r\n");
+        x=0;
+      }
+    }
+    if (x)
+    /* Dump new settings */
+    {
+      if (auto_install)
+      {
+        regset(-3);
+      }
+      else
+      {
+        if (!spp)
+          regset(x);
+      }
+
+      fputs(DIV,npas);
+      fputs(ver,npas);
+      fputs("\r\n",npas);
+
+      if (auto_install)
+      {
+        fputs(id,npas);
+        fputs(ip,npas);
+        fputs("Sentry.log\r\n",npas);
+        fputs(id,npas);
+        fputs(ip,npas);
+        fputs("Backup.log\r\n",npas);
+        fputs(id,npas);
+        fputs(ip,npas);
+        fputs("Sentry.msg",npas);
+      }
+      else
+      {
+        bk=1;
+        while (bk)
+        {
+          strncpy(lo,gin("\r\n\r\nEnter Path for Log file [c:\\Sentry\\Sentry.Log]:",1),MAX);
+          if (strlen(lo)==0)
+            strcpy(lo,"c:\\Sentry\\Sentry.Log");
+          bk=!cpath(0,lo);
+        }
+        cprintf("\r\nPath is %s.",lo);
+        fputs(lo,npas);
+        fputs("\r\n",npas);
+        bk=1;
+        while (bk)
+        {
+          strncpy(lo,gin("\r\n\r\nEnter Path for Backup Log file [c:\\Sentry\\Backup.Log]:",1),MAX);
+          if (strlen(lo)==0)
+            strcpy(lo,"c:\\Sentry\\Backup.Log");
+          bk=!cpath(0,lo);
+        }
+       	cprintf("\r\nPath is %s.",lo);
+        fputs(lo,npas);
+        fputs("\r\n",npas);
+        bk=1;
+        while (bk)
+        {
+          strncpy(lo,gin("\r\n\r\nEnter Path for Message File [c:\\Sentry\\Sentry.Msg]:",1),MAX);
+          if (strlen(lo)==0)
+            strcpy(lo,"c:\\Sentry\\Sentry.Msg");
+          bk=!cpath(0,lo);
+        }
+       	cprintf("\r\nPath is %s.\r\n",lo);
+        fputs(lo,npas);
+      }
+
+      /* DEFAULT INI SETTINGS HERE */
+      fputs("\r\n",npas);
+      if (strlen(password))<4)   // Password length (set to 4 unless SU password was set shorter
+      {
+        sprintf(lo,"%d",strlen(password));
+        fputs(lo,npas);
+      }
+      else
+      {
+        fputs("4",npas);
+      }
+      fputs("\r\n20\r\n3\r\n3\r\n20\r\npasswd\r\n*",npas);
+      fputs("\r\n365\r\n0\r\n300\r\nThis is a Secure Terminal.\r\n",npas);
+      fputs(glstr(19),npas);
+      fputs("\r\n",npas);
+      fputs(glstr(47),npas);
+      fputs("\r\nInvalid Login.\r\nInvalid Login.\r\nInvalid Login.",npas);
+      fputs("\r\nInvalid Login.\r\nUser entered the wrong password.",npas);
+      fputs("\r\nUser Entered the Wrong Login.\r\nInvalid Password Length.",npas);
+      fputs("\r\nInvalid Login Length.\r\nUSER\r\n1\r\n1\r\n1\r\n0\r\n2",npas);
+      fputs("\r\n1\r\n15\r\n1\r\n1\r\n7\r\n10\r\n1\r\n0\r\n0\r\n1\r\n1\r\n12\r\n1\r\n",npas);
+      fputs("3\r\n",npas);
+      fputs(DIV,npas);
+//      fputs(SENTRY,npas);
+      fputs(username,npas);
+      fputs("\r\n",npas);
+#if USER
+//  		strncpy(lo,SENTRY,MAX);
+      password[strlen(password)+1]=0;
+      password[strlen(password)]=STAMP;
+      strcpy(password,penc(password));
+      fputs(password,npas);
+#if DEBUG
+    crwin(2,1,77,17,WINBAKCOL,WINTXTCOL,2,"");
+    cprintf("Password: %s\r\n",password);
+    blch();
+#endif
+#else
+      fputs(password,npas);
+      fputc(STAMP,npas);
+#endif
+      fputc(STAMP,npas);
+      fputs("\r\n0 0 0 0 10 0\r\n",npas);
+      fputs(DIV,npas);
+    }
+  }
+  fclose(npas);
+  if (zz || x)
+  {
+  /* Replace Sentry.exe */
+    sunlink(inam);
+    rename(temp,inam);
+  }
+  else
+  {
+    /* Aborted */
+    sunlink(temp);
+  }
+
+  if (auto_install)
+  {
+    if (ModSys=='1')
+    {
+      sfile();
+    }
+  }
+  else
+  {
+    cprintf("\r\nUpdating your system files will cause %s to execute automatically",SENTRY);
+    cprintf("\r\nwhen your computer starts up.\r\n\r\n");
+    cprintf("If this is an initial installation of %s, no protection will be\r\n",SENTRY);
+    cprintf("available until you update your system files.\r\n\r\n");
+    cprintf("Files to be changed:\r\n * %s\r\n * %s\r\n",AUTO,Win95()?MSDO:CONF);
+    cprintf("\r\nDo you wish to update your system files? ");
+    x=blch();
+    yeah(x)
+    {
+      pstr(211);
+//      cprintf("Yes");
+      sfile();
+    }
+    else
+    {
+      pstr(213);
+//      cprintf("No");
+      cprintf("\r\n\r\nYour system files have not been updated. If this is an initial\r\n");
+      cprintf("installation of %s, no protection will be available until you\r\n",SENTRY);
+      cprintf("manually modify your system files, or re-install %s.\r\n\r\n",SENTRY);
+      cprintf("Instructions on manually securing your system can be found in\r\n");
+      cprintf("section 3.0 of the %s documentation. To access documentation,\r\n",SENTRY);
+      cprintf("go to the directory where %s has been installed, and enter\r\n",SENTRY);
+      cprintf("\"readme\" (without quotation marks) at the prompt.");
+      cprintf("\r\n\r\nPress any key to acknowledge...");
+      blch();
+    }
+    cprintf("\r\n\r\nNOTE: For complete security, you must disable the use of");
+    cprintf("\r\nbootdisks on your system. For information on how to perform");
+    cprintf("\r\nthis procedure, see section 3.0 of the documentation. To access");
+    cprintf("\r\nthe documentation, go to the directory where %s has been",SENTRY);
+    cprintf("\r\ninstalled, and enter \"readme\" (without quotation marks) at");
+    cprintf("\r\nthe prompt.");
+  }
+
+  if (!auto_install)
+  {
+    if (Win95())
+      cprintf("\r\n\r\nDo you wish to use %s from within Windows 95? ",SENTRY);
+    else
+      cprintf("\r\n\r\nDo you wish to use %s with Windows? ",SENTRY);
+    x=blch();
+    yeah(x)
+    {
+      pstr(211);
+//      cprintf("Yes");
+      secres();
+      cprintf("\r\n\r\n%s has been installed for use with Windows...\r\n",SENTRY);
+      cprintf("To finish installing %s with Windows, please read section 6.0\r\n",SENTRY);
+      cprintf("of the %s documentation. To access the documentation,\r\n",SENTRY);
+      cprintf("go to the directory where %s has been installed, and enter\r\n",SENTRY);
+      cprintf("\"readme\" (without quotation marks) at the prompt.\r\n");
+    }
+    else
+    {
+      pstr(213);
+//      cprintf("No");
+      cprintf("\r\n\r\n%s has not been installed for use with Windows.\r\n\r\n",SENTRY);
+      cprintf("Instructions on manually installing %s with Windows can be found\r\n",SENTRY);
+      cprintf("in section 6.0 of the %s documentation. To access documentation,\r\n",SENTRY);
+      cprintf("go to the directory where %s has been installed, and enter\r\n",SENTRY);
+      cprintf("\"readme\" (without quotation marks) at the prompt.\r\n");
+    }
+  }
+
+  sunlink(argv[0]);
+  strncpy(lo,id,MAX);
+  strcat(lo,ip);
+  strcat(lo,"install.exe");
+  _rtl_chmod(lo,0,x);
+  if (auto_install)
+  {
+    cprintf("\r\n\r\n **** FINISHED ****\r\n\r\n");
+    sunlink(lo);
+  }
+  else
+  {
+    if (!(x & FA_RDONLY))
+    {
+      cprintf("\r\n\r\nNOTE: The install program should be removed for security reasons.");
+      cprintf("\r\n\r\nDo you wish to delete the install program? ");
+      x=blch();
+      yeah(x)
+      {
+        pstr(211);
+//        cprintf("Yes");
+        sunlink(lo);
+        cprintf("\r\n\r\nInstall program removed...");
+      }
+      else
+      {
+        pstr(213);
+//        cprintf("No");
+        cprintf("\r\n\r\nInstall program was not removed...");
+      }
+    }
+    cprintf("\r\n\r\nPress any key to exit...");
+    blch();
+  }
+  fin(0);
+}

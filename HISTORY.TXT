@@ -1,0 +1,830 @@
+        Revision History
+        ================
+
+        Pre-Release Notes
+        -----------------
+        March 95   - My search for DOS security programs is
+                     unsuccessful. The general idea for Sentry is
+                     formed.
+
+        April 95   - Coding for Sentry begins.
+
+        May 95     - Still coding...
+
+        June 95    - Sentry is now a complete program.
+
+        July 95    - Beta testing. Many updates made.
+
+
+        Sentry V1.0
+        -----------
+        Release Date: 20 July 95
+
+        - Sentry V1.0 is released. Contains basic functionality. At this
+          point, Sentry is approximately 1700 lines of code.
+
+
+        Sentry V1.1
+        -----------
+        Release Date: 27 July 95
+
+        - Sentry V1.1 Released. V1.1 fixes some bugs in V1.0, and has
+          these additions:
+
+          * Date format is selectable.
+
+          * Users with no password expiration are not assigned an expiry
+            date on entering a new password.
+
+          * Incorrect password verification displayed immediately when
+            creating a new user, or toggling SuperUser status.
+
+
+        Sentry V1.2
+        -----------
+        Release Date: 29 July 95
+
+        - Sentry V1.2 Released. Some more minor bugs are repaired and
+          several areas are updated. Additions are:
+
+          * Memory management improved.
+
+          * All user stats now shown instead of just login name.
+
+          * The keyboard buffer is flushed after an invalid login
+            attempt.
+
+
+        Sentry V1.3
+        -----------
+        Release Date: 01 Aug 95
+
+        - Sentry V1.3 Released. Again, more bugs were fixed in this
+          version. Additions are:
+
+          * The log file is now much more detailed than before, and
+            includes a time stamp on every action.
+
+          * A bug with deleting a user listed as 15th or later in the
+            password file has been fixed. (Regardless of what page the
+            user you selected to delete was on, a user from the first
+            page was always deleted).
+
+          * A bug in the multi-user display was fixed. (If the last page
+            contained one user, you could not page down to see him).
+
+
+        Sentry V1.4
+        -----------
+        Release Date: 08 Aug 95
+
+        - Sentry V1.4 Released. Some minor changes have been made,
+          mostly for the sake of appearance. Additions are:
+
+          * The Sentry.ini file now allows the user to select the
+            colours to be used for normal and highlighted text.
+
+          * Input routines have been improved and simplified.
+            Inappropriate characters have been stripped from the input
+            stream.
+
+
+        Sentry V2.0
+        -----------
+        Release Date: 11 Aug 95
+
+        - Sentry V2.0 Released. Many revisions, fixes and additions have
+          been made to the program for this release. Most of the update
+          ideas came from Bret Jacobsen. Additions include:
+
+          * Invalid login/password length messages (both to the screen
+            and log file) are user-definable in the Sentry.ini file.
+
+          * If a normal user attempts to log in as a SuperUser, it is
+            recorded in the log file.
+
+          * The SuperUser Login flag is cleared after an invalid login.
+            (This is a bug fix: previously if CTRL-ENTER was pressed
+            during an invalid login attempt, the next successful login
+            attempt would be as a SuperUser, as long as the user had
+            access).
+
+          * A bug with the Toggle SuperUser Access option corrupting the
+            time stamps has been fixed.
+
+          * The log file is again re-organized to be more "readable."
+
+          * You can no longer delete the last SuperUser on your system
+            (thereby locking yourself out). Sentry performs a check
+            previous to deletion and will abort if you are deleting the
+            last SuperUser.
+
+          * A bug with the input skipping characters was fixed.
+
+          * After a successful login, the number of invalid login
+            attempts since your last successful login is now shown.
+
+          * The user can now abort a password change, unless the
+            password has expired.
+
+          * The option to reset an account's password has been added to
+            the SuperUser menu.
+
+          * You can now define the number of invalid logins permissible
+            before an account expires (locks up). The default setting is
+            defined in the Sentry.ini file, and the settings for
+            individual accounts can be modified from the SuperUser menu.
+
+
+        Sentry V2.1
+        -----------
+        Release Date: 20 Aug 95
+
+          * Input no longer automatically ends after "MaxPasswordLen"
+            characters have been entered at the login or password
+            prompts. Input continues as required, however only
+            "MaxPasswordLen" characters are used. Any extra characters
+            are discarded.
+
+          * Case sensitivity for logins can now be turned on and off via
+            the Sentry.ini file. This is applicable to logins only,
+            passwords are still case sensitive.
+
+
+        Sentry V2.2
+        -----------
+        Release Date: 10 Sep 95
+
+          * Sentry now uses windowed screens for all output, as opposed
+            to simply directing output to the entire screen.
+
+          * When entering dates, the year is now checked. If it is not 4
+            characters, the user is forced to re-enter it. This was
+            causing problems with Sentry accepting '96' as a valid year,
+            and subsequently not translating correctly.
+
+          * A bug with the password encoding scheme has been fixed. The
+            encryption used to truncate passwords at length 8, causing
+            only the first 8 characters to be recognized. For
+            SuperUsers, this meant that passwords over 8 would not
+            contain the SuperUser stamp (it was truncated). This problem
+            has now been rectified, and passwords are significant for
+            MaxPasswordLen characters. All in all, this seriously
+            increases the amount of security available from Sentry.
+
+            NOTE: Because of the above modification, older versions of
+            Sentry cannot use password files from V2.2 and up. The
+            reverse is not true however, as Sentry V2.2 can use password
+            files all the way back to V1.0.
+
+            Also note that to use passwords over 8 characters, you must
+            re-create the old passwords. This can be easily done by
+            selecting the "Change Account Password" option from the
+            SuperUser menu.
+
+
+        Sentry V2.3
+        -----------
+        Release Date: 24 Sep 95
+
+          * Small bugs with windowed mode have been fixed.
+
+          * Windowed mode is now optional. For those that prefer
+            "normal" operation, you can set that in the Sentry.ini file.
+
+          * Log file viewing can now handle long lines, and you can skip
+            to the end of the file by pressing the ESC key once.
+
+          * Quickstart instructions are now included in the Qstart.txt
+            file.
+
+
+        Sentry V2.4
+        -----------
+        Release Date: 06 Oct 95
+
+          * The Sentry.ini file can now be edited from the SuperUser
+            menu. The user can get information on each attribute,
+            including a brief description, security notes, default
+            setting, and the current setting just by selecting which
+            attribute they wish to change.
+
+
+        Sentry V2.5
+        -----------
+        Release Date: 10 Oct 95
+
+          * Sentry can now be run from any location. The user does not
+            have to be in the Sentry home directory for it to work
+            properly.
+
+
+        Sentry V2.6
+        -----------
+        Release Date: 25 Oct 95
+
+          * The SuperUser may modify the "Login:" and "Password:"
+            prompts to suit their custom environment. These are changed
+            either through the Sentry.ini file or via the SuperUser
+            menu.
+
+          * Any setting changes made via the SuperUser menu are now
+            recorded in the log file. This will help SuperUser keep a
+            history of setting changes, which is useful in the case of a
+            security audit.
+
+          * An environment variable is now set by Sentry upon successful
+            login. The variable is set to the username of the person
+            logging in. This can be very useful if you wish other
+            programs to link with Sentry and perform specific actions
+            depending on who is logging in. (For example: if it is a
+            SuperUser logging in, you may wish to display some system
+            stats, or you may want to display individual greetings (or
+            warnings) based on who is logging in).
+
+
+        Sentry V2.7
+        -----------
+        Release Date: 28 Oct 95
+
+          * Sentry now uses a screen saver to blank the screen during
+            idle periods. Although this feature does not add to Sentry's
+            security, it now means that users can run Sentry before
+            leaving their terminal and not worry about burn-in.
+
+
+        Sentry V3.0
+        -----------
+        Release Date: 10 Nov 95
+
+          * The old password and Sentry.ini files are no more!
+            These files have been done away with, since they posed a
+            slight security risk. This removes the need to edit the
+            initialization settings by hand.
+
+          * You can no longer revoke SuperUser access from the last
+            SuperUser on your system. By doing this, you could
+            potentially lock yourself out of your system, so it is not a
+            valid option any more.
+
+          * "Exploding Windows" are now available. These can be turned
+            on via the initialization settings. This is for appearance
+            only, and has no effect on functionality.
+
+          * The user can now select a message to appear randomly on the
+            screen during the screen saver. This fixes a bug in previous
+            versions where the cursor remained in the upper left corner
+            during the screen saver, which could case burn-in.
+
+          * Upon exiting the SuperUser menu, the screen is restored to
+            the way it was before Sentry was run. This eliminates the
+            problem of sensitive information remaining on your screen.
+
+
+        Sentry V3.1
+        -----------
+        Release Date: 03 Dec 95
+
+          * The user can now select the character to be echoed to the
+            screen when a password is entered. In addition, the user can
+            chose to have no character or the actual character echoed.
+
+          * The log file now records when the Sentry DOS shell is
+            entered and exited.
+
+
+        Sentry V3.2
+        -----------
+        Release Date: 08 Dec 95
+
+          * The maxixum number of invalid logins can now be set during
+            user creation.
+
+          * The initialization settings contain a parameter for
+            automatically expiring accounts that have been inactive for
+            a given amount of time.
+
+          * SuperUsers can now send a one-line memo to any user
+            (including themself). This is useful for reminders,
+            warnings, or explainations (why is user X locked out?).
+
+
+        Sentry V3.3
+        -----------
+        Release Date: 20 Dec 95
+
+          * SuperUsers now have the ability to protect a file. That is,
+            when they run this option on a given executable file, that
+            file becomes "protected." The next time that file is run,
+            Sentry will execute. If a correct login and password are
+            given, then the original file is executed, otherwise the
+            user is locked out.
+
+          * The initialization settings can now be exported and
+            re-loaded during an upgrade. (IE: you don't have to rebuild
+            your entire account structure and preferences each time you
+            upgrade.)
+
+          * Faster disk I/O.
+
+          * Many sections of code have been optimized.
+
+          * Message files can now reside on a drive other than the drive
+            that Sentry.exe is on. This is a bug fix from 3.2.
+
+          * Windows now have titles.
+
+
+        Sentry V3.4
+        -----------
+        Release Date: 01 Jan 96
+
+          * Install program now handles many of the "low-level"
+            procedures, including file copying and editing. This removes
+            the much of the burden from the user during the install.
+
+
+        Sentry V3.5
+        -----------
+        Release Date: 05 Jan 96
+
+          * The log file has been slightly re-designed. Now each user
+            has their own "log file" which can be viewed and/or purged.
+            This makes it easier to track an individual's activities -
+            all you have to do is view their log file to see everything
+            they have done, without the extra clutter.
+
+          * File protection has been slightly re-worked to be compatible
+            with more files.
+
+
+        Sentry V3.6
+        -----------
+        Release Date: 11 Jan 96
+
+          * When viewing the userlist, the current action is shown at
+            the prompt (IE: Delete, Change Password, etc).
+
+          * The SuperUser menu has been broken down. System
+            administation is still done from the main menu, but user
+            maintenance now has it's own submenu.
+
+          * Hot keys are back after popular demand. (IE: one key press
+            executes a menu option).
+
+          * Screen is reset between major menus. This reduces
+            unnecessary clutter on the screen.
+
+
+        Sentry V3.7
+        -----------
+        Release Date: 20 Jan 96
+
+          * A backup log file has been added. Information is moved from
+            the primary log file to the backup log file automatically,
+            once the log file reaches a user specified size.
+
+          * The screen saver can now be activated automatically by
+            pressing the F2 key at any time.
+
+          * When protecting .BAT files, the corresponding .EXE file will
+            not be over-written (if it exists).
+
+
+        Sentry V3.8
+        -----------
+        Release Date: 31 Jan 96
+
+          * The descriptions of the initialization settings have been
+            removed from the Sentry.exe file. This saves about 10kb of
+            memory when using protected files, plus speeds up general
+            operation by about 1/6.
+
+          * An uninstall option has been added to the install program.
+
+
+        Sentry V4.0
+        -----------
+        Release Date: 10 Feb 96
+
+          * File protection is now more stable. In previous versions of
+            Sentry, a protected file could become corrupt if the account
+            structure was modified in certain ways.
+
+          * Exiting the screen saver now requires your password when on
+            the SuperUser menu, or any submenu. This allows you to
+            activate the screen saver (F2) and leave your terminal
+            without having to exit the SuperUser menu.
+
+
+        Sentry V4.1
+        -----------
+        Release Date: 15 Feb 96
+
+          * Files can no longer be protected twice. Protecting a file
+            multiple times caused some problems, while providing little
+            or no added functionality.
+
+          * Online help is now available by pressing the F1 key at any
+            time. Help is context sensitive and will automatically bring
+            up the topic related to your current actions.
+
+
+        Sentry V4.2
+        -----------
+        Release Date: 22 Feb 96
+
+          * Sentry now uses a secure file deletion process. This means
+            that any attempt to recover files deleted by Sentry will
+            reveal only useless "garbage."
+
+          * During login, the password is padded on screen after it is
+            entered. This means that a 6 character password will be
+            padded out to the maximum length with the echo character.
+            This is done so that a password's length cannot be
+            determined if someone glances at your screen.
+
+
+        Sentry V4.3
+        -----------
+        Release Date: 25 Feb 96
+
+          * A few minor bugs with the display were fixed (if the title
+            was disabled, the title box would still appear, etc).
+
+          * The option to turn "type-ahead" on or off has been added to
+            the initialization settings.
+
+          * The option to clear the screen before executing has been
+            added to the initialization settings.
+
+
+        Sentry V4.4
+        -----------
+        Release Date: 07 Mar 96
+
+          * Install program now allows use of hidden directories.
+
+          * The SuperUser can now enter a DOS shell from the SuperUser
+            menu to perform quick DOS operations.
+
+
+        Sentry V4.5
+        -----------
+        Release Date: 20 Mar 96
+
+          * A "Please Wait" message now appears during disk access to
+            let the user know that Sentry is working. This is helpful
+            for some operations (like protecting a large file) that take
+            a considerable amount of time.
+
+          * A Security Audit feature has been added to the SuperUser
+            menu. The Security Audit checks for potential weaknesses in
+            three areas: System, Initialization Settings, and Account
+            Structure. Weaknesses can be fixed on the spot if desired.
+
+          * A bug with protected file's initialization settings showing
+            up incorrectly has been fixed.
+
+
+        Sentry V4.6
+        -----------
+        Release Date: 05 Apr 96
+
+          * The Security Audit and install program now add the BootKeys
+            line to the MSDOS.SYS file intelligently.
+
+          * Some minor bugs have been fixed in various places.
+
+          * The user must accept the license agreement prior to
+            installation.
+
+
+        Sentry V4.7
+        -----------
+        Release Date: 20 Apr 96
+
+          * More minor modifications. Many cosmetic changes have been
+            made. Problems with the log file in individual mode,
+            problems with skipping the SuperUser menu when changing
+            passwords, and several other small bugs have all been fixed
+            in this version.
+
+          * Some basic operations have been "sped up" allowing almost
+            all operations to run faster.
+
+
+        Sentry V5.0
+        -----------
+        Release Date: 20 Jul 96
+
+        This is the "one year anniversary" version of Sentry. It
+        contains as many new features and functions as I could cram into
+        it. Unfortunately, I didn't get *everything* I wanted to in this
+        release, but I did get a lot done (some of which I hadn't
+        planned on). Development will continue, so keep your eye out for
+        V5.1 and so on...
+
+        ** Please Note: Sentry's Home Page has moved!
+        The new location is:
+
+        http://dragon.acadiau.ca/~mike/NightShade/Sentry.html
+
+        Please update any bookmarks and links as appropriate.
+
+        Changes made in V5.0:
+
+          * A new option has been added: Modify Shell commands. With
+            this option, SuperUsers can edit or remove commands from the
+            DOS command interpreter. For example, you may want to
+            disable the COPY command, and rename DEL to ZAP just to keep
+            users from causing damage on your system.
+
+          * Protected files can now be upgraded. If a protected file was
+            created with an older version of Sentry, you can now bring
+            it up to date! Simply re-protect it from the SuperUser menu,
+            and Sentry will do the work!
+
+          * The SuperUser menu has been redesigned to allow easier use.
+            On the main menu, there are now the User Maintenance, Log
+            File Maintenance and System Maintenance Menus. Details on
+            each menu can be found in the manual.
+
+          * It is now possible to jump between sub-menus with the press
+            of a key. Pressing 'U' brings up the User Maintenance Menu,
+            'L' brings up the Log File Maintenance Menu, and 'S' brings
+            up the System Maintenance Menu. These hotkeys can be pressed
+            from the main menu or from any sub-menu. To avoid conflicts,
+            these hotkeys are upper case only.
+
+          * A new initialization setting has been added. This new
+            setting, called Last Login Pause, allows the SuperUser to
+            define how long Sentry pauses while displaying the last
+            login info before clearing the screen. The default setting
+            has no pause, and does not clear the screen.
+
+          * The program SDEL.EXE is now included with Sentry. SDEL
+            deletes files in the same secure manner that Sentry uses
+            when deleting files. Files deleted with SDEL cannot be
+            recovered, so be sure of your actions!
+
+          * Users can now reply to messages from the SuperUser.
+
+          * If a user accidently hits return at the login prompt without
+            entering a login, they are re-prompted instead of being
+            asked for a password.
+
+          * SuperUsers can now select which items to check during a
+            security audit.
+
+          * Shareware versions of Sentry can no longer upgrade files
+            protected with registered versions of Sentry. This fixes a
+            security loophole where a user could download a shareware
+            version of Sentry and wipe out all of the registered
+            versions' settings on a protected file by upgrading it (if
+            applicable).
+
+          * Some minor typos have been fixed.
+
+          * Secure deletion can now be turned on and off via the
+            initialization settings.
+
+          * Changes to the initialization settings now take effect
+            immediately. You no longer have to exit and re-start Sentry
+            to see your changes!
+
+          * View highlighing enables SuperUsers to see "trouble spots"
+            easily and quickly. When viewing the user list, it
+            highlights expired accounts, expired passwords, locked out
+            accounts and more.
+
+
+        Sentry V5.1
+        -----------
+        Release Date: Never Released
+
+          * Bug when updating from 4.7 to 5.0 fixed.
+
+          * New registration system allows for more flexibility.
+
+          * Renegade users cannot use the shareware install program to
+            attempt to overwrite registered versions.
+
+
+        Sentry V5.2
+        -----------
+        Release Date: 10 Sep 96
+
+          * CTRL-C, CTRL-BREAK and CTRL-ALT-DEL can now all be disabled
+            in DOS. A new initialization setting allows the user to turn
+            this function on and off. When enabled, this feature
+            prevents users from breaking out during boot-up, even after
+            Sentry has run. Also, Windows and Windows 95 users will
+            notice that CTRL-C has also been disabled in the DOS box.
+
+          * Users can now be deleted from or added to the userlist by
+            simply pressing the DEL or INS keys. This function works any
+            time the userlist is on-screen.
+
+
+        Sentry V5.3
+        -----------
+        Release Date: 10 Oct 96
+
+          * Updated contact info for the author:
+
+            Orders:
+              Michael A. Bobbitt
+              6055 Westknoll Dr, # 450
+              Grand Blanc, MI
+              48439
+
+            E-Mail:
+              army@izzy.net
+
+            Web:
+              http://www.izzy.net/~army/NightShade/Sentry.html
+
+
+        Sentry V5.4
+        -----------
+        Release Date: 01 Nov 96
+
+          * A "fast" and a "secure" option have been added to the secure
+            deletion initizliation setting. The "secure" setting
+            over-writes all data with random numbers during deletion,
+            whereas the "fast" option overwrites with 00's.
+
+          * The superuser can now disallow password changes by setting
+            the password key to '*' on the initizliation settings menu.
+            This may be useful when passwords are pre-defined to force
+            "secure" passwords for all users, as opposed to easily
+            breakable ones that some users may choose.
+
+
+        Sentry V5.5
+        -----------
+        Release Date: Never Released
+
+          * Internal changes only.
+
+
+        Sentry V5.6
+        -----------
+        Release Date: 22 Nov 96
+
+          * Sentry can now protect Windows based programs running under
+            Windows 95! Simply protect them in the same manner as
+            regular DOS programs, and when Sentry asks, designate them
+            as Windows based programs!
+
+
+        Sentry V5.7
+        -----------
+        Release Date: 12 Feb 97
+
+          * Anti-Virus versions of Sentry are now available. Please see
+            the order form for details.
+
+          * The "Disable CTRL-C" memory problem has been corrected. (Was
+            overusing conventional memory when CTRL-C was disabled through
+            Sentry).
+
+          * Stricter checking on the "Modify Shell Commands" option.
+
+          * Log file messages are clearer in several places.
+
+          * When protecting files, Superusers are now presented with a
+            "menu" of available files, instead of having to enter a
+            path/filename.
+
+
+        Sentry V5.8
+        -----------
+        Release Date: 10 Jul 97
+
+          * Updated contact info for the author:
+
+            Orders:
+              Michael A. Bobbitt
+              PO Box 412
+              Munster, ON
+              K0A 3P0
+              Canada
+
+          * Screen saver activation time of 0 turns off screen saver.
+
+          * New initialization setting to allow multiple characers to
+            echo for each keypress when typing passwords. This makes it
+            difficult to determine the length of a password by shoulder
+            surfing.
+
+
+        Sentry V5.9
+        -----------
+        Release Date: 10 Sep 97
+
+          * Updated Internet contact info:
+
+            E-Mail:
+              army@cyberus.ca
+
+            Web:
+              http://www.cyberus.ca/~army/NightShade/Sentry.html
+
+          * Problem with long lines in log file solved.
+
+
+        Sentry V5.9a
+        -----------
+        Release Date: 23 Sep 97
+
+          * Missing install.exe file added to file archive.
+
+
+        Sentry V6.0
+        -----------
+        Release Date: 15 Mar 98
+
+          * New import settings option on system menu allows users to
+            import settings which were previously exported. Allows for
+            quick installation on multiple machines.
+
+          * Is available in Spanish (press F3 to change languages)
+
+          * Optimized file protection routine
+
+
+        Sentry V6.1
+        -----------
+        Release Date: 30 Jun 98
+
+          * Win95 OSR2 compatibility bug fixed.
+
+
+        Sentry V6.2
+        -----------
+        Release Date: 11 Nov 98
+
+          * New Windows based install allows simpler and easier setup.
+
+          * "25 Window" error fixed.
+
+          * Users can now select a username and password for the primary
+            SuperUser during the install process.
+
+          * Updated Internet contact info:
+
+            E-Mail:
+              bobbitt@cpu2212.adsl.bellglobal.com
+
+            Web:
+              http://cpu2212.adsl.bellglobal.com/~bobbitt/NightShade/Sentry/
+
+
+        Sentry V6.3
+        -----------
+        Release Date: 27 Jan 99
+
+          * Fixed several typos.
+
+          * Clarified log entries.
+
+          * Fixed environment error.
+
+          * Updated Internet contact info:
+
+            E-Mail:
+              niss@bigfoot.com
+
+            Web:
+              http://www.bigfoot.com/~niss
+
+
+        Sentry V6.4
+        -----------
+        Release Date: 25 May 99
+
+          * Updated contact info for the author:
+
+            Orders:
+              Cipher Logic Canada Inc.
+              PO Box 412
+              Munster, ON
+              K0A 3P0
+              Canada
+
+            E-Mail:
+              info@cipherlogic.on.ca
+
+            Web:
+              http://www.cipherlogic.on.ca
+
+          * Fixed short superuser password problem
+
+
+        Sentry V6.5
+        -----------
+        Release Date: 05 Nov 99
+
+          * Fixed some typos
